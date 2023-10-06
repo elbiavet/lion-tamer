@@ -1,0 +1,13 @@
+.bg-login{
+    background-color: #7f98c5;
+}
+.container-login{
+    border: 2px solid hsl(219, 38%, 44%);
+    border-radius: 2%;
+    padding: 20px;
+    width: 40vw;
+    background-color: white;
+    -webkit-box-shadow: 10px 10px 9px -5px rgba(0,0,0,0.46);
+    -moz-box-shadow: 10px 10px 9px -5px rgba(0,0,0,0.46);
+    box-shadow: 10px 10px 9px -5px rgba(0,0,0,0.46);
+}
