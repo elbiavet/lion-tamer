@@ -1,17 +1,16 @@
 import { useDispatch } from "react-redux";
-import { useOwnerStore } from "../hooks/useOwnerStore"
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { useOwnerStore } from "../hooks/useOwnerStore"
 import * as Yup from 'yup';
-import { Link } from "react-router-dom";
-import { onSetActiveOwner } from "../store/owners/ownerSlice";
-// import { BsSearchHeart } from "react-icons/bs";
+import { BsSearchHeart } from "react-icons/bs";
+
 
 export const OwnerSearch = () => {
 
-  const { startSearchingOwner, ownerSearchList } = useOwnerStore();
-
+  const { startSearchingOwner } = useOwnerStore();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
 
   const { getFieldProps, touched, errors, handleSubmit, resetForm } = useFormik({
     initialValues:{
@@ -21,6 +20,7 @@ export const OwnerSearch = () => {
         dispatch(startSearchingOwner(values.searchingOwner))
         console.log(values.searchingOwner)
         resetForm()
+        navigate('/owner-results')
     },
     validationSchema: Yup.object({
         searchingOwner: Yup.string().min(1)
@@ -29,45 +29,20 @@ export const OwnerSearch = () => {
 
   
   return (
-    <div className="container m-4">
-        
-        <form className="form-inline row" onSubmit={ handleSubmit }> 
-            <div className="form-group col-6">
-            <label className="fw-bold mb-1">Nombre del Propietario</label>
-                <div className="d-flex">
-                 <input 
-                     className="form-control" 
-                     type="text" 
-                     placeholder="Nombre dueño"
-                     {...getFieldProps('searchingOwner')}
-                 />
-                 <button type='submit' className="btn btn-primary col-2">Buscar</button>
-                </div>
-
-                 { !touched.searchingOwner && <span className='form-error m-1'>{errors.searchingOwner}</span>}
-                 
-            </div>     
-            
-        
+        <form className="d-flex" role="search" onSubmit={ handleSubmit }>
+            <input 
+                className="form-control me-2" 
+                type="search" 
+                placeholder="Nombre dueño" 
+                {...getFieldProps('searchingOwner')}
+            />
+            <button 
+                type="submit"
+                className="btn btn-primary"
+            > Buscar
+                {/* <BsSearchHeart className="me-0 fs-5"/> */}
+            </button>
+            { !touched.searchingOwner && <span className='form-error m-1'>{errors.searchingOwner}</span>}
         </form>
-
-        <div className="mt-5">
-            <p className="fw-bold">Resultados</p>
-            <div className="list-group">
-                {
-                    ownerSearchList.map(owner => ( 
-                        <Link 
-                            key={owner.id}
-                            to={`/owner/${owner.id}`} 
-                            className="list-group-item list-group-item-action"
-                            onClick={()=> dispatch(onSetActiveOwner(owner))}
-                            >
-                            <span>{`${owner.ownerFirstName} ${owner.ownerLastName}`}</span>
-                        </Link>
-                    ))
-                }
-            </div>
-        </div>
-  </div>
-  )
-}
+     )
+    }

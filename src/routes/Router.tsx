@@ -1,16 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from "../pages/Login";
 import { NavBar } from "../components/NavBar";
-import { PetForm } from "../pages/PetForm";
 import { OwnerForm } from "../pages/OwnerForm";
 import { Schedule } from "../pages/Schedule";
 import { SideBar } from "../components/SideBar";
 import { CashRegister } from "../pages/CashRegister";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import { OwnerSearch } from "../pages/OwnerSearch";
-import { NewOwnerForm } from "../pages/NewOwnerForm";
 import { PetSearch } from "../pages/PetSearch";
 import { ClientPage } from "../pages/ClientPage";
+import { OwnerResults } from "../pages/OwnerResults";
+import { PetPage } from "../pages/PetPage";
+import { usePetStore } from "../hooks/usePetStore";
 
 
 
@@ -18,6 +19,7 @@ import { ClientPage } from "../pages/ClientPage";
 export const Router = () => {
 
   const status = useCheckAuth()
+  const {activePet} = usePetStore();
   
   // if(status === 'not-authenticated'){ return (<Login />)}
 
@@ -39,11 +41,10 @@ export const Router = () => {
               status === 'authenticated' &&
               <Routes>
                 <Route path="schedule" element={<Schedule />} />
-                <Route path="owner-search" element={<OwnerSearch />} />
-                <Route path="owner" element={< NewOwnerForm/>} /> //!OwnerForm 
+                <Route path="owner-results" element={<OwnerResults />} />
+                <Route path="owner" element={< OwnerForm />} /> 
                 <Route path="owner/:id" element={<ClientPage />} />
-                <Route path="owner/:id/pet" element={<PetForm />} />
-                <Route path="pet-search" element={<PetSearch />} />
+                <Route path="pet" element={<PetPage activePet={activePet}/>} />
                 <Route path="cash" element={<CashRegister />} />
                 <Route path="/*" element={<Schedule />} />
               </Routes>

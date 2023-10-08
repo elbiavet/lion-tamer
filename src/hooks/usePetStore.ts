@@ -7,6 +7,7 @@ import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/firebaseConfig";
 import Swal from "sweetalert2";
 import { getPetList } from "../helpers/getPetList";
+import { getSearchPets } from "../helpers/getSearchPets ";
 
 
 export const usePetStore = () => {
@@ -109,6 +110,7 @@ export const usePetStore = () => {
       }
 
 
+
   return {
     activePet, 
     isPetSaving, 
@@ -126,24 +128,6 @@ export const usePetStore = () => {
     
 
 
-
-    // //buscar usuario por nombre
-    // const startSearchingOwner = ( inputValue: string ): ThunkAction<void, OwnersState, unknown, Action> =>{
-    //     return async(dispatch: Dispatch, getState:()=> RootState)=>{
-            
-    //         const {uid} = getState().auth;
-    //         if(!uid) return;
-
-    //         try{
-    //             const resp = await getSearchOwners(uid, inputValue)
-    //             // if(resp) return [];
-    //             dispatch(setOwnerSearchList(resp))
-               
-    //         } catch(error){
-    //             console.log(error)
-    //         }
-    //     } 
-    // }
 
     //     const startDeletingOwner = (): ThunkAction<void, OwnersState, unknown, Action<string>>  => {
     //      return async(dispatch, getState:()=> RootState )=>{

@@ -4,11 +4,13 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { FaCat, FaDog, FaUserGroup } from "react-icons/fa6";
 import { onSetActiveOwner } from "../store/owners/ownerSlice";
+import { usePetStore } from "../hooks/usePetStore";
 
 
 export const SideBar = () => {
 
   const { ownerList, activeOwner, startLoadingOwnerList } = useOwnerStore();
+  const { activePet, petList } = usePetStore();
   const dispatch = useDispatch();
 
   useEffect(() => {  
@@ -16,14 +18,22 @@ export const SideBar = () => {
     }, [])
 
   return (
-    <div className="container h-100 border border-2">
+    <div className="container vh-100 border border-2">
         <p className="mt-3 fw-bold">Últimas fichas abiertas</p>
 
         <p className="mt-3 text-primary">Mascotas <FaCat /><FaDog /></p>
         <div className="list-group">
-            <a href="#" className="list-group-item list-group-item-action "/* active */>Michi</a>
-            <a href="#" className="list-group-item list-group-item-action">Fufi</a>
-            <a href="#" className="list-group-item list-group-item-action">Señor Don Gato</a>
+          { petList.length > 0 && (
+                petList.slice(-3).map(pet => 
+                  <Link 
+                    key={pet.id}
+                    to={`/owner/${pet.id}`} 
+                    className="list-group-item list-group-item-action" 
+                    onClick={()=> dispatch(onSetActiveOwner(pet))}
+                  >
+                  {pet.namePet}
+                  </Link>)
+            )}
         </div>
 
         <p className="mt-3 text-primary">Dueños<FaUserGroup /></p>
@@ -49,6 +59,18 @@ export const SideBar = () => {
                 className="list-group-item list-group-item-action"
               >
                 {activeOwner.ownerFirstName}
+              </Link>
+            }
+        </div>
+
+        <p className="mt-3 text-primary">Mascota Activo</p>
+        <div className="list-group">
+            {activeOwner && 
+              <Link 
+                to={`/owner/${activeOwner.id}`} 
+                className="list-group-item list-group-item-action"
+              >
+                {activePet?.namePet}
               </Link>
             }
         </div>

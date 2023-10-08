@@ -2,62 +2,90 @@ import { useDispatch } from "react-redux";
 import { useOwnerStore } from "../hooks/useOwnerStore"
 import { usePetStore } from "../hooks/usePetStore";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { petList1 } from '../assets/data';
+import { useNavigate, useParams } from "react-router-dom";
+import { PetPage } from "./PetPage";
+import { onSetActivePet } from "../store/pet/petSlice";
 
 
 export const ClientPage = () => {
 
-    const {activeOwner, startDeletingOwner, ownerList} = useOwnerStore();
-    const {petList, startLoadingPetList} = usePetStore();
-    
+    const {activeOwner, startDeletingOwner} = useOwnerStore();
+    const {petList, startLoadingPetList, activePet} = usePetStore();
     const dispatch = useDispatch();
+    const {id} = useParams();
+    const navigate = useNavigate();
     
     const handleDeleteOwner = () =>{
         dispatch(startDeletingOwner(activeOwner))
     }
 
-    const {id} = useParams();
- 
 
     useEffect(() => {
        dispatch(startLoadingPetList(id))
-    }, [id, petList])
+    }, [id])
     
   return (
     
     <div className="container m-4">
+        <div className="card">
+            <div className="card-header d-flex justify-content-between">
+                <h5 className="card-title m-2">{activeOwner?.ownerFirstName} {activeOwner?.ownerLastName}</h5>
+                <div className="m-1">
+                    <button 
+                        type="button" 
+                        className="btn btn-outline-primary m-1"
+                        onClick={()=> navigate('/owner')}
+                        >
+                            Editar
+                        </button>
+                        <button type="button" className="btn btn-outline-danger m-1" onClick={(handleDeleteOwner)}>
+                            Eliminar
+                    </button>
+                </div>  
+            </div>
+            <div className="card-body">
+                
+                <div className="card-text">
+                    <p className="m-1"><span className="fw-bold">DNI:</span> {activeOwner?.dni}</p>
+                    <p className="m-1" ><span className="fw-bold">Email:</span> {activeOwner?.email}</p>
+                    <p className="m-1"><span className="fw-bold">Dirección:</span> {activeOwner?.address}</p>
 
-        <div className="row mt-4 mb-4">
-          <h2 className="col-9 text-center fs-5 fw-bold">Ficha del Propietario</h2> 
-    
-          <button type="button" className="col-1 btn btn-outline-primary m-1">
-                  Editar
-            </button>
-            <button type="button" className="col-1 btn btn-outline-danger m-1" onClick={(handleDeleteOwner)}>
-                  Eliminar
-            </button>
-        </div>  
-    
-        <div className="row">
-            <p className="col-5 m-1"><span className="fw-bold">Nombre: </span>{activeOwner?.ownerFirstName} {activeOwner?.ownerLastName}</p>
-            <p className="col-5 m-1"><span className="fw-bold">DNI:</span> {activeOwner?.dni}</p>
+                    <p className="m-1"><span className="fw-bold">Teléfonos de contacto:</span> {activeOwner?.tlf} - {activeOwner?.tlf2}</p>
+                    <p className="m-1"><span className="fw-bold">Comentarios:</span> {activeOwner?.commentsOwner}</p>
+                    
+                    <div className="d-flex justify-content-start">
+                    <p className="m-1"><span className="fw-bold">Sus mascotas:</span></p>
+                            {
+                                petList.map((pet) => 
+                                    <button 
+                                        type="button" 
+                                        className="btn btn-outline-primary m-1" 
+                                        key={pet.id}
+                                        onClick={()=> dispatch(onSetActivePet({...pet}))}
+                                        >
+                                            {pet.namePet}
+                                        
+                                    </button>)
+                            } 
+
+
+        </div>
+                </div>
+           
+            </div>
         </div>
 
-        <div className="row">
-            <p className="col-4 m-1" ><span className="fw-bold">Email:</span> {activeOwner?.email}</p>
-            <p className="col-7 m-1"><span className="fw-bold">Dirección:</span> {activeOwner?.address}</p>
-        </div>
-
-        <div className="row">            
-            <p className="col-4 m-1"><span className="fw-bold">Teléfonos de contacto:</span> {activeOwner?.tlf} - {activeOwner?.tlf2}</p>
-            <p className="col-7 m-1"><span className="fw-bold">Comentarios:</span> {activeOwner?.commentsOwner}</p>
-        </div>
         
 
         {
-            petList.map((pet) => <p className="btn btn-outline-primary" key={pet.id}>{pet.namePet}</p>)
-        }
+            activeOwner && activePet && (
+                <PetPage activePet={activePet}/>
+            ) 
+        } 
+       
     
+
+
+  
     </div>
 )}

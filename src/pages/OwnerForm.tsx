@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { initialValuesOwner as initialValues } from "../assets/data";
 import { useEffect } from "react";
 import { PetForm } from "./PetForm";
+import { onSetActiveOwner } from "../store/owners/ownerSlice";
 
 
 
@@ -36,8 +37,13 @@ export const OwnerForm = () => {
       resetForm();
   }
 
+  const resetFormValues = ()=>{
+    resetForm()
+    dispatch(onSetActiveOwner(null))
+  }
+
     useEffect(() => {
-    if(activeOwner !== null){
+    if(activeOwner && activeOwner.id){
      setValues({...activeOwner})
     }
    }, [activeOwner])
@@ -47,18 +53,22 @@ export const OwnerForm = () => {
     <form onSubmit={ handleSubmit }>
         <div className="container m-4">
               <div className="row mt-4 mb-4">
-                <h2 className="col-9 text-center fs-5 fw-bold">Nuevo Propietario</h2> 
-            
-                <button type="submit" className="col-1 btn btn-outline-primary m-1">
-                        Guardar
-                  </button>
-                  <button type="button" className="col-1 btn btn-outline-danger m-1" onClick={handleDeleteOwner}>
-                        Eliminar
-                  </button>
+                <h2 className="col-10 text-center fs-5 fw-bold">Propietario</h2> 
+                {
+                  activeOwner && (
+                    <button 
+                      type="button" 
+                      className="col-1 btn btn-primary m-1"
+                      onClick={()=> resetFormValues()}
+                    >
+                      Nuevo
+                    </button>
+                  ) 
+                }
               </div>  
           
-              <div className="row">
-                <div className="col-3 form-group m-1">
+              <div className="row mb-3">
+                <div className="col-3 form-group m-1 ">
                   <label className="fw-bold">Nombre</label>
                   <input type="text"
                     className="form-control"
@@ -91,7 +101,7 @@ export const OwnerForm = () => {
                 </div>
               </div>
 
-              <div className="row">
+              <div className="row mb-3">
                    
                 <div className="col-4 form-group m-1">
                    <label className="fw-bold">Email</label>
@@ -114,8 +124,8 @@ export const OwnerForm = () => {
                   />
                 </div>
               </div>
-
-              <div className="row">            
+ 
+              <div className="row mb-3">            
                 <div className="col-4">
                   <div className="form-group m-1">
                      <label className="fw-bold">Teléfono de contacto</label>
@@ -141,15 +151,23 @@ export const OwnerForm = () => {
                 <div className="col-7 form-group m-1">
                    <label className="fw-bold">Comentarios</label>
                   <textarea 
-                      rows={2}
+                      rows={4}
                       className="form-control"
                       placeholder="Comentarios"
                       {...getFieldProps('commentsOwner')}
                   />
                 </div>
               </div>
-              
-          </div>
+              <div className="d-flex justify-content-center">
+                <button type="submit" className="col-1 btn btn-outline-primary m-1">
+                      Guardar
+                </button>
+                <button type="button" className="col-1 btn btn-outline-danger m-1" onClick={()=>{}}>
+                      Eliminar
+                </button>
+              </div>
+            </div>
+            
           </form>
           { activeOwner && <PetForm />}
           </>

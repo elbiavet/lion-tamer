@@ -1,9 +1,11 @@
-import { FaPaw, FaUser } from "react-icons/fa6";
+import { FaPaw, FaUser, FaCashRegister } from "react-icons/fa6";
 import { IoLogOutOutline } from "react-icons/io5";
 import Logo from "../assets/logo-trans.png"
 import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { startLogout } from "../store/auth/thunks";
+import { OwnerSearch } from "../pages/OwnerSearch";
+import { useOwnerStore } from "../hooks/useOwnerStore";
 
 
 export const NavBar = () => {
@@ -17,7 +19,7 @@ export const NavBar = () => {
 
   return (
     
-    <nav className="navbar navbar-expand-sm navbar-light bg-light border border-2" >
+    <nav className="navbar navbar-expand-sm navbar-light text-primary bg-light border border-2" >
       
       <div className="container-fluid m-0 p-0 row d-flex justify-content-center">
 
@@ -27,52 +29,24 @@ export const NavBar = () => {
 
 
           <div className="fs-5 col-9"> 
-            <ul className="navbar-nav row d-flex justify-content-center align-items-center">
+            <ul className="navbar-nav row d-flex justify-content-evenly align-items-center">
               
-              <li className="nav-item col-2 d-flex justify-content-center">
-                <div className="dropdown">
-                  <button className="btn dropdown-toggle fs-5 fw-bold" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Nueva Ficha
-                  </button>
-                  <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <Link className= 'dropdown-item' aria-current="page" to="/owner">Nuevo Propietario</Link>
-                    <Link className= 'dropdown-item' aria-current="page" to="/owner-search">Propietario existente</Link>
-                  </div>
-                </div>
+              <li className="nav-item col-1">
+                {/* <button className="btn btn-outline-primary" type="submit"><FaUser className="m-2"/></button> */}
+                <NavLink className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} aria-current="page" to={`/owner`}><FaUser className="m-2"/></NavLink>
               </li>
 
-
-              
-              <li className="nav-item col-4 row">
-                <div className="col d-flex justify-content-center">
-                  <NavLink className= {({isActive}) => `nav-link ${ isActive ? "active" :"" }`} to="/pet-search">
-                    <FaPaw className="m-2"/>
-                  </NavLink>
-      
-                  <form className="form-inline col m-1">
-                    <div className="form-group">
-                      <input type="mascota" className="form-control" id="inputMascota" placeholder="Nombre mascota"/>
-                    </div>
-                  </form>
-                </div>
+              <li className="nav-item col-1">
+                {/* <button className="btn btn-outline-primary" type="submit"><FaPaw className="m-2"/></button> */}
+                <NavLink className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} aria-current="page" to={`/pet`}><FaPaw className="m-2"/></NavLink>
               </li>
 
-              <li className="nav-item col-4 row">
-                <div className="col d-flex justify-content-center">
-                  <NavLink className= {({isActive}) => `nav-link ${ isActive ? "active" :"" }`} aria-current="page" to="/owner">
-                    <FaUser className="m-2"/>
-                  </NavLink>
-                
-                  <form className="form-inline col m-1">
-                    <div className="form-group">
-                      <input type="propietario" className="form-control" id="inputPropietario" placeholder="Nombre dueño"/>
-                    </div>
-                  </form>
-                </div>
+              <li className="nav-item col-5 row">
+                  <OwnerSearch />
               </li>
-
+       
               <li className="nav-item col-1 m-1  d-flex justify-content-center align-items-center">
-                <NavLink className= {({isActive}) => `nav-link fw-bold ${ isActive ? "active" :"" }`} aria-current="page" to="/cash">Caja</NavLink>
+                <NavLink className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} aria-current="page" to="/cash"><FaCashRegister /></NavLink>
               </li>
 
               <li className="nav-item col-1 m-1 d-flex justify-content-center align-items-center">

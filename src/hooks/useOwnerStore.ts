@@ -114,14 +114,6 @@ export const useOwnerStore = () => {
 
             try{
                 const resp = await getSearchOwners(uid, inputValue)
-                if(resp?.length === 0) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oh! Lo siento',
-                        text: 'No existe un propietario con ese nombre',
-                        footer:'Prueba otra vez',
-                      })
-                }
                 dispatch(setOwnerSearchList(resp))
                 
                
