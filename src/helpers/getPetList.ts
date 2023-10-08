@@ -5,7 +5,6 @@ import { Pet } from "../interfaces/appInterfaces"
 
 export const getPetList = async(uid:string, ownerID:string) => {
     if(!uid) throw new Error ('El uid del usuario no existe')
-    
 
     try{
         const collectionRef = collection(FirebaseDB, `${uid}/lionTamer/owners/${ownerID}/pets`)

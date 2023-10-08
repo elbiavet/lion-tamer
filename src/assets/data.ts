@@ -29,7 +29,7 @@ export const initialValuesOwner={
 }
 
 export const initialValuesPet={
-    id:'',
+    // id:'',
     namePet: '',
     specie: '',
     breed: '',
@@ -37,9 +37,10 @@ export const initialValuesPet={
     character: '',
     birthday: '',
     castrated: false,
-    diseases: [{
-        date: '',
-        diagnosis: ''
-      }],
+    diseases: [''],
+    // diseases: [{
+    //   date: '',
+    //   diagnosis: ''
+    // }],
     commentsPet: [''],
 }

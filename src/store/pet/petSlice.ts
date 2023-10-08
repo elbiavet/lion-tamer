@@ -5,14 +5,14 @@ export interface PetsState {
     petList:Pet[],
     petSearchList:Pet[],
     activePet: Pet | null,
-    isPetSaving: boolean
+    isPetSaving: boolean,
 }
 
 const initialState: PetsState = {
     petList:[],
     petSearchList:[],
     activePet:null,
-    isPetSaving: false
+    isPetSaving: false,
   }
 
 export const petSlice = createSlice({

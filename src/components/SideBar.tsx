@@ -10,7 +10,7 @@ import { usePetStore } from "../hooks/usePetStore";
 export const SideBar = () => {
 
   const { ownerList, activeOwner, startLoadingOwnerList } = useOwnerStore();
-  const { activePet, petList } = usePetStore();
+  const { activePet, petList, lastPets } = usePetStore();
   const dispatch = useDispatch();
 
   useEffect(() => {  
@@ -21,22 +21,7 @@ export const SideBar = () => {
     <div className="container vh-100 border border-2">
         <p className="mt-3 fw-bold">Últimas fichas abiertas</p>
 
-        <p className="mt-3 text-primary">Mascotas <FaCat /><FaDog /></p>
-        <div className="list-group">
-          { petList.length > 0 && (
-                petList.slice(-3).map(pet => 
-                  <Link 
-                    key={pet.id}
-                    to={`/owner/${pet.id}`} 
-                    className="list-group-item list-group-item-action" 
-                    onClick={()=> dispatch(onSetActiveOwner(pet))}
-                  >
-                  {pet.namePet}
-                  </Link>)
-            )}
-        </div>
-
-        <p className="mt-3 text-primary">Dueños<FaUserGroup /></p>
+        <p className="mt-3 text-primary">Dueños <FaUserGroup /></p>
           <div className="list-group">
             { ownerList.length > 0 && (
                 ownerList.slice(-3).map(owner => 
@@ -50,6 +35,7 @@ export const SideBar = () => {
                   </Link>)
             )}
           </div>
+
 
         <p className="mt-3 text-primary">Propietario Activo</p>
         <div className="list-group">

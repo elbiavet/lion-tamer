@@ -26,20 +26,20 @@ export interface FormValuesCalendarEvent{
     castrated: boolean,
     birthday:string, //! antes estaba en Date
     character?:string,
-    diseases?:Disease[],
-    commentsPet?:string[],
-    history?:History[]
+    diseases?:string[], //Disease[]
+    commentsPet?:string[], 
+    history?:string[] //History[] 
   }
 
-  export interface Disease{
-    date: string,
-    diagnosis: string
-  } 
+  // export interface Disease{
+  //   date: string,
+  //   diagnosis: string
+  // } 
 
-  export interface History{
-    date: string,
-    case: string
-  } 
+  // export interface History{
+  //   date: string,
+  //   case: string
+  // } 
 
   export interface Owner{
     id?:string,

@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../store/store";
 import { Pet } from "../interfaces/appInterfaces";
-import { PetsState, onAddNewPet, onSetActivePet, setSavingPet, onUpdatePet, setPetList } from "../store/pet/petSlice";
+import { PetsState, onAddNewPet, onSetActivePet, setSavingPet, onUpdatePet, setPetList, onDeletePet } from "../store/pet/petSlice";
 import { Action, Dispatch, ThunkAction } from "@reduxjs/toolkit";
-import { collection, doc, setDoc } from "firebase/firestore/lite";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/firebaseConfig";
 import Swal from "sweetalert2";
 import { getPetList } from "../helpers/getPetList";
@@ -12,7 +12,7 @@ import { getSearchPets } from "../helpers/getSearchPets ";
 
 export const usePetStore = () => {
 
-    const {activePet, isPetSaving, petList } = useSelector((state:RootState)=> state.pet)
+    const {activePet, isPetSaving, petList, lastPets } = useSelector((state:RootState)=> state.pet)
     const dispatch = useDispatch();
   
     //mascota activa
@@ -65,12 +65,13 @@ export const usePetStore = () => {
                   if(activeOwner){
                     const newDoc = doc(collection(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets`));
                  
-                    const resp = await setDoc(newDoc, pet);
-                    console.log('Documento guardado correctamente', resp);
+                    await setDoc(newDoc, pet);
 
                     pet.id = newDoc.id
+                    
                     dispatch(onAddNewPet({...pet}))
                     dispatch(onSetActivePet({...pet}))
+                   
                     Swal.fire({
                       icon: 'success',
                       title: 'Mascota guardada correctamente',
@@ -110,16 +111,54 @@ export const usePetStore = () => {
       }
 
 
+      
+        const startDeletingPet = (): ThunkAction<void, PetsState, unknown, Action<string>>  => {
+         return async(dispatch, getState:()=> RootState )=>{
+            
+            try {
+                const {uid} = getState().auth
+                if(!uid) return;
+                
+                const { activeOwner } = getState().owner
+                if(!activeOwner) return;
+              
+                if(!activePet) return; 
+    
+                const docRef = doc(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${activePet.id}`) 
+                
+                const resp = await deleteDoc(docRef)
+                console.log('Mascota borrado correctamente', resp);
+                
+                dispatch(onDeletePet(activePet))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Mascota eliminada correctamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: `Error al eliminar la mascota: ${error}`,
+                })
+            }   
+       
+        }
+    }
+
+ 
 
   return {
     activePet, 
     isPetSaving, 
     petList,
     hasPetSelected: !!activePet,
+    lastPets,
     setActivePet,
     startSavingPet,
     startLoadingPetList,
-
+    startDeletingPet
   }
 }
 
@@ -128,39 +167,3 @@ export const usePetStore = () => {
     
 
 
-
-    //     const startDeletingOwner = (): ThunkAction<void, OwnersState, unknown, Action<string>>  => {
-    //      return async(dispatch, getState:()=> RootState )=>{
-            
-    //         try {
-    //             const {uid} = getState().auth
-    //             if(!uid) return;
-                
-    //             if(!activeOwner) return; 
-    
-    //             const docRef = doc(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}`) 
-                
-    //             const resp = await deleteDoc(docRef)
-    //             console.log('Propietario borrado correctamente', resp);
-                
-    //             dispatch(onDeleteOwner(activeOwner))
-    //             Swal.fire({
-    //                 icon: 'success',
-    //                 title: 'Propietario eliminado correctamente',
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //               })
-
-    //         } catch (error) {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: `Error al eliminar el propietario: ${error}`,
-    //                 showConfirmButton: false,
-    //                 timer: 1500
-    //             })
-    //         }   
-       
-    //     }
-    // }
-
- 

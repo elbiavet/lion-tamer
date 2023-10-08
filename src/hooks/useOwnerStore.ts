@@ -154,8 +154,6 @@ export const useOwnerStore = () => {
                 Swal.fire({
                     icon: 'error',
                     title: `Error al eliminar el propietario: ${error}`,
-                    showConfirmButton: false,
-                    timer: 1500
                 })
             }   
        

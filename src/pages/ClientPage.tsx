@@ -5,11 +5,13 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PetPage } from "./PetPage";
 import { onSetActivePet } from "../store/pet/petSlice";
+import { initialValuesPet } from "../assets/data";
+import { Pet } from "../interfaces/appInterfaces";
 
 
 export const ClientPage = () => {
 
-    const {activeOwner, startDeletingOwner} = useOwnerStore();
+    const {activeOwner, startDeletingOwner, ownerList} = useOwnerStore();
     const {petList, startLoadingPetList, activePet} = usePetStore();
     const dispatch = useDispatch();
     const {id} = useParams();
@@ -19,11 +21,12 @@ export const ClientPage = () => {
         dispatch(startDeletingOwner(activeOwner))
     }
 
-
     useEffect(() => {
        dispatch(startLoadingPetList(id))
+       dispatch(onSetActivePet(initialValuesPet))
     }, [id])
     
+
   return (
     
     <div className="container m-4">
@@ -61,7 +64,10 @@ export const ClientPage = () => {
                                         type="button" 
                                         className="btn btn-outline-primary m-1" 
                                         key={pet.id}
-                                        onClick={()=> dispatch(onSetActivePet({...pet}))}
+                                        onClick={()=> {
+                                            dispatch(onSetActivePet({...pet}))
+                                        }
+                                         }
                                         >
                                             {pet.namePet}
                                         
