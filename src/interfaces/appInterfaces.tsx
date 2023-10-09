@@ -42,6 +42,7 @@ export interface FormValuesCalendarEvent{
   // } 
 
   export interface Owner{
+    data(): Owner
     id?:string,
     ownerFirstName: string,
     ownerLastName:string,

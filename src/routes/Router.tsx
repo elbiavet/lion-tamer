@@ -6,8 +6,6 @@ import { Schedule } from "../pages/Schedule";
 import { SideBar } from "../components/SideBar";
 import { CashRegister } from "../pages/CashRegister";
 import { useCheckAuth } from "../hooks/useCheckAuth";
-import { OwnerSearch } from "../pages/OwnerSearch";
-import { PetSearch } from "../pages/PetSearch";
 import { ClientPage } from "../pages/ClientPage";
 import { OwnerResults } from "../pages/OwnerResults";
 import { PetPage } from "../pages/PetPage";

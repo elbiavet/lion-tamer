@@ -1,4 +1,4 @@
-import { collection, getDocs} from "firebase/firestore/lite"
+import { DocumentSnapshot, collection, getDocs} from "firebase/firestore/lite"
 import { FirebaseDB } from "../firebase/firebaseConfig"
 import { Pet } from "../interfaces/appInterfaces"
 
@@ -12,7 +12,7 @@ export const getPetList = async(uid:string, ownerID:string) => {
         
 
         const newPetList:Pet[]  = [];
-        docs.forEach((doc) => newPetList.push({id: doc.id, ...doc.data()}))
+        docs.forEach((doc: DocumentSnapshot) => newPetList.push({id: doc.id, ...doc.data()} as Pet))
         return newPetList;
         
 

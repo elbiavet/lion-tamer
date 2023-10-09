@@ -1,4 +1,4 @@
-import { collection, getDocs, query, where } from "firebase/firestore/lite"
+import { DocumentSnapshot, collection, getDocs, query, where } from "firebase/firestore/lite"
 import { FirebaseDB } from "../firebase/firebaseConfig"
 import { Owner } from "../interfaces/appInterfaces"
 
@@ -14,7 +14,7 @@ export const getSearchOwners = async(uid:string, searchValue:string) => {
 
         const resp = await getDocs(queryOwner);
         const newSearchOwnerList: Owner[] = [];
-        resp.forEach(doc => newSearchOwnerList.push({id: doc.id, ...doc.data()}))
+        resp.forEach((doc: DocumentSnapshot) => newSearchOwnerList.push({id: doc.id, ...doc.data()} as Owner))
         console.log(newSearchOwnerList)
         return newSearchOwnerList;
      

@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore/lite"
+import { DocumentSnapshot, collection, getDocs } from "firebase/firestore/lite"
 import { FirebaseDB } from "../firebase/firebaseConfig"
 import { CalendarEventInterface } from "../interfaces/appInterfaces"
 
@@ -11,10 +11,11 @@ export const getEventsFirebase = async(uid:string) => {
         const docs = await getDocs(collectionRef)
 
         const newEventList:CalendarEventInterface[]  = [];
-        docs.forEach((doc) => newEventList.push({id: doc.id, ...doc.data()}))
+        //docs.forEach((doc) => newEventList.push({id: doc.id, ...doc.data()}))
+        docs.forEach((doc: DocumentSnapshot) => newEventList.push({ id: doc.id, ...doc.data() } as CalendarEventInterface))
+        
         return newEventList;
         
-
     }catch(error){
         console.log(error)
     }

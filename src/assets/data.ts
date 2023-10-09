@@ -5,12 +5,13 @@
 export const initialValuesOwner={
   ownerFirstName:'',
   ownerLastName:'',
-  address:'',
+  // address:'',
   tlf: 0,
-  tlf2: 0,
+  // tlf2: 0,
   email:'',
   dni:'',
-  commentsOwner:'',
+  // commentsOwner:'',
+  
   // pets:[{
   //   id:'',
   //   namePet: '',

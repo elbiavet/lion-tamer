@@ -1,4 +1,4 @@
-import { collection, getDocs} from "firebase/firestore/lite"
+import { DocumentSnapshot, collection, getDocs} from "firebase/firestore/lite"
 import { FirebaseDB } from "../firebase/firebaseConfig"
 import { Owner } from "../interfaces/appInterfaces"
 
@@ -10,12 +10,12 @@ export const getOwnersList = async(uid:string) => {
         const docs = await getDocs(collectionRef)
 
         const newOwnerList:Owner[]  = [];
-        docs.forEach((doc) => newOwnerList.push({id: doc.id, ...doc.data()}))
+        //docs.forEach((doc) => newOwnerList.push({id: doc.id, ...doc.data()}))
+        docs.forEach((doc: DocumentSnapshot) => newOwnerList.push({ id: doc.id, ...doc.data() } as Owner));
+
         return newOwnerList;
-        
 
     }catch(error){
         console.log(error)
     }
 }
-
