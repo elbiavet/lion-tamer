@@ -2,26 +2,26 @@ import { useDispatch } from "react-redux";
 import { usePetStore } from "../hooks/usePetStore";
 import { useNavigate } from "react-router-dom";
 import { Pet } from "../interfaces/appInterfaces";
+import { useOwnerStore } from "../hooks/useOwnerStore";
 
 interface Props{
     activePet:Pet|null,
 }
 
 export const PetPage = ({ activePet }:Props) => {
-    // const {activeOwner, startDeletingOwner} = useOwnerStore();
+    const { activeOwner } = useOwnerStore();
     const {startDeletingPet} = usePetStore();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    console.log(activePet)
 
   return (
     <>     
     {
-        activePet && activePet.id 
+        activeOwner && activePet && activePet.id 
         ? (
             <div className="card">
                 <div className="card-header d-flex justify-content-between">
-                    <h5 className="card-title m-2">{activePet?.namePet}</h5>
+                    <p className="card-title m-2"><span className="text-primary fw-bold fs-5 me-4">{activePet?.namePet.toUpperCase()}</span> ({activeOwner.ownerFirstName} {activeOwner.ownerLastName})</p>
                     <div className="m-1">
                         <button 
                             type="button" 
@@ -36,26 +36,41 @@ export const PetPage = ({ activePet }:Props) => {
                     </div>  
                 </div>
                 <div className="card-body">
-                    <div className="card-text">
-                        <p className="col-5 m-1"><span className="fw-bold">Edad:</span> {activePet?.birthday}</p>
-                        <p className="col-5 m-1"><span className="fw-bold">Castrado:</span> {activePet?.castrated}</p>
-                        <p className="col-5 m-1"><span className="fw-bold">Especie:</span> {activePet?.specie}</p>
-                        <p className="col-4 m-1" ><span className="fw-bold">Raza:</span> {activePet?.breed}</p>
-                        <p className="col-7 m-1"><span className="fw-bold">Capa:</span> {activePet?.coat}</p>
-                        <p className="col-4 m-1"><span className="fw-bold">Character</span> {activePet?.character} </p> 
-                        <p className="col-7 m-1"><span className="fw-bold">Enfermedades:</span> Hacer un map</p>
-                        <p className="col-7 m-1"><span className="fw-bold">Comentarios:</span> {activePet?.commentsPet}</p>
+                    <div className="card-text row">
+                        <div className="col">
+                            <p className="m-1"><span className="fw-bold">Edad:</span> {activePet?.birthday}</p>
+                            <p className="m-1"><span className="fw-bold">Castrado:</span> {activePet?.castrated}</p>
+                            <p className="m-1"><span className="fw-bold">Especie:</span> {activePet?.specie}</p>
+                            <p className="m-1" ><span className="fw-bold">Raza:</span> {activePet?.breed}</p>
+                            <p className="m-1"><span className="fw-bold">Capa:</span> {activePet?.coat}</p>
+                            <p className="m-1"><span className="fw-bold">Character</span> {activePet?.character} </p> 
+                            <p className="m-1"><span className="fw-bold">Enfermedades:</span> Hacer un map</p>
+                            <p className="m-1"><span className="fw-bold">Comentarios:</span> {activePet?.commentsPet}</p>
+                        </div>
+                        <div className="col">
+                            <p className="m-1"><span className="fw-bold">Historia Clínica:</span> {activePet?.history}</p> 
+                        </div>
                     </div>
                 </div>
             </div>
         )
         : (
-            <div className="container-fluid m-3 mt-4">
-                <p className="fw-bold">Resultados</p>
+            <div className="container-fluid mt-4">
+                <h2 className="fs-5 fw-bold">Resultados</h2> 
                 <div className="alert alert-danger" role="alert">
-                    <p>No hay ninguna mascota seleccionada.</p>
-                    <p>Por favor, busca en la ficha del propietario.</p>
-                </div>
+                    <p className="m-2"> No hay ninguna mascota seleccionada. Por favor, busca en la ficha del propietario.</p>    
+                </div> 
+
+                {/* <div className="alert alert-primary d-flex" role="alert">
+                    <p className="m-1 me-3">No hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
+                    <button 
+                        type="button" 
+                        className="btn btn-primary"
+                        onClick={()=> resetFormValues()}
+                    >
+                    Nuevo
+                    </button>      
+                </div>  */}
             </div>
         )    
     }

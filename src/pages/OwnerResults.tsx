@@ -11,7 +11,7 @@ export const OwnerResults = () => {
     
   return (
     <div className="container-fluid m-3 mt-4">
-        <p className="fw-bold">Resultados</p>
+        <h2 className="fs-5 fw-bold">Resultados</h2> 
         {
             ownerSearchList.length === 0
                 ? (

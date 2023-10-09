@@ -9,6 +9,7 @@ import { onSetActiveOwner } from "../store/owners/ownerSlice";
 
 
 
+
 export const OwnerForm = () => {
 
   const { startSavingOwner, activeOwner, startDeletingOwner } = useOwnerStore();
@@ -49,22 +50,26 @@ export const OwnerForm = () => {
    }, [activeOwner])
 
    
-  return (<>
+  return (
+  <div>
+      {
+        activeOwner && (
+          <div className="alert alert-primary row d-flex justify-content-center align-items-center m-1" role="alert">
+            <p className="col-7">Hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
+            <button 
+              type="button" 
+              className="col-1 btn btn-primary m-1"
+              onClick={()=> resetFormValues()}
+            >
+              Nuevo
+            </button>      
+          </div> 
+        ) 
+      }
     <form onSubmit={ handleSubmit }>
-        <div className="container m-4">
-              <div className="row mt-4 mb-4">
-                <h2 className="col-10 text-center fs-5 fw-bold">Propietario</h2> 
-                {
-                  activeOwner && (
-                    <button 
-                      type="button" 
-                      className="col-1 btn btn-primary m-1"
-                      onClick={()=> resetFormValues()}
-                    >
-                      Nuevo
-                    </button>
-                  ) 
-                }
+        <div className="container-fluid m-4">
+              <div className="mt-4 mb-4">
+                <h2 className="text-center fs-5 fw-bold">Propietario</h2> 
               </div>  
           
               <div className="row mb-3">
@@ -162,15 +167,15 @@ export const OwnerForm = () => {
                 <button type="submit" className="col-1 btn btn-outline-primary m-1">
                       Guardar
                 </button>
-                <button type="button" className="col-1 btn btn-outline-danger m-1" onClick={()=>{}}>
+                <button type="button" className="col-1 btn btn-outline-danger m-1" onClick={()=>{handleDeleteOwner()}}>
                       Eliminar
                 </button>
               </div>
             </div>
             
-          </form>
+    </form>
           { activeOwner && <PetForm />}
-          </>
+  </div>
 
          
         

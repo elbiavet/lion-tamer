@@ -7,12 +7,11 @@ import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/firebaseConfig";
 import Swal from "sweetalert2";
 import { getPetList } from "../helpers/getPetList";
-import { getSearchPets } from "../helpers/getSearchPets ";
 
 
 export const usePetStore = () => {
 
-    const {activePet, isPetSaving, petList, lastPets } = useSelector((state:RootState)=> state.pet)
+    const {activePet, isPetSaving, petList } = useSelector((state:RootState)=> state.pet)
     const dispatch = useDispatch();
   
     //mascota activa
@@ -37,7 +36,7 @@ export const usePetStore = () => {
 
                 try {
                     if(!activeOwner) throw new Error("No hay usuario activo")
-                    const docRef = doc(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/${pet.id}`);
+                    const docRef = doc(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${pet.id}`);
                     const resp = await setDoc(docRef, petToFirestore, {merge:true});
                     console.log('Documento actualizado correctamente', resp);
                     
@@ -154,7 +153,6 @@ export const usePetStore = () => {
     isPetSaving, 
     petList,
     hasPetSelected: !!activePet,
-    lastPets,
     setActivePet,
     startSavingPet,
     startLoadingPetList,
