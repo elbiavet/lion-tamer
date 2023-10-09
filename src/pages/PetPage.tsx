@@ -60,17 +60,6 @@ export const PetPage = ({ activePet }:Props) => {
                 <div className="alert alert-danger" role="alert">
                     <p className="m-2"> No hay ninguna mascota seleccionada. Por favor, busca en la ficha del propietario.</p>    
                 </div> 
-
-                {/* <div className="alert alert-primary d-flex" role="alert">
-                    <p className="m-1 me-3">No hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
-                    <button 
-                        type="button" 
-                        className="btn btn-primary"
-                        onClick={()=> resetFormValues()}
-                    >
-                    Nuevo
-                    </button>      
-                </div>  */}
             </div>
         )    
     }

@@ -54,11 +54,11 @@ export const OwnerForm = () => {
   <div>
       {
         activeOwner && (
-          <div className="alert alert-primary row d-flex justify-content-center align-items-center m-1" role="alert">
-            <p className="col-7">Hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
+          <div className="alert alert-primary d-flex justify-content-center align-items-center" role="alert">
+            <p className="me-4 m-1">Hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
             <button 
               type="button" 
-              className="col-1 btn btn-primary m-1"
+              className="btn btn-primary align-self-baseline"
               onClick={()=> resetFormValues()}
             >
               Nuevo
@@ -156,7 +156,7 @@ export const OwnerForm = () => {
                 <div className="col-7 form-group m-1">
                    <label className="fw-bold">Comentarios</label>
                   <textarea 
-                      rows={4}
+                      rows={3}
                       className="form-control"
                       placeholder="Comentarios"
                       {...getFieldProps('commentsOwner')}
@@ -164,7 +164,7 @@ export const OwnerForm = () => {
                 </div>
               </div>
               <div className="d-flex justify-content-center">
-                <button type="submit" className="col-1 btn btn-outline-primary m-1">
+                <button type="submit" className="col-1 btn btn-success m-1">
                       Guardar
                 </button>
                 <button type="button" className="col-1 btn btn-outline-danger m-1" onClick={()=>{handleDeleteOwner()}}>
