@@ -1,16 +1,20 @@
 import { Formik, Form, Field, ErrorMessage } from "formik"
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import * as Yup from 'yup';
-import { loginWithEmail } from "../store/auth/thunks";
 import "../styles/Pages.css"
+import { RootState } from '../store/store';
+import { useAuthStore } from "../hooks/useAuthStore";
 
 export const Login = () => {
 
-    const dispatch = useDispatch();
-    const { errorMessage } = useSelector(state => state.auth)
+   
+    const { errorMessage } = useSelector((state: RootState) => state.auth)
+    const { loginWithEmail } = useAuthStore();
+
 
     const handleSubmit= (email: string, password: string)=> {
-        dispatch(loginWithEmail(email,password))
+        //dispatch(loginWithEmail(email,password))
+        loginWithEmail(email,password)
     }
 
     return (
@@ -19,7 +23,6 @@ export const Login = () => {
               email:'',
               password:'',
             }} 
-            // onSubmit={({email,password}) => dispatch(loginWithEmail(email,password))}
             onSubmit={({email,password}) => handleSubmit(email,password)}
             validationSchema= {
               Yup.object({

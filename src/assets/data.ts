@@ -32,15 +32,28 @@ export const initialValuesPet={
     // id:'',
     namePet: '',
     specie: '',
-    breed: '',
-    coat: '',
-    character: '',
+    // breed: '',
+    // coat: '',
+    // character: '',
     birthday: '',
     castrated: false,
-    diseases: [''],
+    // diseases: [''],
     // diseases: [{
     //   date: '',
     //   diagnosis: ''
     // }],
-    commentsPet: [''],
+    // commentsPet: [''],
+}
+
+export interface Pet{
+  namePet:string,
+  specie:string,
+  breed?:string,
+  coat?:string,
+  birthday:string, //! antes estaba en Date
+  castrated: boolean,
+  character?:string,
+  diseases?:string[], //Disease[]
+  commentsPet?:string[], 
+  history?:string[] //History[] 
 }

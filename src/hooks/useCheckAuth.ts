@@ -21,8 +21,8 @@ export const useCheckAuth = () =>{
         const { uid, email, displayName } = user;
 
         dispatch(login({ uid, email, displayName }))
-
-        dispatch(startLoadingEventList(uid))
+        
+        startLoadingEventList(uid) //dispatch(startLoadingEventList(uid))
        
       })
 

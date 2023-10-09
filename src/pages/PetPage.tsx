@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+
 import { usePetStore } from "../hooks/usePetStore";
 import { useNavigate } from "react-router-dom";
 import { Pet } from "../interfaces/appInterfaces";
@@ -11,7 +11,7 @@ interface Props{
 export const PetPage = ({ activePet }:Props) => {
     const { activeOwner } = useOwnerStore();
     const {startDeletingPet} = usePetStore();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const navigate = useNavigate();
 
   return (
@@ -30,7 +30,10 @@ export const PetPage = ({ activePet }:Props) => {
                             >
                                 Editar
                             </button>
-                            <button type="button" className="btn btn-outline-danger m-1" onClick={()=>dispatch(startDeletingPet(activePet))}>
+                            <button 
+                                type="button" 
+                                className="btn btn-outline-danger m-1" 
+                                onClick={()=>startDeletingPet()}> {/* dispatch(startDeletingPet(activePet) */}
                                 Eliminar
                         </button>
                     </div>  

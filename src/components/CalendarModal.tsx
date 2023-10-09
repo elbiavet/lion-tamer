@@ -10,7 +10,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/Modal.css'
 import { useCalendarStore } from '../hooks/useCalendarStore';
 import { useModalStore } from '../hooks/useModalStore';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 
 Modal.setAppElement('#root');
@@ -28,13 +28,14 @@ export const CalendarModal = () => {
     const { activeEvent, startSavingEvent, isEventSaving } = useCalendarStore();
     const { isModalOpen, closeModal, openModal } = useModalStore();
    
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
  
 
     const { handleSubmit, values, setValues , getFieldProps, errors, touched, resetForm, handleChange } = useFormik({
       initialValues,
       onSubmit: values => { 
-        dispatch(startSavingEvent(values))
+        // dispatch(startSavingEvent(values))
+        startSavingEvent(values)
         closeModal();
         resetForm()
       },

@@ -1,15 +1,14 @@
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useOwnerStore } from "../hooks/useOwnerStore"
 import * as Yup from 'yup';
-import { BsSearchHeart } from "react-icons/bs";
+//import { BsSearchHeart } from "react-icons/bs";
 
 
 export const OwnerSearch = () => {
 
   const { startSearchingOwner } = useOwnerStore();
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const { getFieldProps, touched, errors, handleSubmit, resetForm } = useFormik({
@@ -17,7 +16,8 @@ export const OwnerSearch = () => {
         searchingOwner:''
     },
     onSubmit: (values) => { 
-        dispatch(startSearchingOwner(values.searchingOwner))
+        //dispatch(startSearchingOwner(values.searchingOwner))
+        startSearchingOwner(values.searchingOwner)
         console.log(values.searchingOwner)
         resetForm()
         navigate('/owner-results')

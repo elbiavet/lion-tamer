@@ -1,17 +1,14 @@
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { usePetStore } from "../hooks/usePetStore";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { initialValuesPet as initialValues } from "../assets/data";
 import { useEffect } from "react";
 import { useOwnerStore } from "../hooks/useOwnerStore";
 
 
-
- 
 export const PetForm = () => {
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const {activePet, startSavingPet, startDeletingPet} = usePetStore();
   const { activeOwner } = useOwnerStore();
@@ -19,8 +16,8 @@ export const PetForm = () => {
   const { handleSubmit, setValues , getFieldProps, errors, touched, resetForm } = useFormik({
       initialValues, 
       onSubmit: values => {
-        dispatch(startSavingPet(values))
-        if(activePet) navigate(`/owner/${activeOwner.id}`)   
+        startSavingPet(values)
+        if(activePet && activeOwner) navigate(`/owner/${activeOwner.id}`)   
         console.log(values)
       },          
       validationSchema: Yup.object({
@@ -30,10 +27,6 @@ export const PetForm = () => {
         })}
   );
 
-    const handleDeletePet = () =>{
-      dispatch(startDeletingPet(activePet))
-      resetForm();
-  }
 
   // const resetFormValues = ()=>{
   //   resetForm()
@@ -48,20 +41,6 @@ export const PetForm = () => {
 
   return (
     <div>
-      {/* {
-        activePet && activePet.id && (
-          <div className="alert alert-primary d-flex justify-content-center" role="alert">
-            <p className="me-4 m-1">Hay una mascota seleccionada actualmente. ¿Quieres crear una nueva?</p>
-            <button 
-              type="button" 
-              className="btn btn-primary align-self-baseline"
-              onClick={()=> resetFormValues()}
-            >
-              Nuevo
-            </button>      
-          </div> 
-        ) 
-      } */}
       <form onSubmit={ handleSubmit }>
         <div className="container-fluid m-4">
           <div className="mt-4 mb-4">
@@ -84,6 +63,7 @@ export const PetForm = () => {
                   className="form-control"
                   {...getFieldProps('birthday')} 
                 />
+                { touched.birthday && errors.birthday && <span className='form-error m-1'>{errors.birthday}</span>}
             </div>
             <div className="col form-group m-1">
               <label className="fw-bold">Especie</label>
@@ -105,7 +85,6 @@ export const PetForm = () => {
                   placeholder="Raza"
                   {...getFieldProps('breed')}
               />
-              { touched.breed && errors.breed && <span className='form-error m-1'>{errors.breed}</span>}
             </div>
             <div className="col form-group m-1">
               <label className="fw-bold">Capa</label>
@@ -161,7 +140,14 @@ export const PetForm = () => {
             <button type="submit" className="col-1 btn btn-success m-1">
                   Guardar
             </button>
-            <button type="button" className="col-1 btn btn-outline-danger m-1" onClick={()=>{handleDeletePet}}>
+            <button 
+              type="button" 
+              className="col-1 btn btn-outline-danger m-1" 
+              onClick={()=>{
+                startDeletingPet()
+                resetForm();
+              }}
+            >
                   Eliminar
             </button>
           </div>

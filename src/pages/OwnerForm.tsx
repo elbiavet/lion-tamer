@@ -9,7 +9,6 @@ import { onSetActiveOwner } from "../store/owners/ownerSlice";
 
 
 
-
 export const OwnerForm = () => {
 
   const { startSavingOwner, activeOwner, startDeletingOwner } = useOwnerStore();
@@ -22,7 +21,8 @@ export const OwnerForm = () => {
   const { handleSubmit, setValues , getFieldProps, errors, touched, resetForm } = useFormik({
       initialValues, 
       onSubmit: values => {
-        dispatch(startSavingOwner(values))
+        //dispatch(startSavingOwner(values))
+        startSavingOwner(values)
         console.log(values)
       },          
       validationSchema: Yup.object({
@@ -34,7 +34,8 @@ export const OwnerForm = () => {
   );
 
     const handleDeleteOwner = () =>{
-      dispatch(startDeletingOwner(activeOwner))
+      //dispatch(startDeletingOwner(activeOwner))
+      startDeletingOwner()
       resetForm();
   }
 

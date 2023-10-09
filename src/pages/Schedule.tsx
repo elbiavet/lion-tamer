@@ -3,7 +3,7 @@ import { Calendar } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { useCalendarStore } from '../hooks/useCalendarStore';
 import { useModalStore } from '../hooks/useModalStore';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { getMessages } from '../helpers/getMessages';
 import { CalendarEvent } from '../components/CalendarEvent';
 import { CalendarModal } from '../components/CalendarModal';
@@ -14,19 +14,12 @@ import { FaTrashCan } from "react-icons/fa6";
 
 export const Schedule = () => {
 
-  // const [lastView, setLastView] = useState(localStorage.getItem('lastView')|| 'agenda')
-
-  /* const eventStyleGetter = ( event: CalendarEvent) =>{ //event: event,start,end,isSelected
-    console.log(event)
-
-  } */
-
   const {openModal} = useModalStore();
   
   const {eventList, setActiveEvent, activeEvent, hasEventSelected, startDeletingEvent } = useCalendarStore();
 
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   const handleDoubleClick = () => {
     openModal()
@@ -39,14 +32,10 @@ export const Schedule = () => {
 
 
   const handleDeleteEvent = () =>{
-    dispatch(startDeletingEvent())
+    startDeletingEvent()
+    //dispatch(startDeletingEvent())
   }
   
-
-  // const onViewChanged = (view:View) => {
-  //   localStorage.setItem('lastView', view)
-  //   setLastView( view )
-  // }
 
   return (
     <div>

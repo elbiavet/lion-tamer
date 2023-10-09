@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Pet } from '../../interfaces/appInterfaces';
 
 export interface PetsState {
@@ -19,34 +19,34 @@ export const petSlice = createSlice({
     name: 'pet',
     initialState,
     reducers: {
-        setPetList: (state: PetsState, {payload})  => {
-            state.petList = payload;
+        setPetList: (state: PetsState, action: PayloadAction<Pet[]>)  => {
+            state.petList = action.payload;
         },
-        setPetSearchList: (state: PetsState, {payload})  => {
-            state.petSearchList = payload;
+        setPetSearchList: (state: PetsState, action: PayloadAction<Pet[]>) => {
+            state.petSearchList = action.payload;
         },
-        onSetActivePet: (state: PetsState, {payload})  => {
-            state.activePet= payload;
+        onSetActivePet: (state: PetsState, action: PayloadAction<Pet | null>) => {
+          state.activePet = action.payload;
         },
-        onAddNewPet: (state: PetsState, {payload})  => {
-            state.petList.push(payload);
-            state.activePet = payload;
-            state.isPetSaving= false;
+        onAddNewPet: (state: PetsState, action: PayloadAction<Pet>) => {
+          state.petList.push(action.payload);
+          state.activePet = action.payload;
+          state.isPetSaving = false;
         },
-        setSavingPet:(state: PetsState)  => {
-            state.isPetSaving = true
+        setSavingPet: (state: PetsState) => {
+          state.isPetSaving = true
         },
-        onUpdatePet: (state: PetsState, {payload}) =>{
-            state.petList = state.petList.map(pet => {
-                if(pet.id === payload.id) return payload
-                return pet
-            })
-            state.isPetSaving= false;
+        onUpdatePet: (state: PetsState, action: PayloadAction<Pet>) => {
+          state.petList = state.petList.map(pet => {
+            if (pet.id === action.payload.id) return action.payload;
+            return pet;
+          })
+          state.isPetSaving = false;
         },
-        onDeletePet: (state: PetsState, { payload }) =>{ 
-            state.petList = state.petList.filter(pet => pet.id !== payload.id);
-            state.activePet = null;   
-        }
+        onDeletePet: (state: PetsState, action: PayloadAction<Pet>) => {
+          state.petList = state.petList.filter(pet => pet.id !== action.payload.id);
+          state.activePet = null;
+        }      
     }
 });
 

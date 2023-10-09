@@ -1,19 +1,21 @@
 import { FaPaw, FaUser, FaCashRegister } from "react-icons/fa6";
 import { IoLogOutOutline } from "react-icons/io5";
 import Logo from "../assets/logo-trans.png"
-import { Link, NavLink, useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux";
-import { startLogout } from "../store/auth/thunks";
+import { NavLink, useNavigate } from "react-router-dom"
+// import { useDispatch } from "react-redux";
 import { OwnerSearch } from "../pages/OwnerSearch";
-import { useOwnerStore } from "../hooks/useOwnerStore";
+import { useAuthStore } from '../hooks/useAuthStore';
+
 
 
 export const NavBar = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { startLogout } = useAuthStore();
 
     const onLogout = () =>{
-      dispatch(startLogout())
+      //dispatch(startLogout())
+      startLogout()
       navigate('/')
     }
 
@@ -32,12 +34,10 @@ export const NavBar = () => {
             <ul className="navbar-nav row d-flex justify-content-evenly align-items-center">
               
               <li className="nav-item col-1">
-                {/* <button className="btn btn-outline-primary" type="submit"><FaUser className="m-2"/></button> */}
                 <NavLink className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} aria-current="page" to={`/owner`}><FaUser className="m-2"/></NavLink>
               </li>
 
               <li className="nav-item col-1">
-                {/* <button className="btn btn-outline-primary" type="submit"><FaPaw className="m-2"/></button> */}
                 <NavLink className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} aria-current="page" to={`/pet`}><FaPaw className="m-2"/></NavLink>
               </li>
 

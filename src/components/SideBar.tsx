@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useOwnerStore } from "../hooks/useOwnerStore";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { FaCat, FaDog, FaUserGroup } from "react-icons/fa6";
+import { FaUserGroup } from "react-icons/fa6";
 import { onSetActiveOwner } from "../store/owners/ownerSlice";
 import { usePetStore } from "../hooks/usePetStore";
 
@@ -10,11 +10,12 @@ import { usePetStore } from "../hooks/usePetStore";
 export const SideBar = () => {
 
   const { ownerList, activeOwner, startLoadingOwnerList } = useOwnerStore();
-  const { activePet, petList, lastPets } = usePetStore();
+  const { activePet } = usePetStore();
   const dispatch = useDispatch();
 
   useEffect(() => {  
-    dispatch(startLoadingOwnerList())
+    // dispatch(startLoadingOwnerList())
+    startLoadingOwnerList()
     }, [])
 
   return (

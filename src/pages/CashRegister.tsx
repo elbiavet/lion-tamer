@@ -1,9 +1,5 @@
-import { useOwnerStore } from "../hooks/useOwnerStore"
-
 
 export const CashRegister = () => {
-
-  const {activeOwner} = useOwnerStore();
 
   return (
     <div className="container mt-4">
