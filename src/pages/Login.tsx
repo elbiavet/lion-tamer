@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import "../styles/Pages.css"
 import { RootState } from '../store/store';
 import { useAuthStore } from "../hooks/useAuthStore";
+import logo from "../assets/logo-trans.png"
 
 export const Login = () => {
 
@@ -13,7 +14,6 @@ export const Login = () => {
 
 
     const handleSubmit= (email: string, password: string)=> {
-        //dispatch(loginWithEmail(email,password))
         loginWithEmail(email,password)
     }
 
@@ -34,7 +34,7 @@ export const Login = () => {
                 <div className="vh-100 d-flex align-items-center bg-login">
                     <div className="container container-login animate__animated animate__zoomIn">
                     <div className="text-center m-3">
-                        <img src="src/assets/logo-blue-small.jpg" alt="Logo Lion Tamer" width={250}/>
+                        <img src={logo} alt="Logo Lion Tamer" width={250}/>
                     </div>
                     <div className="row">
                         <div className="col-md-11 m-3">

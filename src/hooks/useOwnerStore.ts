@@ -7,6 +7,7 @@ import { onAddNewOwner, onDeleteOwner, onSetActiveOwner, onUpdateOwner, setOwner
 import { getOwnersList } from "../helpers/getOwnersList";
 import { getSearchOwners } from "../helpers/getSearchOwners";
 import Swal from "sweetalert2";
+import { onSetActivePet } from "../store/pet/petSlice";
 
 
 export const useOwnerStore = () => {
@@ -60,6 +61,7 @@ export const useOwnerStore = () => {
                 owner.id = newDoc.id
                 dispatch(onAddNewOwner({...owner}))
                 dispatch(onSetActiveOwner({...owner}))
+                dispatch(onSetActivePet(null))
                 Swal.fire({
                     icon: 'success',
                     title: 'Propietario guardado correctamente',
