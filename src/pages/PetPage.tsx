@@ -3,6 +3,7 @@ import { usePetStore } from "../hooks/usePetStore";
 import { useNavigate } from "react-router-dom";
 import { Pet } from "../interfaces/appInterfaces";
 import { useOwnerStore } from "../hooks/useOwnerStore";
+import Swal from "sweetalert2";
 
 interface Props{
     activePet:Pet|null,
@@ -11,8 +12,23 @@ interface Props{
 export const PetPage = ({ activePet }:Props) => {
     const { activeOwner } = useOwnerStore();
     const {startDeletingPet} = usePetStore();
-    // const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const deletePetModal = () =>{
+        Swal.fire({
+            title: '¿Quieres eliminar a esta mascota?',
+            text: "No podrás revertirlo",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              startDeletingPet()
+            }
+          })
+    }
 
   return (
     <>     
@@ -33,7 +49,7 @@ export const PetPage = ({ activePet }:Props) => {
                             <button 
                                 type="button" 
                                 className="btn btn-outline-danger m-1" 
-                                onClick={()=>startDeletingPet()}> {/* dispatch(startDeletingPet(activePet) */}
+                                onClick={()=>deletePetModal()}>
                                 Eliminar
                         </button>
                     </div>  

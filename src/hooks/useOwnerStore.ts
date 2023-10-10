@@ -84,13 +84,12 @@ export const useOwnerStore = () => {
         if(!uid) return;
         try{
             const owners = await getOwnersList(uid)
-        
             if(!owners) return [];
             dispatch(setOwnerList(owners))
+
         } catch(error){
             console.log(error)
         }
-        
     }
 
     //buscar usuario por nombre

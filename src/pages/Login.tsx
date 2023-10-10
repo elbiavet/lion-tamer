@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import "../styles/Pages.css"
 import { RootState } from '../store/store';
 import { useAuthStore } from "../hooks/useAuthStore";
-import logo from "../assets/logo-trans.png"
+import logo from "../assets/logo-blue-trans.png"
 
 export const Login = () => {
 
@@ -31,9 +31,9 @@ export const Login = () => {
             })
           }>
             { () => (
-                <div className="vh-100 d-flex align-items-center bg-login">
+                <div className="vh-100 d-flex align-items-center bg-login"tabIndex={0} data-bs-toggle="tooltip" title="Si quieres probar la aplicación: nube@gmail.com --> 123456">
                     <div className="container container-login animate__animated animate__zoomIn">
-                    <div className="text-center m-3">
+                    <div className="text-center m-3" tabIndex={0} data-bs-toggle="tooltip" title="Si quieres probar la aplicación: nube@gmail.com --> 123456">
                         <img src={logo} alt="Logo Lion Tamer" width={250}/>
                     </div>
                     <div className="row">
@@ -58,11 +58,10 @@ export const Login = () => {
                                     <span className="text-danger"><ErrorMessage name="password" /></span>
                                 </div>
                                 <div className="form-group m-2">
-                                    <input 
+                                    <button 
                                         type="submit"
-                                        className="btn btn-primary w-100"
-                                        value="Entrar" 
-                                    />
+                                        className="btn btn-primary w-100" 
+                                    >Entrar</button>
                                 </div>
                             </Form>
                             { errorMessage && <span>{errorMessage}</span> }

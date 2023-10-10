@@ -1,11 +1,13 @@
 
 import { checkingCredentials, login, logout } from "../store/auth/authSlice";
 import { logoutFirebase, signInWithEmail } from "../firebase/providers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 
 export const useAuthStore = () => {
 
+    const { status, uid } = useSelector((state:RootState)=> state.auth)
     const dispatch = useDispatch();
 
     const loginWithEmail = async(email: string, password: string )=> {
@@ -26,6 +28,8 @@ export const useAuthStore = () => {
     
 
   return {
+    uid,
+    status,
     loginWithEmail,
     startLogout
     }

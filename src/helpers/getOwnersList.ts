@@ -10,7 +10,6 @@ export const getOwnersList = async(uid:string) => {
         const docs = await getDocs(collectionRef)
 
         const newOwnerList:Owner[]  = [];
-        //docs.forEach((doc) => newOwnerList.push({id: doc.id, ...doc.data()}))
         docs.forEach((doc: DocumentSnapshot) => newOwnerList.push({ id: doc.id, ...doc.data() } as Owner));
 
         return newOwnerList;
