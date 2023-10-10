@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
+import { configureStore } from "@reduxjs/toolkit"
 import { authSlice } from "./auth/authSlice"
 import { petSlice } from './pet/petSlice'
 import { calendarSlice } from "./calendar/calendarSlice"

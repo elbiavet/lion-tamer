@@ -34,22 +34,11 @@ export const ClientPage = () => {
         !activeOwner
             ? (
                 <div className="container-fluid m-3 mt-4">
-                <h2 className="fs-5 fw-bold">Resultados</h2> 
-                <div className="alert alert-danger" role="alert">
-                    <p> No hay ningún propietario seleccionado.</p>    
-                </div> 
-
-                <div className="alert alert-primary row d-flex" role="alert">
-                    <p>Hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
-                    <button 
-                        type="button" 
-                        className="col-1 btn btn-primary m-1"
-                        onClick={()=> {}} //TODO: implementar
-                    >
-                    Nuevo
-                    </button>      
-                </div> 
-            </div>
+                    <h2 className="fs-5 fw-bold">Resultados</h2> 
+                    <div className="alert alert-danger" role="alert">
+                        <p> No hay ningún propietario seleccionado.</p>    
+                    </div> 
+                </div>
             )
             : (
                 <div className="container m-4">

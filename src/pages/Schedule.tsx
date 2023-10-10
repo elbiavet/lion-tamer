@@ -3,7 +3,6 @@ import { Calendar } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { useCalendarStore } from '../hooks/useCalendarStore';
 import { useModalStore } from '../hooks/useModalStore';
-// import { useDispatch } from 'react-redux';
 import { getMessages } from '../helpers/getMessages';
 import { CalendarEvent } from '../components/CalendarEvent';
 import { CalendarModal } from '../components/CalendarModal';
@@ -19,8 +18,6 @@ export const Schedule = () => {
   const {eventList, setActiveEvent, activeEvent, hasEventSelected, startDeletingEvent } = useCalendarStore();
 
 
-  // const dispatch = useDispatch()
-
   const handleDoubleClick = () => {
     openModal()
   }
@@ -30,10 +27,8 @@ export const Schedule = () => {
     console.log(activeEvent)
   }
 
-
   const handleDeleteEvent = () =>{
     startDeletingEvent()
-    //dispatch(startDeletingEvent())
   }
   
 
@@ -43,8 +38,9 @@ export const Schedule = () => {
       <Calendar
         localizer={localizer}
         events={eventList}
-        startAccessor= {(event)=> new Date(event.start)}  // startAccessor= 'start'
-        endAccessor={(event)=> new Date(event.end)} // endAccessor='end'
+        //* no funcionaba la opción de la documentación: startAccessor= 'start' y la que si funcionaba daba error de TS: endAccessor={(event)=>new Date(event.end)} 
+        startAccessor={(event)=> new Date(`${event.start}`)}   
+        endAccessor={(event)=>new Date(`${event.end}`)} 
         style={{ height: 590 }}
         culture='es'
         messages={ getMessages() }

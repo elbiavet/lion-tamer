@@ -1,9 +1,9 @@
-import { FormValuesCalendarEvent } from "../interfaces/appInterfaces"
+import { CalendarEventInterface } from "../interfaces/appInterfaces"
 
 
 
 interface Props{
-  event: FormValuesCalendarEvent
+  event: CalendarEventInterface
 }
 
 export const CalendarEvent = ({event}:Props ) => {

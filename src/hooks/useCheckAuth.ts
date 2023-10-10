@@ -22,7 +22,7 @@ export const useCheckAuth = () =>{
 
         dispatch(login({ uid, email, displayName }))
         
-        startLoadingEventList(uid) //dispatch(startLoadingEventList(uid))
+        startLoadingEventList(uid)
        
       })
 

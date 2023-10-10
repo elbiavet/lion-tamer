@@ -5,7 +5,6 @@ import { RootState } from "../store/store";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/firebaseConfig";
 import { getEventsFirebase } from "../helpers/getEventsFirebase";
-import { timestampToDate } from "../helpers/timestampToDate";
 
 
 export const useCalendarStore = () => {
@@ -28,10 +27,8 @@ export const useCalendarStore = () => {
         if( calendarEvent.id){
             const eventToFirestore = {...calendarEvent};
             delete eventToFirestore.id;
+            
             try {
-                //*ojo, no hago "doc(collection...)". Si lo hiciera sería: 
-                //*const docRef = doc(collection(FirebaseDB, `${uid}/lionTamer/calendar/`), `/${calendarEvent.id}`);
-                
                 const docRef = doc(FirebaseDB, `${uid}/lionTamer/calendar/${calendarEvent.id}`);
                 const resp = await setDoc(docRef, eventToFirestore, {merge:true});
                 console.log('Documento actualizado correctamente', resp);
@@ -42,7 +39,7 @@ export const useCalendarStore = () => {
     
           } catch (error){ console.error('Error al actualizar el documento:', error) }   
         } else {
-            //!     //TODO: TAREA: QUE LA FECHA DE UNA CITA SE GRABE SIEMPRE CON EL MISMO FORMATO
+          
             //*Nuevo evento en el calendario
             try {
                 const newDoc = doc(collection(FirebaseDB, `${uid}/lionTamer/calendar`));
@@ -58,27 +55,19 @@ export const useCalendarStore = () => {
         }   
     };
       
+      
     const startLoadingEventList = async(uid:string) =>{
-        
-        const events = await getEventsFirebase(uid)
-        
-        if(!events) return [];
-        //TODO: OJO CON COMO SE GUARDAN LAS FECHAS EN EL MODAL. A VECES NO APARECEN
-        //*He tenido que tranformar la fecha porque firebase a veces la devuelve como TimeStamp, a veces como string
-        events.map((event:CalendarEventInterface) => {
-            typeof(event.start) !== 'string' 
-                ? (event.start= timestampToDate(event.start)) 
-                : (event.start= new Date(event.start))
-            typeof(event.end) !== 'string' 
-                ? (event.end= timestampToDate(event.end)) 
-                : (event.end= new Date(event.end))
-            }
-        )
-        dispatch(setEventList(events))
+
+        try{
+            const events = await getEventsFirebase(uid)
+            if(!events) return [];
+            dispatch(setEventList(events))
+
+        } catch(error){
+            console.log(error)
+        }
     } 
     
-    
-
     const startDeletingEvent = async()=> {
          
         try {

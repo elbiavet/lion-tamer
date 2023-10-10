@@ -1,17 +1,10 @@
 
-export interface FormValuesCalendarEvent{
-    pet:string,
-    start: Date, 
-    end: Date, 
-    title:string,
-    notes?:string
-  }
 
-  export interface CalendarEventInterface{
+export interface CalendarEventInterface{
     id?:string,
     pet:string, //! PONER Pet
-    start: Date, 
-    end: Date, 
+    start?: string, 
+    end?: string, 
     title:string,
     notes?:string
   }
@@ -42,7 +35,6 @@ export interface FormValuesCalendarEvent{
   // } 
 
   export interface Owner{
-    data(): Owner
     id?:string,
     ownerFirstName: string,
     ownerLastName:string,

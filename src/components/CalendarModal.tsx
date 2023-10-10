@@ -5,20 +5,20 @@ import * as Yup from 'yup';
 import { format } from 'date-fns';
 import { dateEnd } from '../helpers/dateEnd';
 import { AiOutlineCloseCircle, AiOutlinePlus } from "react-icons/ai";
-import { FormValuesCalendarEvent } from '../interfaces/appInterfaces';
+import { CalendarEventInterface } from '../interfaces/appInterfaces';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/Modal.css'
 import { useCalendarStore } from '../hooks/useCalendarStore';
 import { useModalStore } from '../hooks/useModalStore';
-// import { useDispatch } from 'react-redux';
+
 
 
 Modal.setAppElement('#root');
 
-const initialValues:FormValuesCalendarEvent={
+const initialValues:CalendarEventInterface={
   pet:'',
-  start: new Date(),
-  end: new Date(dateEnd()),
+  start: format(new Date(), 'yyyy-MM-dd hh:mm'),
+  end: format(new Date(dateEnd()), 'yyyy-MM-dd hh:mm'),
   title:'',
   notes:''
 }
@@ -27,14 +27,11 @@ export const CalendarModal = () => {
 
     const { activeEvent, startSavingEvent, isEventSaving } = useCalendarStore();
     const { isModalOpen, closeModal, openModal } = useModalStore();
-   
-    // const dispatch = useDispatch();
- 
+
 
     const { handleSubmit, values, setValues , getFieldProps, errors, touched, resetForm, handleChange } = useFormik({
       initialValues,
       onSubmit: values => { 
-        // dispatch(startSavingEvent(values))
         startSavingEvent(values)
         closeModal();
         resetForm()
@@ -89,7 +86,7 @@ export const CalendarModal = () => {
                 type='datetime-local' 
                 className='form-control m-1' 
                 name='start'
-                value={format(new Date(values.start), 'yyyy-MM-dd HH:mm')} //!OJO, con hh daba problemas de formato
+                value={values.start}
                 onChange={handleChange}
                 />
                 { !touched.start && <span className='form-error m-1'>{JSON.stringify(errors.start)}</span>} 
@@ -101,8 +98,8 @@ export const CalendarModal = () => {
                 type='datetime-local' 
                 className='form-control m-1' 
                 name='end'
-                value={format(new Date(values.end), 'yyyy-MM-dd HH:mm')}
-                min={(values.start).toLocaleString()} 
+                value={values.end}
+                min={values.start} 
                 onChange={handleChange}
                 />
               { touched.end && <span className='form-error m-1'>{JSON.stringify(errors.end)}</span>} 
@@ -119,17 +116,6 @@ export const CalendarModal = () => {
               />
               { touched.pet && errors.pet && <span className='form-error m-1'>{errors.pet}</span>}
             </div>
-        
-            {/* <div className='form-group mb-2'>
-              <label>Nombre propietario</label>
-              <input
-                  type='text'
-                  className='form-control'
-                  placeholder='Nombre propietario'
-                  {...getFieldProps('owner')}
-              />
-                { touched.owner && errors.owner && <span className='form-error m-1'>{errors.owner}</span>}
-            </div> */}
             
           <div className='form-group mb-2'>
               <label>Titulo</label>
