@@ -28,15 +28,15 @@ export const Login = () => {
               Yup.object({
               email: Yup.string().required('El email es obligatorio').email('El email no es válido'),
               password: Yup.string().required('La contraseña es obligatoria'),
-            })
-          }>
+            })}
+            >
             { () => (
-                <div className="vh-100 d-flex align-items-center bg-login"tabIndex={0} data-bs-toggle="tooltip" title="Si quieres probar la aplicación: nube@gmail.com --> 123456">
-                    <div className="container container-login animate__animated animate__zoomIn">
-                    <div className="text-center m-3" tabIndex={0} data-bs-toggle="tooltip" title="Si quieres probar la aplicación: nube@gmail.com --> 123456">
+                <div className="vh-100 d-flex align-items-center bg-login row" tabIndex={0} data-bs-toggle="tooltip" title="Si quieres probar la aplicación: nube@gmail.com --> 123456">
+                    <div className="container container-login col-10 col-sm-6 col-lg-4 animate__animated animate__zoomIn p-4">
+                    <div className="text-center">
                         <img src={logo} alt="Logo Lion Tamer" width={250}/>
                     </div>
-                    <div className="row">
+                    <div className="row d-flex justify-content-center">
                         <div className="col-md-11 m-3">
                             <Form> 
                                 <div className="form-group m-2">
@@ -70,11 +70,7 @@ export const Login = () => {
                     </div>
                 </div>
             </div>
-              )
-            }
-
-          </Formik>
-          
-          
+            )}
+        </Formik>
     )
 }
