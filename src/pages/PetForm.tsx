@@ -27,7 +27,6 @@ export const PetForm = () => {
         })}
   );
 
-
   // const resetFormValues = ()=>{
   //   resetForm()
   //   dispatch(onSetActivePet(null))
@@ -47,7 +46,7 @@ export const PetForm = () => {
             <h2 className="text-center fs-5 fw-bold">Mascota</h2> 
           </div>   
           <div className="row">
-            <div className="col form-group m-1">
+            <div className="col-sm-5 col-lg form-group m-1">
               <label className="fw-bold">Nombre mascota</label>
               <input type="text"
                 className="form-control"
@@ -56,7 +55,7 @@ export const PetForm = () => {
             />
               { touched.namePet && errors.namePet && <span className='form-error m-1'>{errors.namePet}</span>}
             </div>
-            <div className="col form-group m-1 ">
+            <div className="col-sm-5 col-lg form-group m-1 ">
               <label className="fw-bold">Fecha de nacimiento</label>
                 <input 
                   type="date" 
@@ -65,7 +64,7 @@ export const PetForm = () => {
                 />
                 { touched.birthday && errors.birthday && <span className='form-error m-1'>{errors.birthday}</span>}
             </div>
-            <div className="col form-group m-1">
+            <div className="col-sm-5 col-lg form-group m-1">
               <label className="fw-bold">Especie</label>
               <input 
                   type="text"
@@ -77,7 +76,7 @@ export const PetForm = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col form-group m-1">
+            <div className="col-sm col-lg form-group m-sm-1">
               <label className="fw-bold">Raza</label>
               <input 
                   type="text"
@@ -86,7 +85,7 @@ export const PetForm = () => {
                   {...getFieldProps('breed')}
               />
             </div>
-            <div className="col form-group m-1">
+            <div className="col-sm col-lg form-group m-sm-1">
               <label className="fw-bold">Capa</label>
               <input 
                   type="text"
@@ -96,7 +95,7 @@ export const PetForm = () => {
               />
             </div>
             
-            <div className="col form-group m-1">
+            <div className="col-sm col-lg form-group m-1">
               <label className="fw-bold">Carácter</label>
               <input 
                   type="text"
@@ -108,7 +107,7 @@ export const PetForm = () => {
           </div>
                   
           <div className="row">
-            <div className="col form-group m-1">
+            <div className="col-lg form-group m-1">
               <label className="fw-bold">Enfermedades</label>
               <input 
                   type="text"
@@ -117,7 +116,7 @@ export const PetForm = () => {
                   {...getFieldProps('diseases')}
               />
             </div>
-            <div className="col form-group m-1">
+            <div className="col-lg form-group m-1">
               <label className="fw-bold">Comentarios</label>
               <textarea
                   rows={2}
@@ -137,12 +136,12 @@ export const PetForm = () => {
             />
           </div>
           <div className="d-flex justify-content-center">
-            <button type="submit" className="col-1 btn btn-success m-1">
+            <button type="submit" className="col-5 col-sm-3 col-lg-1 btn btn-success m-1">
                   Guardar
             </button>
             <button 
               type="button" 
-              className="col-1 btn btn-outline-danger m-1" 
+              className="col-5 col-sm-3 col-lg-1 btn btn-outline-danger m-1" 
               onClick={()=>{
                 startDeletingPet()
                 resetForm();

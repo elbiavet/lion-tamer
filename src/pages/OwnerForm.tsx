@@ -55,11 +55,11 @@ export const OwnerForm = () => {
   <div>
       {
         activeOwner && (
-          <div className="alert alert-primary d-flex justify-content-center align-items-center" role="alert">
-            <p className="me-4 m-1">Hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
+          <div className="alert alert-primary d-flex flex-column flex-sm-row justify-content-center align-items-center" role="alert">
+            <p className="me-sm-4 m-1">Hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
             <button 
               type="button" 
-              className="btn btn-primary align-self-baseline"
+              className="btn btn-primary align-self-sm-baseline"
               onClick={()=> resetFormValues()}
             >
               Nuevo
@@ -74,7 +74,7 @@ export const OwnerForm = () => {
               </div>  
           
               <div className="row mb-3">
-                <div className="col-3 form-group m-1 ">
+                <div className="col-11 col-sm-5 col-lg-3 form-group m-sm-1 ">
                   <label className="fw-bold">Nombre</label>
                   <input type="text"
                     className="form-control"
@@ -84,18 +84,18 @@ export const OwnerForm = () => {
                   { touched.ownerFirstName && errors.ownerFirstName && <span className='form-error m-1'>{errors.ownerFirstName}</span>}
                 </div>
 
-                <div className="col-5 form-group m-1">
+                <div className="col-11 col-sm-6 col-lg-5 form-group m-sm-1">
                   <label className="fw-bold">Apellidos</label>
                   <input type="text"
                     className="form-control"
                     placeholder="Apellidos"
                     {...getFieldProps('ownerLastName')}
                     />
-                  { touched.ownerLastName && errors.ownerLastName && <span className='form-error m-1'>{errors.ownerLastName}</span>}
+                  { touched.ownerLastName && errors.ownerLastName && <span className='form-error m-sm-1'>{errors.ownerLastName}</span>}
                 </div>
                 
 
-                <div className="col-3 form-group m-1">
+                <div className="col-11 col-sm-5 col-lg-3 form-group m-sm-1">
                    <label className="fw-bold">DNI</label>
                   <input 
                       type="text"
@@ -103,13 +103,13 @@ export const OwnerForm = () => {
                       placeholder="DNI"
                       {...getFieldProps('dni')}
                   />
-                  { touched.dni && errors.dni && <span className='form-error m-1'>{errors.dni}</span>}
+                  { touched.dni && errors.dni && <span className='form-error m-sm-1'>{errors.dni}</span>}
                 </div>
               </div>
 
               <div className="row mb-3">
                    
-                <div className="col-4 form-group m-1">
+                <div className="col-11 col-sm-5 col-lg-4 form-group m-sm-1">
                    <label className="fw-bold">Email</label>
                   <input
                       type="text"
@@ -117,10 +117,10 @@ export const OwnerForm = () => {
                       placeholder="Email"
                       {...getFieldProps('email')}
                   />
-                  { touched.email && errors.email && <span className='form-error m-1'>{errors.email}</span>}
+                  { touched.email && errors.email && <span className='form-error m-sm-1'>{errors.email}</span>}
 
                 </div>
-                <div className="col-7 form-group m-1">
+                <div className="col-11 col-sm-6 col-lg-7 form-group m-sm-1">
                    <label className="fw-bold">Dirección</label>
                   <input 
                       type="text"
@@ -132,8 +132,8 @@ export const OwnerForm = () => {
               </div>
  
               <div className="row mb-3">            
-                <div className="col-4">
-                  <div className="form-group m-1">
+                <div className="col-11 col-sm-5 col-lg-4">
+                  <div className="form-group m-sm-1">
                      <label className="fw-bold">Teléfono de contacto</label>
                     <input 
                         type="number"
@@ -141,10 +141,10 @@ export const OwnerForm = () => {
                         placeholder="Teléfono"
                         {...getFieldProps('tlf')}
                     />
-                  { touched.tlf && errors.tlf && <span className='form-error m-1'>{errors.tlf}</span>}
+                  { touched.tlf && errors.tlf && <span className='form-error m-sm-1'>{errors.tlf}</span>}
 
                   </div>
-                  <div className="form-group m-1">
+                  <div className="form-group m-sm-1">
                      <label className="fw-bold">Teléfono secundario</label>
                     <input 
                         type="number"
@@ -154,7 +154,7 @@ export const OwnerForm = () => {
                     />
                   </div>
                 </div>
-                <div className="col-7 form-group m-1">
+                <div className="col-11 col-sm-6 col-lg-7 form-group m-sm-1">
                    <label className="fw-bold">Comentarios</label>
                   <textarea 
                       rows={3}
@@ -165,10 +165,10 @@ export const OwnerForm = () => {
                 </div>
               </div>
               <div className="d-flex justify-content-center">
-                <button type="submit" className="col-1 btn btn-success m-1">
+                <button type="submit" className="col-5 col-sm-3 col-lg-1 btn btn-success m-1">
                       Guardar
                 </button>
-                <button type="button" className="col-1 btn btn-outline-danger m-1" onClick={()=>{handleDeleteOwner()}}>
+                <button type="button" className="col-5 col-sm-3 col-lg-1 btn btn-outline-danger m-1" onClick={()=>{handleDeleteOwner()}}>
                       Eliminar
                 </button>
               </div>
