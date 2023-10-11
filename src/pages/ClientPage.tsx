@@ -41,7 +41,7 @@ export const ClientPage = () => {
                 </div>
             )
             : (
-                <div className="container m-4">
+                <div className="container m-2 m-sm-4">
                 <div className="card">
                     <div className="card-header d-flex justify-content-between">
                         <h5 className="card-title m-2">{activeOwner?.ownerFirstName} {activeOwner?.ownerLastName}</h5>

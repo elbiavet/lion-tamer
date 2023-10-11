@@ -20,7 +20,7 @@ export const SideBar = () => {
     }, [uid])
 
   return (
-    <div className="container vh-100 border border-2">
+    <div className="container h-100 border border-2">
         <p className="mt-3 fw-bold">Últimas fichas añadidas</p>
 
         <p className="mt-3 text-primary">Dueños <FaUserGroup /></p>

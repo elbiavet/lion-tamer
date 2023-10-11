@@ -41,7 +41,7 @@ export const PetForm = () => {
   return (
     <div>
       <form onSubmit={ handleSubmit }>
-        <div className="container-fluid m-4">
+        <div className="container-fluid m-2 m-sm-4">
           <div className="mt-4 mb-4">
             <h2 className="text-center fs-5 fw-bold">Mascota</h2> 
           </div>   

@@ -55,7 +55,7 @@ export const OwnerForm = () => {
   <div>
       {
         activeOwner && (
-          <div className="alert alert-primary d-flex flex-column flex-sm-row justify-content-center align-items-center" role="alert">
+          <div className="alert alert-primary d-flex flex-column flex-sm-row justify-content-center align-items-center m-2 m-sm-1 m-lg-0" role="alert">
             <p className="me-sm-4 m-1">Hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
             <button 
               type="button" 
@@ -68,7 +68,7 @@ export const OwnerForm = () => {
         ) 
       }
     <form onSubmit={ handleSubmit }>
-        <div className="container-fluid m-4">
+        <div className="container-fluid m-2 m-sm-4">
               <div className="mt-4 mb-4">
                 <h2 className="text-center fs-5 fw-bold">Propietario</h2> 
               </div>  

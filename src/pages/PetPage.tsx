@@ -56,7 +56,7 @@ export const PetPage = ({ activePet }:Props) => {
                 </div>
                 <div className="card-body">
                     <div className="card-text row">
-                        <div className="col">
+                        <div className="col-11 col-sm">
                             <p className="m-1"><span className="fw-bold">Edad:</span> {activePet?.birthday}</p>
                             <p className="m-1"><span className="fw-bold">Castrado:</span> {activePet?.castrated}</p>
                             <p className="m-1"><span className="fw-bold">Especie:</span> {activePet?.specie}</p>
@@ -66,7 +66,7 @@ export const PetPage = ({ activePet }:Props) => {
                             <p className="m-1"><span className="fw-bold">Enfermedades:</span> Hacer un map</p>
                             <p className="m-1"><span className="fw-bold">Comentarios:</span> {activePet?.commentsPet}</p>
                         </div>
-                        <div className="col">
+                        <div className="col-11 col-sm">
                             <p className="m-1"><span className="fw-bold">Historia Clínica:</span> {activePet?.history}</p> 
                         </div>
                     </div>

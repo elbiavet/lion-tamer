@@ -34,7 +34,7 @@ export const Router = () => {
       :(<>
         <NavBar />
         <div className="row d-flex justify-content-evenly">
-          <div className="col-9 p-0">
+          <div className="col-8 col-sm-9 p-0">
             {
               status === 'authenticated' &&
               <Routes>
@@ -48,7 +48,7 @@ export const Router = () => {
               </Routes>
             }
           </div>
-          <div className="col-2 p-0">
+          <div className="col-3 col-sm-2 p-0">
             <SideBar />
           </div>
         </div>
