@@ -2,26 +2,18 @@ import { useEffect } from 'react';
 import { useFormik } from 'formik';
 import Modal from 'react-modal';
 import * as Yup from 'yup';
-import { format } from 'date-fns';
 import { dateEnd } from '../helpers/dateEnd';
 import { AiOutlineCloseCircle, AiOutlinePlus } from "react-icons/ai";
-import { CalendarEventInterface } from '../interfaces/appInterfaces';
 import 'react-datepicker/dist/react-datepicker.css';
-import '../styles/Modal.css'
+import '../styles/CalendarModal.css'
 import { useCalendarStore } from '../hooks/useCalendarStore';
 import { useModalStore } from '../hooks/useModalStore';
+import { initialValuesCalendar as initialValues } from '../assets/initialValues';
 
 
 
 Modal.setAppElement('#root');
 
-const initialValues:CalendarEventInterface={
-  pet:'',
-  start: format(new Date(), 'yyyy-MM-dd hh:mm'),
-  end: format(new Date(dateEnd()), 'yyyy-MM-dd hh:mm'),
-  title:'',
-  notes:''
-}
 
 export const CalendarModal = () => {
 
@@ -69,8 +61,8 @@ export const CalendarModal = () => {
           isOpen={isModalOpen}
           /* onAfterOpen={afterOpenModal} */
           onRequestClose={setCloseModal}
-          className='modal'
-          overlayClassName='modal-fondo'
+          className='calendar-modal'
+          overlayClassName='calendar-modal-fondo'
           closeTimeoutMS={200}
         >
           <div className='d-flex justify-content-between'>

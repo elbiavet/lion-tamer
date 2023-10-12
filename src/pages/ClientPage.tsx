@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PetPage } from "./PetPage";
 import { onSetActivePet } from "../store/pet/petSlice";
-import { initialValuesPet } from "../assets/data";
+import { initialValuesPet } from "../assets/initialValues";
 
 
 export const ClientPage = () => {

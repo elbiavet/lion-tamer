@@ -2,9 +2,9 @@ import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { usePetStore } from "../hooks/usePetStore";
 import { useNavigate } from "react-router-dom";
-import { initialValuesPet as initialValues } from "../assets/data";
 import { useEffect } from "react";
 import { useOwnerStore } from "../hooks/useOwnerStore";
+import { initialValuesPet as initialValues } from "../assets/initialValues";
 
 
 export const PetForm = () => {
@@ -24,6 +24,7 @@ export const PetForm = () => {
         namePet: Yup.string().required('El nombre de la mascota es obligatorio'),
         specie: Yup.string().required('La especie es obligatoria'),
         birthday: Yup.date().required('La fecha de nacimiento es obligatoria').max(new Date()),
+        castrated: Yup.boolean().required('Es una información obligatoria'),
         })}
   );
 
@@ -45,9 +46,11 @@ export const PetForm = () => {
           <div className="mt-4 mb-4">
             <h2 className="text-center fs-5 fw-bold">Mascota</h2> 
           </div>   
+
           <div className="row">
+
             <div className="col-sm-5 col-lg form-group m-1">
-              <label className="fw-bold">Nombre mascota</label>
+              <label className="fw-bold" htmlFor="namePet">Nombre mascota</label>
               <input type="text"
                 className="form-control"
                 placeholder="Nombre mascota"
@@ -108,13 +111,12 @@ export const PetForm = () => {
                   
           <div className="row">
             <div className="col-lg form-group m-1">
-              <label className="fw-bold">Enfermedades</label>
-              <input 
-                  type="text"
-                  className="form-control"
-                  placeholder="Enfermedades"
-                  {...getFieldProps('diseases')}
-              />
+              <label className="fw-bold">¿Está castrad@?</label>
+              <select {...getFieldProps('castrated')}>
+                <option value="true">Si</option>
+                <option value="false" selected>No</option>
+              </select>
+  
             </div>
             <div className="col-lg form-group m-1">
               <label className="fw-bold">Comentarios</label>

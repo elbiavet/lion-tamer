@@ -20,13 +20,13 @@ export const NavBar = () => {
     
     <nav className="navbar navbar-expand-sm navbar-light text-primary bg-light border border-2" >
       
-      <div className="container-fluid m-0 p-0 row d-flex justify-content-center justify-content-sm-around">
+      <div className="container-fluid m-0 p-0 row d-flex justify-content-center align-items-center">
 
         <NavLink className={({ isActive }) => `col-8 col-sm-3 col-lg-2 navbar-brand text-center ${ isActive ? "active" :"" }`} to="/schedule"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Calendario"> 
           <img src={Logo} alt="" width={180}/>
         </NavLink>
 
-        <div className="fs-5 col-2 col-sm-7 col-lg-9"> 
+        <div className="fs-5 col-2 col-sm-8 col-lg-10"> 
 
           <button className="btn btn-primary navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
             <span className="navbar-toggler-icon"></span>
@@ -40,41 +40,41 @@ export const NavBar = () => {
             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
 
-          <div className="offcanvas-body row d-flex flex-sm-row justify-content-sm-center justify-content-lg-between align-items-sm-center">
+          <div className="offcanvas-body row d-flex flex-sm-row justify-content-sm-center align-items-sm-center">
     
-          <div className="fs-5"> 
-              <ul className="navbar-nav row d-flex flex-sm-row justify-content-sm-center justify-content-lg-between align-items-center">
+          <div> 
+              <ul className="navbar-nav row d-flex flex-sm-row justify-content-sm-center justify-content-lg-around align-items-center">
                 
-                <li className="nav-item col col-sm-2">
+                <li className="nav-item col col-sm-2 col-lg-2">
                   <NavLink 
                     className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} 
                     aria-current="page" 
                     to={`/owner`}  
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ficha Propietario"
                   >
-                    <div className="d-flex justify-content-start align-items-baseline">
+                    <div className="d-flex align-items-baseline">
                       <FaUser className="m-lg-2"/>
-                      <p className="d-sm-none mx-2">Propietario</p>
+                      <p className="d-sm-none d-lg-inline m-0 mx-2 text-secondary">Cliente</p>
                     </div>
                   </NavLink>
                 </li>
 
-                <li className="nav-item col col-sm-2">
+                <li className="nav-item col col-sm-2 col-lg-2">
                   <NavLink 
                     className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} 
                     aria-current="page" 
                     to={`/pet`}
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ficha mascota"
                   >
-                    <div className="d-flex justify-content-start align-items-baseline">
+                    <div className="d-flex align-items-baseline">
                       <FaPaw className="m-lg-2"/>
-                      <p className="d-sm-none mx-2">Mascota</p>
+                      <p className="d-sm-none d-lg-inline m-0 mx-2 text-secondary">Mascota</p>
                     </div>
                   </NavLink>
                 </li>
 
-                <li className="nav-item col col-lg-5 row">
-                    <div className="d-flex justify-content-start align-items-baseline">
+                <li className="nav-item col col-lg-4 row">
+                    <div className="d-flex align-items-baseline">
                       <OwnerSearch />
                     </div>
                 </li>
@@ -86,9 +86,9 @@ export const NavBar = () => {
                     to="/cash"
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cobros"
                     >
-                      <div className="d-flex justify-content-start align-items-baseline">
-                        <FaCashRegister />
-                        <p className="d-sm-none mx-2">Cobros</p>
+                      <div className="d-flex align-items-baseline">
+                        <FaCashRegister className="m-lg-2"/>
+                        <p className="d-sm-none d-lg-inline m-0 mx-2 text-secondary">Cobros</p>
                     </div>
                       
                     </NavLink>
@@ -96,7 +96,7 @@ export const NavBar = () => {
 
                 <li className="nav-item col col-sm-1 p-0 m-sm-1 d-flex justify-content-sm-center align-items-center">
                   <button className="btn text-danger fs-3"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar sesión">
-                    <div className="d-flex justify-content-start align-items-baseline">
+                    <div className="d-flex align-items-baseline">
                       <IoLogOutOutline onClick={onLogout} />
                         <p className="d-sm-none mx-2">Cerrar sesión</p>
                     </div>

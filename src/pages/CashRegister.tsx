@@ -11,6 +11,7 @@ export const CashRegister = () => {
     <div className="alert alert-info" role="alert">
       Esta funcionalidad aún no está implememtada
     </div>
+    
 
   </div>
   )

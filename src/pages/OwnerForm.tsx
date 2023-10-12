@@ -2,12 +2,10 @@ import { useDispatch } from "react-redux";
 import { useFormik } from "formik"
 import { useOwnerStore } from "../hooks/useOwnerStore";
 import * as Yup from 'yup';
-import { initialValuesOwner as initialValues } from "../assets/data";
 import { useEffect } from "react";
 import { PetForm } from "./PetForm";
 import { onSetActiveOwner } from "../store/owners/ownerSlice";
-
-
+import { initialValuesOwner as initialValues } from "../assets/initialValues";
 
 export const OwnerForm = () => {
 

@@ -30,7 +30,7 @@ export const ownerSlice = createSlice({
         },
         onAddNewOwner: (state: OwnersState, {payload})  => {
             state.ownerList.push(payload);
-            state.activeOwner = null; //!
+            state.activeOwner = null; 
             state.isOwnerSaving= false;
         },
         setSavingOwner:(state: OwnersState)  => {

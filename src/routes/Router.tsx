@@ -10,6 +10,7 @@ import { ClientPage } from "../pages/ClientPage";
 import { OwnerResults } from "../pages/OwnerResults";
 import { PetPage } from "../pages/PetPage";
 import { usePetStore } from "../hooks/usePetStore";
+import { CashModal } from "../components/CashModal";
 
 
 
@@ -43,6 +44,8 @@ export const Router = () => {
                 <Route path="owner" element={< OwnerForm />} /> 
                 <Route path="owner/:id" element={<ClientPage />} />
                 <Route path="pet" element={<PetPage activePet={activePet}/>} />
+                {/* o ${activePet}/cashModal y uso los params */}
+                <Route path="cashModal" element={<CashModal activePet={activePet}/>} /> {/* //!QUITAR? */}
                 <Route path="cash" element={<CashRegister />} />
                 <Route path="/*" element={<Schedule />} />
               </Routes>

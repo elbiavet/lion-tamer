@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Pet } from "../interfaces/appInterfaces";
 import { useOwnerStore } from "../hooks/useOwnerStore";
 import Swal from "sweetalert2";
+import { CashModal } from "../components/CashModal";
 
 interface Props{
     activePet:Pet|null,
@@ -43,14 +44,14 @@ export const PetPage = ({ activePet }:Props) => {
                             type="button" 
                             className="btn btn-outline-primary m-1"
                             onClick={()=> navigate('/owner')}
-                            >
-                                Editar
-                            </button>
-                            <button 
-                                type="button" 
-                                className="btn btn-outline-danger m-1" 
-                                onClick={()=>deletePetModal()}>
-                                Eliminar
+                        >
+                            Editar
+                        </button>
+                        <button 
+                            type="button" 
+                            className="btn btn-outline-danger m-1" 
+                            onClick={()=>deletePetModal()}>
+                            Eliminar
                         </button>
                     </div>  
                 </div>
@@ -58,17 +59,22 @@ export const PetPage = ({ activePet }:Props) => {
                     <div className="card-text row">
                         <div className="col-11 col-sm">
                             <p className="m-1"><span className="fw-bold">Edad:</span> {activePet?.birthday}</p>
-                            <p className="m-1"><span className="fw-bold">Castrado:</span> {activePet?.castrated}</p>
+                            <p className="m-1"><span className="fw-bold">Castrado:</span> 
+                                {`${activePet.castrated}` == 'true' ? <> Si</> : <> No</>}
+                            </p>
                             <p className="m-1"><span className="fw-bold">Especie:</span> {activePet?.specie}</p>
                             <p className="m-1" ><span className="fw-bold">Raza:</span> {activePet?.breed}</p>
                             <p className="m-1"><span className="fw-bold">Capa:</span> {activePet?.coat}</p>
-                            <p className="m-1"><span className="fw-bold">Character</span> {activePet?.character} </p> 
-                            <p className="m-1"><span className="fw-bold">Enfermedades:</span> Hacer un map</p>
+                            <p className="m-1"><span className="fw-bold">Carácter</span> {activePet?.character} </p> 
                             <p className="m-1"><span className="fw-bold">Comentarios:</span> {activePet?.commentsPet}</p>
                         </div>
                         <div className="col-11 col-sm">
                             <p className="m-1"><span className="fw-bold">Historia Clínica:</span> {activePet?.history}</p> 
                         </div>
+                        
+                    </div>
+                    <div className="d-flex justify-content-end">
+                        <CashModal activePet={activePet}/>
                     </div>
                 </div>
             </div>
