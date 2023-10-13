@@ -1,7 +1,11 @@
 import { useFormik } from "formik"
-import { Pet, Services } from "../interfaces/appInterfaces"
+import { Pet, Service } from "../interfaces/appInterfaces"
 import { dataServices } from "../assets/data"
 import { useState } from "react"
+import debounce from "debounce"
+import { useCashRegisterStore } from "../hooks/useCashRegisterStore"
+// import { TableComponent } from "./TableComponent"
+
 
 interface Props{
     activePet:Pet|null,
@@ -9,24 +13,61 @@ interface Props{
 
 export const CashModal = ({ activePet }:Props) => {
 
-    const [serviceResults, setServiceResults] = useState<Services[]>([])
+    const [serviceResults, setServiceResults] = useState<Service[]>([])
+    const [tableList, setTableList] = useState<Service[]>([])
+    const {startSavingInvoice} = useCashRegisterStore();
+ 
 
-    const searchService = (value:string) =>{
-
-        const filteredServices = dataServices.filter(item => item.service.includes(value));
-        setServiceResults(filteredServices);
-    }
-
-
-
-    const {handleChange, handleSubmit, getFieldProps} = useFormik({
+    const { handleSubmit, submitForm, getFieldProps, values, handleChange } = useFormik({
         initialValues: {
             search:'',
         }, 
         onSubmit: values => {
-            searchService(values.search)
+            console.log(values.search)
+            searchService(values.search.toLowerCase())
         },  
     });
+ 
+    //buscar servicio
+    const searchService = (value:string) =>{
+        const filteredServices = dataServices.filter(item => item.service.toLowerCase().includes(value));
+        setServiceResults(filteredServices);
+    }
+
+    //debounce
+    const debouncedSubmit = debounce(submitForm, 200);
+
+
+    const onSelected = (e: React.MouseEvent<HTMLElement>) : void =>{
+        
+        const target = e.target as HTMLElement;
+        const selectedId = target.id;
+
+        if (!selectedId) return;
+               
+        const newServiceAdded= serviceResults.find(item => `${item.code}` == selectedId);
+    
+        if (!newServiceAdded) return;
+        setTableList(prevTableList => [...prevTableList, newServiceAdded]);
+
+        } 
+    
+        const onDelete= (e: React.MouseEvent<HTMLElement>) : void =>{
+
+            const target = e.target as HTMLElement;
+            const selectedId = target.id;
+           
+    
+            if (!selectedId) return;
+            setTableList(tableList.filter(service => `${service.code}` !== selectedId));
+        }
+
+        const addInvoice = (tableList:Service[]) =>{
+            
+            console.log(tableList)
+            //startSavingInvoice(invoice)
+        }
+        
 
   return (
     <>
@@ -42,6 +83,8 @@ export const CashModal = ({ activePet }:Props) => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
+                        {/* <TableComponent services={tableList} setServices={setTableList}/> */}
+
                         <table className="table">
                             <thead className="table-primary">
                                 <tr>
@@ -50,30 +93,23 @@ export const CashModal = ({ activePet }:Props) => {
                                 <th scope="col">Precio</th>
                                 <th scope="col">Unidades</th>
                                 <th scope="col">Total</th>
+                                <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                <th scope="row">1</th>
-                                <td>Consulta</td>
-                                <td>35</td>
-                                <td>1</td>
-                                <td>35</td>
-                                </tr>
-                                <tr>
-                                <th scope="row">5</th>
-                                <td>Vacuna</td>
-                                <td>25</td>
-                                <td>1</td>
-                                <td>25</td>
-                                </tr>
-                                <tr>
-                                <th scope="row">11</th>
-                                <td>Castración gato macho</td>
-                                <td>100</td>
-                                <td>1</td>
-                                <td>100</td>
-                                </tr>
+                                {
+                                    tableList.map(service => (
+                                        <tr key={service.code}>
+                                            <th scope="row">{service.code}</th>
+                                            <td>{service.service}</td>
+                                            <td>{service.cost}</td>
+                                            <td>1</td>
+                                            <td>35</td>
+                                            <td id={service.code.toString()} className="text-danger fw-bold" onClick={(e)=>onDelete(e)}>x</td>
+                                        </tr>
+                                    ))
+                                } 
+                                
                             </tbody>
                             <tfoot className="table-info">
                                 <tr>
@@ -85,24 +121,44 @@ export const CashModal = ({ activePet }:Props) => {
                                 </tr>
                             </tfoot>
                         </table>
-
-                        <form className="d-flex justify-content-center m-5" role="search" onSubmit={handleSubmit}>
-                            <input 
-                                className="form-control me-2" 
-                                type="search" 
-                                placeholder="Buscar Servicio o Producto" 
-                                aria-label="Search" 
-                                {...getFieldProps('search')}
-                            />
-                            <button className="btn btn-outline-primary" type="submit">Buscar</button>
+                        <form className="d-flex flex-column justify-content-center m-5" role="search" onSubmit={handleSubmit}>
+                            <div className="d-flex">
+                                <input 
+                                    className="form-control me-2" 
+                                    type="search" 
+                                    placeholder="Buscar Servicio o Producto" 
+                                    aria-label="Search" 
+                                    aria-controls="autocomplete-results"
+                                    {...getFieldProps('search')}
+                                    onChange={(e) => {
+                                        handleChange(e);
+                                        debouncedSubmit();
+                                    }}
+                                />
+                                <button className="btn btn-outline-primary" type="submit">Buscar</button>
+                            </div>
                             
-                            { JSON.stringify(serviceResults) }
+                            <div className="list-group row">
+                                { values.search !== '' && serviceResults.map(item => (
+                                    <p 
+                                        id={`${item.code}`}
+                                        key={item.code} 
+                                        className="list-group-item list-group-item-action m-2"
+                                        onClick={onSelected}
+                                    >
+                                        {item.service} - {item.cost}€
+                                    </p>
+                                )) }
+                            </div> 
                         </form>
+
+                        
+                        
 
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Aceptar</button>
+                        <button type="button" className="btn btn-primary" onClick={()=>addInvoice(tableList)}>Aceptar</button>
                     </div>
                 </div>
             </div>
@@ -112,3 +168,5 @@ export const CashModal = ({ activePet }:Props) => {
 }
 
 
+
+ 

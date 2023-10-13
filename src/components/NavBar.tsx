@@ -52,8 +52,8 @@ export const NavBar = () => {
                     to={`/owner`}  
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ficha Propietario"
                   >
-                    <div className="d-flex align-items-baseline">
-                      <FaUser className="m-lg-2"/>
+                    <div className="d-flex align-items-center">
+                      <FaUser className="d-lg-none d-xl-inline"/>
                       <p className="d-sm-none d-lg-inline m-0 mx-2 text-secondary">Cliente</p>
                     </div>
                   </NavLink>
@@ -66,8 +66,8 @@ export const NavBar = () => {
                     to={`/pet`}
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ficha mascota"
                   >
-                    <div className="d-flex align-items-baseline">
-                      <FaPaw className="m-lg-2"/>
+                    <div className="d-flex align-items-center">
+                      <FaPaw className="d-lg-none d-xl-inline"/>
                       <p className="d-sm-none d-lg-inline m-0 mx-2 text-secondary">Mascota</p>
                     </div>
                   </NavLink>
@@ -79,7 +79,7 @@ export const NavBar = () => {
                     </div>
                 </li>
         
-                <li className="nav-item col col-sm-1 m-1 d-flex justify-content-sm-center align-items-center">
+                <li className="nav-item col col-sm-1 d-flex justify-content-sm-center align-items-center">
                   <NavLink 
                     className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} 
                     aria-current="page" 
@@ -87,7 +87,7 @@ export const NavBar = () => {
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cobros"
                     >
                       <div className="d-flex align-items-baseline">
-                        <FaCashRegister className="m-lg-2"/>
+                        <FaCashRegister className="d-lg-none d-xl-inline"/>
                         <p className="d-sm-none d-lg-inline m-0 mx-2 text-secondary">Cobros</p>
                     </div>
                       

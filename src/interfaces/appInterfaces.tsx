@@ -20,6 +20,7 @@ export interface Owner{
   email:string,
   commentsOwner?:string,
   // pets?:Pet[]
+  //invoices:Invoice[]
 }
 
 export interface Pet{
@@ -33,6 +34,7 @@ export interface Pet{
   character?:string,
   commentsPet?:string[], 
   history?:string[] //History[] 
+ //invoices?:Invoice[]
 }
 
   // export interface History{
@@ -40,15 +42,17 @@ export interface Pet{
   //   case: string
   // } 
 
-export interface Services{
+export interface Invoice{
+  id?:string,
+  date:string,
+  consumedServices: Service[],
+  //total: number
+  isPaid: boolean
+}
+
+export interface Service{
   code: number,
   service: string,
   cost: number
 }
   
-
-export interface OwnerPayment{
-  pet:string,
-  case:string,
-  amount: number
-}

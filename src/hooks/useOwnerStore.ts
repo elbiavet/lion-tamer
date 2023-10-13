@@ -14,6 +14,7 @@ export const useOwnerStore = () => {
 
     const { uid } = useSelector((state:RootState) => state.auth)
     const { activeOwner, isOwnerSaving, ownerList, ownerSearchList } = useSelector((state:RootState) => state.owner)
+    // const {  } = useSelector((state:RootState) => state.cash)
     const dispatch = useDispatch();
 
     //usuario activo
