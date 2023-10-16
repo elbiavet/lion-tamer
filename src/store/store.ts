@@ -5,6 +5,7 @@ import { calendarSlice } from "./calendar/calendarSlice"
 import { modalSlice } from "./modal/modalSlice"
 import { ownerSlice } from "./owners/ownerSlice"
 import { cashRegisterSlice } from "./cash/cashRegisterSlice"
+import { healthHistorySlice } from "./healthHistory/healthHistorySlice"
 
 export const store = configureStore({
    reducer:  {
@@ -14,6 +15,7 @@ export const store = configureStore({
       owner: ownerSlice.reducer,
       pet: petSlice.reducer,
       cash: cashRegisterSlice.reducer,
+      history: healthHistorySlice.reducer,
    }, 
    middleware:(getDefaultMiddleware) => getDefaultMiddleware({
       serializableCheck: false

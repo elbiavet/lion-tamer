@@ -2,58 +2,51 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Invoice } from '../../interfaces/appInterfaces';
 
 export interface CashState {
-    totalInvoicesDay: Invoice[],
+    totalInvoicesPet: Invoice[],
     activeInvoice: Invoice | null,
-    /* activeInvoice:{
-        pet: string,
-        consumedServices: Service[],
-        total: number
-        isPaid: boolean
-    } */
+    isInvoiceSaving: boolean
  }
 
-//      eventList: CalendarEventInterface[],
-//     activeEvent: CalendarEventInterface | null,
-//     isEventSaving: boolean
-
 const initialState: CashState = {
-    totalInvoicesDay: [],
+    totalInvoicesPet: [],
     activeInvoice: null,
+    isInvoiceSaving: false
+
   }
 
 export const cashRegisterSlice = createSlice({
     name: 'cash',
     initialState,
     reducers: {
-        setTotalInvoicesDay: (state: CashState, {payload})  => {
-            state.totalInvoicesDay = payload;
+        setTotalInvoicesPet: (state: CashState, {payload})  => {
+            state.totalInvoicesPet = payload;
         },
         onSetActiveInvoice: (state: CashState, {payload})  => {
-            //toggle evento activo
+            //toggle invoice activo
             (state.activeInvoice && state.activeInvoice.id === payload.id)
                 ? (state.activeInvoice = null) 
                 : (state.activeInvoice= payload)
         },
         onAddNewInvoice: (state: CashState, action: PayloadAction<Invoice>)  => {
-            state.totalInvoicesDay.push(action.payload); 
+            state.totalInvoicesPet.push(action.payload); 
             state.activeInvoice = null;
-            // state.isEventSaving= false;
+            state.isInvoiceSaving= false;
         },
-        //setSaving:(state: CashState)  => {
-        //     state.isEventSaving = true
-        //},
+        setSavingInvoice:(state: CashState)  => {
+            state.isInvoiceSaving = true
+        },
         onUpdateInvoice: (state: CashState, {payload}) =>{
-            state.totalInvoicesDay = state.totalInvoicesDay.map(event => {
-                if(event.id === payload.id) return payload
-                return event
+            state.totalInvoicesPet = state.totalInvoicesPet.map(invoice => {
+                if(invoice.id === payload.id) return payload
+                return invoice
             })
-            // state.isEventSaving= false;
+            state.isInvoiceSaving= false;
         },
         onDeleteInvoice: (state: CashState, { payload }) =>{ 
-            state.totalInvoicesDay = state.totalInvoicesDay.filter(event => event.id !== payload.id);
+            state.totalInvoicesPet = state.totalInvoicesPet.filter(invoice => invoice.id !== payload.id);
             state.activeInvoice = null;   
         }
     }
 });
 
-export const { setTotalInvoicesDay, onSetActiveInvoice, onAddNewInvoice, onUpdateInvoice, onDeleteInvoice } = cashRegisterSlice.actions;
+export const { setTotalInvoicesPet, onSetActiveInvoice, onAddNewInvoice, setSavingInvoice, onUpdateInvoice, onDeleteInvoice } = cashRegisterSlice.actions;

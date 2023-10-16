@@ -94,7 +94,6 @@ export const usePetStore = () => {
   } 
   
 
-
   //borrar mascota
   const startDeletingPet = async() => {
     if(!uid) return;

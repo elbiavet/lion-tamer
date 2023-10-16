@@ -37,17 +37,19 @@ export interface Pet{
  //invoices?:Invoice[]
 }
 
-  // export interface History{
-  //   date: string,
-  //   case: string
-  // } 
+export interface HealthHistory{
+    id?: string,
+    date: string,
+    case: string,
+    //invoiceOfDay: Invoice
+} 
 
 export interface Invoice{
   id?:string,
   date:string,
   consumedServices: Service[],
-  //total: number
   isPaid: boolean
+  //total: number
 }
 
 export interface Service{

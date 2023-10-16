@@ -1,10 +1,9 @@
 import { useFormik } from "formik"
-import { Pet, Service } from "../interfaces/appInterfaces"
-import { dataServices } from "../assets/data"
-import { useState } from "react"
+import { Pet } from "../interfaces/appInterfaces"
 import debounce from "debounce"
+import { useCashModal } from "../hooks/useCashModal"
+import { useEffect } from "react"
 import { useCashRegisterStore } from "../hooks/useCashRegisterStore"
-// import { TableComponent } from "./TableComponent"
 
 
 interface Props{
@@ -13,68 +12,27 @@ interface Props{
 
 export const CashModal = ({ activePet }:Props) => {
 
-    const [serviceResults, setServiceResults] = useState<Service[]>([])
-    const [tableList, setTableList] = useState<Service[]>([])
-    const {startSavingInvoice} = useCashRegisterStore();
- 
+    const { activeInvoice } = useCashRegisterStore();
+    const { tableList, setTableList, serviceResults, searchService, onSelectedService, onDeleteService, addInvoice } = useCashModal();
 
     const { handleSubmit, submitForm, getFieldProps, values, handleChange } = useFormik({
         initialValues: {
             search:'',
         }, 
         onSubmit: values => {
-            console.log(values.search)
             searchService(values.search.toLowerCase())
         },  
     });
  
-    //buscar servicio
-    const searchService = (value:string) =>{
-        const filteredServices = dataServices.filter(item => item.service.toLowerCase().includes(value));
-        setServiceResults(filteredServices);
-    }
-
     //debounce
     const debouncedSubmit = debounce(submitForm, 200);
-
-
-    const onSelected = (e: React.MouseEvent<HTMLElement>) : void =>{
-        
-        const target = e.target as HTMLElement;
-        const selectedId = target.id;
-
-        if (!selectedId) return;
-               
-        const newServiceAdded= serviceResults.find(item => `${item.code}` == selectedId);
     
-        if (!newServiceAdded) return;
-        setTableList(prevTableList => [...prevTableList, newServiceAdded]);
-
-        } 
-    
-        const onDelete= (e: React.MouseEvent<HTMLElement>) : void =>{
-
-            const target = e.target as HTMLElement;
-            const selectedId = target.id;
-           
-    
-            if (!selectedId) return;
-            setTableList(tableList.filter(service => `${service.code}` !== selectedId));
-        }
-
-        const addInvoice = (tableList:Service[]) =>{
-            
-            console.log(tableList)
-            //startSavingInvoice(invoice)
-        }
-        
+    useEffect(()=>{
+        activeInvoice && activeInvoice.id && setTableList(activeInvoice.consumedServices)
+    },[activeInvoice])
 
   return (
-    <>
-        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Facturación
-        </button>
-
+   
         <div className="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                 <div className="modal-content">
@@ -83,7 +41,6 @@ export const CashModal = ({ activePet }:Props) => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        {/* <TableComponent services={tableList} setServices={setTableList}/> */}
 
                         <table className="table">
                             <thead className="table-primary">
@@ -105,7 +62,7 @@ export const CashModal = ({ activePet }:Props) => {
                                             <td>{service.cost}</td>
                                             <td>1</td>
                                             <td>35</td>
-                                            <td id={service.code.toString()} className="text-danger fw-bold" onClick={(e)=>onDelete(e)}>x</td>
+                                            <td id={service.code.toString()} className="text-danger fw-bold" onClick={(e)=>onDeleteService(e)}>x</td>
                                         </tr>
                                     ))
                                 } 
@@ -144,26 +101,21 @@ export const CashModal = ({ activePet }:Props) => {
                                         id={`${item.code}`}
                                         key={item.code} 
                                         className="list-group-item list-group-item-action m-2"
-                                        onClick={onSelected}
+                                        onClick={onSelectedService}
                                     >
                                         {item.service} - {item.cost}€
                                     </p>
                                 )) }
                             </div> 
                         </form>
-
-                        
-                        
-
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" onClick={()=>addInvoice(tableList)}>Aceptar</button>
+                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=>addInvoice(tableList)}>Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
-    </>
   )
 }
 
