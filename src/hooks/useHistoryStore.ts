@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../store/store";
-import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
+import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/firebaseConfig";
 import Swal from "sweetalert2";
 
@@ -13,7 +13,7 @@ export const useHealthHistoryStore = () => {
   const dispatch = useDispatch();
   const { uid } = useSelector((state:RootState)=> state.auth)
   const { activeOwner } = useSelector((state:RootState)=> state.owner)
-  const { petList, activePet } = useSelector((state:RootState)=> state.pet)
+  const { activePet } = useSelector((state:RootState)=> state.pet)
   const { activeHealthHistory } = useSelector((state:RootState)=> state.history)
   
   
@@ -40,7 +40,7 @@ export const useHealthHistoryStore = () => {
             
             const docRef = doc(collection(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${activePet.id}/healthHistory/${history.id}`));
 
-            const resp = await setDoc(docRef, historyToFirestore, {merge:true});
+            await setDoc(docRef, historyToFirestore, {merge:true});
             // console.log('Historial de salud actualizado correctamente', resp);
             
             historyToFirestore.id = docRef.id
@@ -89,56 +89,56 @@ export const useHealthHistoryStore = () => {
 };       
 
   //cargar historial
-  const startLoadingHealthHistoryList = async(petID: string) =>{
+//   const startLoadingHealthHistoryList = async(petID: string) =>{
       
-    if(!uid) return;
+//     if(!uid) return;
 
-    try{
-        const healthHistory = await getHealthHistoryList(uid, ownerID:activeOwner?.id, petID, invoiceID)
+//     try{
+//         const healthHistory = await getHealthHistoryList(uid, ownerID:activeOwner?.id, petID, invoiceID)
         
-        if(!healthHistory) return [];
-        dispatch(setHealthHistoryList(healthHistory))
-    } catch(error){
-        console.log(error)
-    }
-  } 
+//         if(!healthHistory) return [];
+//         dispatch(setHealthHistoryList(healthHistory))
+//     } catch(error){
+//         console.log(error)
+//     }
+//   } 
   
 
   //borrar historial
-  const startDeletingHealthHistory = async() => {
+//   const startDeletingHealthHistory = async() => {
    
-    if(!uid || !activeOwner || !activePet || !activeHealthHistory) return;
-    try {
+//     if(!uid || !activeOwner || !activePet || !activeHealthHistory) return;
+//     try {
        
-        const docRef = doc(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${activeHealthHistory.id}`) 
+//         const docRef = doc(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${activeHealthHistory.id}`) 
         
-        const resp = await deleteDoc(docRef)
-        console.log('Mascota borrado correctamente', resp);
+//         const resp = await deleteDoc(docRef)
+//         console.log('Mascota borrado correctamente', resp);
         
-        dispatch(onDeleteHealthHistory(activeHealthHistory))
-        Swal.fire({
-            icon: 'success',
-            title: 'Mascota eliminada correctamente',
-            showConfirmButton: false,
-            timer: 1500
-        })
+//         dispatch(onDeleteHealthHistory(activeHealthHistory))
+//         Swal.fire({
+//             icon: 'success',
+//             title: 'Mascota eliminada correctamente',
+//             showConfirmButton: false,
+//             timer: 1500
+//         })
           
-    }catch (error) {
-        Swal.fire({
-            icon: 'error',
-            title: `Error al eliminar la mascota: ${error}`,
-        })
-    }   
-  }
+//     }catch (error) {
+//         Swal.fire({
+//             icon: 'error',
+//             title: `Error al eliminar la mascota: ${error}`,
+//         })
+//     }   
+//   }
   
   return {
     activeHealthHistory, 
-    isHealthHistorySaving, 
-    petList,
+    // isHealthHistorySaving, 
+    setHealthHistoryList,
     hasHealthHistorySelected: !!activeHealthHistory,
     setActiveHealthHistory,
     startSavingHealthHistory,
-    startLoadingHealthHistoryList,
-    startDeletingHealthHistory
+    // startLoadingHealthHistoryList,
+    // startDeletingHealthHistory
   }
 }

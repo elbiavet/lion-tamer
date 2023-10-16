@@ -1,6 +1,6 @@
-import { Services } from "../interfaces/appInterfaces";
+import { Service } from "../interfaces/appInterfaces";
 
-export const dataServices:Services[]=[
+export const dataServices:Service[]=[
   {
     code: 1,
     service: 'Consulta',

@@ -60,7 +60,6 @@ export const useCashRegisterStore = () => {
                
                 const newDoc = doc(collection(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${activePet.id}/invoices/`));
             
-            
                 await setDoc(newDoc, invoice);
                 invoice.id = newDoc.id
                 dispatch(onAddNewInvoice({...invoice}))
