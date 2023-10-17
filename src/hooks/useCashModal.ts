@@ -9,7 +9,7 @@ export const useCashModal = () => {
 
     const [serviceResults, setServiceResults] = useState<Service[]>([])
     const [tableList, setTableList] = useState<Service[]>([])
-    const {startSavingInvoice, activeInvoice} = useCashRegisterStore();
+    const {startSavingInvoice, activeInvoice } = useCashRegisterStore();
  
 
         //buscar servicio
@@ -17,21 +17,46 @@ export const useCashModal = () => {
             const filteredServices = dataServices.filter(item => item.service.toLowerCase().includes(value));
             setServiceResults(filteredServices);
         }
-    
+        
+        
         //seleccionar servicio
-        const onSelectedService = (e: React.MouseEvent<HTMLElement>) : void =>{
-            
+        const onSelectedService = (e: React.MouseEvent<HTMLElement>) : void => {
             const target = e.target as HTMLElement;
             const selectedId = target.id;
-    
-            if (!selectedId) return;
-                   
-            const newServiceAdded= serviceResults.find(item => `${item.code}` == selectedId);
         
-            if (!newServiceAdded) return;
-            setTableList(prevTableList => [...prevTableList, newServiceAdded]);
-    
-        } 
+            if (!selectedId) return;
+        
+            const serviceSelected = serviceResults.find(item => `${item.code}` == selectedId);
+            if (!serviceSelected) return;
+        
+            const units = 1;
+        
+            if (serviceSelected && tableList.find(service => service.code === serviceSelected.code)) {
+                
+                setTableList(prevTableList => prevTableList.map(element => {
+                    if (element.code === serviceSelected.code) {
+
+                        const newServiceAdded: Service = {
+                            ...element,
+                            units: element.units! + 1,
+                            totalCostService: (element.units! + 1) * element.cost
+                        }
+                        return newServiceAdded;
+                        
+                    } return element;
+                    
+                }))
+            } else {
+                const newServiceAdded: Service = {
+                    ...serviceSelected,
+                    units: units,
+                    totalCostService: units * serviceSelected.cost
+                };
+        
+                setTableList(prevTableList => [...prevTableList, newServiceAdded]);
+            }
+        }
+        
 
         //borrar servicio
         const onDeleteService= (e: React.MouseEvent<HTMLElement>) : void =>{
@@ -41,6 +66,13 @@ export const useCashModal = () => {
     
             if (!selectedId) return;
             setTableList(tableList.filter(service => `${service.code}` !== selectedId));
+        }
+
+        //obtener total
+        const getTotal = (tableList:Service[])=>{
+            const arrayCost = tableList.map(element => element.totalCostService)
+            const total = arrayCost.reduce((prev, curr) => {return prev! + curr!}, 0);
+            return total
         }
         
         //añadir facturación
@@ -52,6 +84,7 @@ export const useCashModal = () => {
                     date: (new Date()).toLocaleString(),
                     consumedServices: tableList,
                     isPaid: false,  
+                    totalCostInvoice:getTotal(tableList)|| 0
                 }
                 startSavingInvoice(newInvoice)
             } else{
@@ -59,6 +92,7 @@ export const useCashModal = () => {
                     date: (new Date()).toLocaleString(),
                     consumedServices: tableList,
                     isPaid: false,  
+                    totalCostInvoice:getTotal(tableList) || 0
                 }
                 startSavingInvoice(newInvoice)
             }
@@ -72,6 +106,7 @@ export const useCashModal = () => {
         searchService,
         onSelectedService,
         onDeleteService,
+        getTotal,
         addInvoice,
   }
 }

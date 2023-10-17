@@ -4,7 +4,7 @@ export const dataServices:Service[]=[
   {
     code: 1,
     service: 'Consulta',
-    cost: 35
+    cost: 35,
   },
   {
     code: 2,

@@ -13,7 +13,7 @@ interface Props{
 export const CashModal = ({ activePet }:Props) => {
 
     const { activeInvoice } = useCashRegisterStore();
-    const { tableList, setTableList, serviceResults, searchService, onSelectedService, onDeleteService, addInvoice } = useCashModal();
+    const { tableList, setTableList, serviceResults, searchService, onSelectedService, onDeleteService, addInvoice, getTotal } = useCashModal();
 
     const { handleSubmit, submitForm, getFieldProps, values, handleChange } = useFormik({
         initialValues: {
@@ -45,24 +45,24 @@ export const CashModal = ({ activePet }:Props) => {
                         <table className="table">
                             <thead className="table-primary">
                                 <tr>
-                                <th scope="col">Código</th>
-                                <th scope="col">Servicio</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Unidades</th>
-                                <th scope="col">Total</th>
-                                <th scope="col"></th>
+                                    <th scope="col">Código</th>
+                                    <th scope="col">Servicio</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Unidades</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    tableList.map(service => (
+                                    tableList && tableList.map(service => (
                                         <tr key={service.code}>
                                             <th scope="row">{service.code}</th>
                                             <td>{service.service}</td>
                                             <td>{service.cost}</td>
-                                            <td>1</td>
-                                            <td>35</td>
-                                            <td id={service.code.toString()} className="text-danger fw-bold" onClick={(e)=>onDeleteService(e)}>x</td>
+                                            <td>{service.units}</td>
+                                            <td>{service.totalCostService}</td>
+                                            <td id={service.code.toString()} className="btn text-danger fw-bold" onClick={(e)=>onDeleteService(e)}>x</td>
                                         </tr>
                                     ))
                                 } 
@@ -74,7 +74,8 @@ export const CashModal = ({ activePet }:Props) => {
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                     <th scope="col">Total</th>
-                                    <th scope="col">160</th>
+                                    <th scope="col">{getTotal(tableList)}</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -109,6 +110,10 @@ export const CashModal = ({ activePet }:Props) => {
                             </div> 
                         </form>
                     </div>
+                    {
+                        
+                    }
+
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=>addInvoice(tableList)}>Aceptar</button>

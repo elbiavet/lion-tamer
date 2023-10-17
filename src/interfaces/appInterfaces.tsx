@@ -48,13 +48,15 @@ export interface Invoice{
   id?:string,
   date:string,
   consumedServices: Service[],
-  isPaid: boolean
-  //total: number
+  isPaid: boolean,
+  totalCostInvoice: number //!ultima mod
 }
 
 export interface Service{
   code: number,
   service: string,
   cost: number
+  units?: number,//!ultima mod
+  totalCostService?: number//!ultima mod
 }
   

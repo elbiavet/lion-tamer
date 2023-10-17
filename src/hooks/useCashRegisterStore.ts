@@ -51,7 +51,7 @@ export const useCashRegisterStore = () => {
             } catch (error){ 
                 Swal.fire({
                     icon: 'error',
-                    title: `Error al actualizar la facturacion: ${error}`,
+                    title: `Error al actualizar la facturación: ${error}`,
                 })
             }   
         } else {

@@ -33,7 +33,7 @@ export const InvoicesPetPage = () => {
     useEffect(()=>{
         if(!activePet || !activePet.id) return
         startLoadingInvoiceList(activePet.id)
-    },[])
+    },[activePet])
     
 
   return (
@@ -57,12 +57,14 @@ export const InvoicesPetPage = () => {
                                     onClick={()=> setActiveInvoice(invoice)}
                                 >
                                     <div className="d-inline">
-                                        <span className="fw-bold">{invoice.date.slice(0,10)}: </span> 
-                                        {
+                                        <span className="fw-bold">{invoice.date.slice(0,10)}: {invoice.totalCostInvoice}€ </span> 
+                                        ({
                                         invoice.consumedServices.map(service => (
-                                            <span key={service.code} >{service.service} - {service.cost} </span>
+                                            <span key={service.code} >
+                                                {service.service} </span>
                                             ))
-                                        }
+                                        })
+                                          
                                     </div>
                                     <span className="">
                                         <button 
