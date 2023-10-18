@@ -57,11 +57,12 @@ export const useCashRegisterStore = () => {
         } else {
             //*Nueva facturación
             try {
-               
+                delete invoice.id; //! para cuando viene undefined por los initialValues
+                
                 const newDoc = doc(collection(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${activePet.id}/invoices/`));
-            
                 await setDoc(newDoc, invoice);
                 invoice.id = newDoc.id
+                
                 dispatch(onAddNewInvoice({...invoice}))
             
                 Swal.fire({

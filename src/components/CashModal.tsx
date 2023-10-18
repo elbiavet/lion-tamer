@@ -1,9 +1,9 @@
-// import { useEffect } from "react"
+import { useEffect } from "react"
 import { useFormik } from "formik"
 import debounce from "debounce"
 import { Pet } from "../interfaces/appInterfaces"
 import { useCashModal } from "../hooks/useCashModal"
-// import { useCashRegisterStore } from "../hooks/useCashRegisterStore"
+import { useCashRegisterStore } from "../hooks/useCashRegisterStore"
 
 
 interface Props{
@@ -12,8 +12,8 @@ interface Props{
 
 export const CashModal = ({ activePet }:Props) => {
 
-    // const { activeInvoice } = useCashRegisterStore();
-    const { tableList, /* setTableList, */ serviceResults, searchService, onSelectedService, onDeleteService, addInvoice, getTotal,  } = useCashModal();
+    const { activeInvoice } = useCashRegisterStore();
+    const { tableList, setTableList, serviceResults, searchService, onSelectedService, onDeleteService, addInvoice, getTotal,  } = useCashModal();
 
     const { handleSubmit, submitForm, getFieldProps, values, handleChange } = useFormik({
         initialValues: {
@@ -27,11 +27,13 @@ export const CashModal = ({ activePet }:Props) => {
     //debounce
     const debouncedSubmit = debounce(submitForm, 200);
   
-    // useEffect(() => {
-    //     if(activeInvoice !== null){
-    //         setTableList(activeInvoice.consumedServices)
-    //     }
-    //    }, [activeInvoice])
+ 
+
+    useEffect(() => {
+        if(activeInvoice !== null){
+            setTableList(activeInvoice.consumedServices)
+        }
+       }, [activeInvoice])
 
     // console.log(activeInvoice)
 

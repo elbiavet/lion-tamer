@@ -8,13 +8,12 @@ import { useEffect } from 'react';
 import { BsTrash, BsPencil } from "react-icons/bs";
 import { FaSackDollar } from "react-icons/fa6";
 import { CashModal } from "../components/CashModal";
-// import { useCashModal } from "../hooks/useCashModal";
 
 export const InvoicesPetPage = () => {
     const { activeOwner } = useOwnerStore();
     const { activePet } = usePetStore();
     const {activeInvoice, totalInvoicesPet, startDeletingInvoice, startLoadingInvoiceList, setActiveInvoice } = useCashRegisterStore();
-    // const { setTableList } = useCashModal();
+
 
     const deleteInvoice = () =>{
         Swal.fire({
@@ -31,8 +30,14 @@ export const InvoicesPetPage = () => {
             }
           })
     }
-
     
+    const initialValuesCashModal = {
+        date:new Date().toLocaleString(),
+        consumedServices: [],
+        isPaid: false,
+        totalCostInvoice: 0 
+    }
+
     useEffect(()=>{
         if(!activePet || !activePet.id) return
         startLoadingInvoiceList(activePet.id)
@@ -52,14 +57,14 @@ export const InvoicesPetPage = () => {
                             </span>
                             {activePet?.namePet} 
                         </p>
-                        {/* //!esto no funciona porque ponga lo que ponga ahi ocurre siempre que se abre el modal */}
-                        <div className="d-flex justify-content-end" /* onClick={()=> setActiveInvoice(null)} */ >
+
+                        <div className="d-flex justify-content-end" >
                             <button 
                                 type="button" 
                                 className="btn btn-success d-flex align-items-baseline" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#staticBackdrop"
-                                
+                                onClick={()=> setActiveInvoice(initialValuesCashModal)}
                             >
                                 <span className="d-sm-none d-lg-inline me-1">Cobro</span>
                                 <span className="fs-5"><FaSackDollar /></span>
