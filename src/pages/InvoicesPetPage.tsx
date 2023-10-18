@@ -52,7 +52,7 @@ export const InvoicesPetPage = () => {
                             </span>
                             {activePet?.namePet} 
                         </p>
-                        //!esto no funciona porque ponga lo que ponga ahi ocurre siempre que se abre el modal
+                        {/* //!esto no funciona porque ponga lo que ponga ahi ocurre siempre que se abre el modal */}
                         <div className="d-flex justify-content-end" /* onClick={()=> setActiveInvoice(null)} */ >
                             <button 
                                 type="button" 
