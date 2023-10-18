@@ -8,13 +8,13 @@ import { useEffect } from 'react';
 import { BsTrash, BsPencil } from "react-icons/bs";
 import { FaSackDollar } from "react-icons/fa6";
 import { CashModal } from "../components/CashModal";
-import { useCashModal } from "../hooks/useCashModal";
+// import { useCashModal } from "../hooks/useCashModal";
 
 export const InvoicesPetPage = () => {
     const { activeOwner } = useOwnerStore();
     const { activePet } = usePetStore();
     const {activeInvoice, totalInvoicesPet, startDeletingInvoice, startLoadingInvoiceList, setActiveInvoice } = useCashRegisterStore();
-    const { setTableList } = useCashModal();
+    // const { setTableList } = useCashModal();
 
     const deleteInvoice = () =>{
         Swal.fire({
@@ -53,7 +53,7 @@ export const InvoicesPetPage = () => {
                             {activePet?.namePet} 
                         </p>
                         //!esto no funciona porque ponga lo que ponga ahi ocurre siempre que se abre el modal
-                        <div className="d-flex justify-content-end" onClick={()=> setActiveInvoice(null)} >
+                        <div className="d-flex justify-content-end" /* onClick={()=> setActiveInvoice(null)} */ >
                             <button 
                                 type="button" 
                                 className="btn btn-success d-flex align-items-baseline" 
