@@ -15,12 +15,10 @@ export const OwnerResults = () => {
         {
             ownerSearchList.length === 0
                 ? (
-                    
-                        <div className="alert alert-danger" role="alert">
-                            <p>No hay ningún propietario con ese nombre.</p>
-                            <p>Por favor, vuelve a intentarlo con el nombre completo.</p>
-                        </div>
-                   
+                    <div className="alert alert-danger" role="alert">
+                        <p>No hay ningún propietario con ese nombre.</p>
+                        <p>Por favor, vuelve a intentarlo con el nombre completo.</p>
+                    </div>
                 )
                 : (
                     <div className="list-group">
@@ -36,8 +34,7 @@ export const OwnerResults = () => {
                                 </Link>
                             ))
                         }
-            
-        </div>
+                    </div>
                 )
         }
     </div>

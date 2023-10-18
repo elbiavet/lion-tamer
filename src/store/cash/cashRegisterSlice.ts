@@ -11,7 +11,6 @@ const initialState: CashState = {
     totalInvoicesPet: [],
     activeInvoice: null,
     isInvoiceSaving: false
-
   }
 
 export const cashRegisterSlice = createSlice({
@@ -22,10 +21,11 @@ export const cashRegisterSlice = createSlice({
             state.totalInvoicesPet = payload;
         },
         onSetActiveInvoice: (state: CashState, {payload})  => {
-            //toggle invoice activo
-            (state.activeInvoice && state.activeInvoice.id === payload.id)
-                ? (state.activeInvoice = null) 
-                : (state.activeInvoice= payload)
+            state.activeInvoice= payload;
+            //toggle evento activo
+            // (state.activeInvoice && state.activeInvoice.id === payload.id)
+            //     ? (state.activeInvoice = null) 
+            //     : (state.activeInvoice= payload)
         },
         onAddNewInvoice: (state: CashState, action: PayloadAction<Invoice>)  => {
             state.totalInvoicesPet.push(action.payload); 
@@ -35,15 +35,15 @@ export const cashRegisterSlice = createSlice({
         setSavingInvoice:(state: CashState)  => {
             state.isInvoiceSaving = true
         },
-        onUpdateInvoice: (state: CashState, {payload}) =>{
+        onUpdateInvoice: (state: CashState, action: PayloadAction<Invoice>) =>{
             state.totalInvoicesPet = state.totalInvoicesPet.map(invoice => {
-                if(invoice.id === payload.id) return payload
+                if(invoice.id === action.payload.id) return action.payload
                 return invoice
             })
             state.isInvoiceSaving= false;
         },
-        onDeleteInvoice: (state: CashState, { payload }) =>{ 
-            state.totalInvoicesPet = state.totalInvoicesPet.filter(invoice => invoice.id !== payload.id);
+        onDeleteInvoice: (state: CashState, action: PayloadAction<Invoice>) =>{ 
+            state.totalInvoicesPet = state.totalInvoicesPet.filter(invoice => invoice.id !== action.payload.id);
             state.activeInvoice = null;   
         }
     }

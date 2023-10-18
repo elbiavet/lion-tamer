@@ -17,7 +17,7 @@ export const useCashRegisterStore = () => {
     const dispatch = useDispatch();
 
     
-    const setActiveInvoice = (invoice:Invoice) =>{
+    const setActiveInvoice = (invoice:Invoice | null) =>{
         dispatch(onSetActiveInvoice(invoice))
     }
 
@@ -51,7 +51,7 @@ export const useCashRegisterStore = () => {
             } catch (error){ 
                 Swal.fire({
                     icon: 'error',
-                    title: `Error al actualizar la facturación: ${error}`,
+                    title: `Error al actualizar la facturacion: ${error}`,
                 })
             }   
         } else {
@@ -63,7 +63,6 @@ export const useCashRegisterStore = () => {
                 await setDoc(newDoc, invoice);
                 invoice.id = newDoc.id
                 dispatch(onAddNewInvoice({...invoice}))
-                dispatch(onSetActiveInvoice({...invoice}))
             
                 Swal.fire({
                 icon: 'success',
@@ -100,7 +99,9 @@ export const useCashRegisterStore = () => {
 
     //borrar una facturación
     const startDeletingInvoice = async() => {
-        dispatch(onDeleteInvoice(activeInvoice))
+        
+        activeInvoice && dispatch(onDeleteInvoice(activeInvoice))
+        
             
         try {
             if(!uid || !activeOwner || !activePet || !activeInvoice) return;

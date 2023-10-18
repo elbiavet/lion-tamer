@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Pet } from "../interfaces/appInterfaces";
 import { useOwnerStore } from "../hooks/useOwnerStore";
 import Swal from "sweetalert2";
-import { CashModal } from "../components/CashModal";
 import { InvoicesPetPage } from "./InvoicesPetPage";
-import { FaCashRegister } from "react-icons/fa6";
+
 
 interface Props{
     activePet:Pet|null,
@@ -75,17 +74,7 @@ export const PetPage = ({ activePet }:Props) => {
                         </div>
                         
                     </div>
-                    <div className="d-flex justify-content-end">
-                        <button 
-                            type="button" 
-                            className="btn btn-primary" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#staticBackdrop"
-                        >
-                            Caja <FaCashRegister />
-                        </button>
-                        <CashModal activePet={activePet}/>
-                    </div>
+               
                 </div>
                 <InvoicesPetPage />
             </div>

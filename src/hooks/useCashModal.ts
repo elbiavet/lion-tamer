@@ -87,6 +87,8 @@ export const useCashModal = () => {
                     totalCostInvoice:getTotal(tableList)|| 0
                 }
                 startSavingInvoice(newInvoice)
+                //onSetActiveInvoice(null)
+            
             } else{
                 const newInvoice:Invoice = {
                     date: (new Date()).toLocaleString(),
