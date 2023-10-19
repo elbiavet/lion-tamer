@@ -39,13 +39,13 @@ export const CashModal = ({ activePet }:Props) => {
 
     return (
    
-        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div className="modal fade" id="staticBackdropInvoice" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropInvoiceLabel" aria-hidden="true">
 
             <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl modal-fullscreen-sm-down">
 
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                        <h1 className="modal-title fs-5" id="staticBackdropInvoiceLabel">
                             Facturación de {activePet?.namePet}
                         </h1>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -98,8 +98,8 @@ export const CashModal = ({ activePet }:Props) => {
                         <form className="d-flex flex-column justify-content-center m-5" onSubmit={handleSubmit} role="search">
                             <div className="d-flex">
                                 <input 
-                                    className="form-control me-2" 
                                     type="search" 
+                                    className="form-control me-2" 
                                     placeholder="Buscar Servicio o Producto" 
                                     aria-label="Search" 
                                     aria-controls="autocomplete-results"

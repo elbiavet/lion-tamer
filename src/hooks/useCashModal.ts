@@ -81,7 +81,7 @@ export const useCashModal = () => {
             if(activeInvoice) {
                 const newInvoice:Invoice = {
                     id: activeInvoice.id,
-                    date: (new Date()).toLocaleString(),
+                    date: (new Date()).toLocaleDateString(),
                     consumedServices: tableList,
                     isPaid: false,  
                     totalCostInvoice:getTotal(tableList)|| 0
@@ -90,7 +90,7 @@ export const useCashModal = () => {
             
             } else{
                 const newInvoice:Invoice = {
-                    date: (new Date()).toLocaleString(),
+                    date: (new Date()).toLocaleDateString(),
                     consumedServices: tableList,
                     isPaid: false,  
                     totalCostInvoice:getTotal(tableList) || 0

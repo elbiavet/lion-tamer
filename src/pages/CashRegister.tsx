@@ -1,3 +1,4 @@
+import { InvoicesPetPage } from "./InvoicesPetPage"
 
 export const CashRegister = () => {
 
@@ -9,8 +10,10 @@ export const CashRegister = () => {
     </div>
 
     <div className="alert alert-info" role="alert">
-      Esta funcionalidad aún no está implememtada
+      Esta funcionalidad aún no está implementada. Pero sí hay facturación en la ficha de cada mascota.
     </div>
+
+    <InvoicesPetPage />
     
 
   </div>

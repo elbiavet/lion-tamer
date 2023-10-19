@@ -1,3 +1,7 @@
+import { format } from "date-fns"
+import { dateEnd } from "../helpers/dateEnd"
+import { CalendarEventInterface, Owner, Pet } from "../interfaces/appInterfaces"
+
 /* CALENDAR */
 
 export const initialValuesCalendar:CalendarEventInterface={
@@ -9,51 +13,19 @@ export const initialValuesCalendar:CalendarEventInterface={
   }
   
 
-import { format } from "date-fns"
 /* OWNER */
-
-import { CalendarEventInterface, Owner, Pet } from "../interfaces/appInterfaces"
-import { dateEnd } from "../helpers/dateEnd"
 
 export const initialValuesOwner:Owner={
   ownerFirstName:'',
   ownerLastName:'',
-  // address:'',
   tlf: 0,
-  // tlf2: 0,
   email:'',
   dni:'',
-  // commentsOwner:'',
-  
-  // pets:[{
-  //   id:'',
-  //   namePet: '',
-  //   specie: '',
-  //   breed: '',
-  //   coat: '',
-  //   character: '',
-  //   birthday: '',
-  //   castrated: false,
-  //   diseases: [{
-  //       date: '',
-  //       diagnosis: ''
-  //     }],
-  //   commentsPet: [''],
-  // },]
 }
 
 export const initialValuesPet:Pet={
-    // id:'',
     namePet: '',
     specie: '',
-    // breed: '',
-    // coat: '',
-    // character: '',
     birthday: '',
     castrated: false,
-    // diseases: [{
-    //   date: '',
-    //   diagnosis: ''
-    // }],
-    // commentsPet: [''],
 }

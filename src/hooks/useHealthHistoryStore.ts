@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../store/store";
-import { collection, doc, setDoc } from "firebase/firestore/lite";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/firebaseConfig";
 import Swal from "sweetalert2";
 
-import { onAddNewHealthHistory, onSetActiveHealthHistory, onUpdateHealthHistory, setHealthHistoryList, setSavingHealthHistory } from "../store/healthHistory/healthHistorySlice";
+import { onAddNewHealthHistory, onDeleteHealthHistory, onSetActiveHealthHistory, onUpdateHealthHistory, setHealthHistoryList, setSavingHealthHistory } from "../store/healthHistory/healthHistorySlice";
 import { HealthHistory } from "../interfaces/appInterfaces";
+import { getHealthHistoryPet } from "../helpers/getHealthHistoryPet";
 
 
 export const useHealthHistoryStore = () => {
@@ -14,14 +15,13 @@ export const useHealthHistoryStore = () => {
   const { uid } = useSelector((state:RootState)=> state.auth)
   const { activeOwner } = useSelector((state:RootState)=> state.owner)
   const { activePet } = useSelector((state:RootState)=> state.pet)
-  const { activeHealthHistory } = useSelector((state:RootState)=> state.history)
+  const { historyList, activeHealthHistory, isHealthHistorySaving } = useSelector((state:RootState)=> state.history)
   
   
   //historia activa
   const setActiveHealthHistory = (history:HealthHistory) =>{
       dispatch(onSetActiveHealthHistory({...history}))
   }
-  
 
   //guardar- actualizar historia
   const startSavingHealthHistory = async(history: HealthHistory)=> {
@@ -89,56 +89,59 @@ export const useHealthHistoryStore = () => {
 };       
 
   //cargar historial
-//   const startLoadingHealthHistoryList = async(petID: string) =>{
+  const startLoadingHealthHistory = async(petID: string) =>{
       
-//     if(!uid) return;
+    if(!uid || !activeOwner || !activeOwner.id || !activePet ) return;
+    const ownerID = activeOwner.id
 
-//     try{
-//         const healthHistory = await getHealthHistoryList(uid, ownerID:activeOwner?.id, petID, invoiceID)
+    try{
+        const healthHistory = await getHealthHistoryPet(uid, ownerID, petID)
         
-//         if(!healthHistory) return [];
-//         dispatch(setHealthHistoryList(healthHistory))
-//     } catch(error){
-//         console.log(error)
-//     }
-//   } 
-  
+        if(!healthHistory) return [];
+        dispatch(setHealthHistoryList(healthHistory))
+
+    } catch(error){
+        console.log(error)
+    }
+  } 
+
 
   //borrar historial
-//   const startDeletingHealthHistory = async() => {
+  const startDeletingHealthHistory = async() => {
    
-//     if(!uid || !activeOwner || !activePet || !activeHealthHistory) return;
-//     try {
-       
-//         const docRef = doc(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${activeHealthHistory.id}`) 
+    if(!uid || !activeOwner || !activePet || !activeHealthHistory) return;
+    
+    try {
+        const docRef = doc(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${activePet.id}/healthHistory/${activeHealthHistory.id}`) 
         
-//         const resp = await deleteDoc(docRef)
-//         console.log('Mascota borrado correctamente', resp);
+        const resp = await deleteDoc(docRef)
+        console.log('Historial borrado correctamente', resp);
         
-//         dispatch(onDeleteHealthHistory(activeHealthHistory))
-//         Swal.fire({
-//             icon: 'success',
-//             title: 'Mascota eliminada correctamente',
-//             showConfirmButton: false,
-//             timer: 1500
-//         })
+        dispatch(onDeleteHealthHistory(activeHealthHistory))
+        Swal.fire({
+            icon: 'success',
+            title: 'Historial eliminado correctamente',
+            showConfirmButton: false,
+            timer: 1500
+        })
           
-//     }catch (error) {
-//         Swal.fire({
-//             icon: 'error',
-//             title: `Error al eliminar la mascota: ${error}`,
-//         })
-//     }   
-//   }
+    }catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: `Error al eliminar el historial: ${error}`,
+        })
+    }   
+  }
   
   return {
+    historyList, 
     activeHealthHistory, 
-    // isHealthHistorySaving, 
+    isHealthHistorySaving, 
     setHealthHistoryList,
     hasHealthHistorySelected: !!activeHealthHistory,
     setActiveHealthHistory,
     startSavingHealthHistory,
-    // startLoadingHealthHistoryList,
-    // startDeletingHealthHistory
+    startLoadingHealthHistory,
+    startDeletingHealthHistory
   }
 }

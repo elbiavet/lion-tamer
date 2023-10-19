@@ -33,30 +33,29 @@ export interface Pet{
   birthday:string, //! antes estaba en Date
   character?:string,
   commentsPet?:string[], 
-  history?:string[] //History[] 
+  // history?:string[]
  //invoices?:Invoice[]
 }
-
-export interface HealthHistory{
-    id?: string,
-    date: string,
-    case: string,
-    //invoiceOfDay: Invoice
-} 
 
 export interface Invoice{
   id?:string,
   date:string,
   consumedServices: Service[],
   isPaid: boolean,
-  totalCostInvoice: number //!ultima mod
+  totalCostInvoice: number 
 }
 
 export interface Service{
   code: number,
   service: string,
   cost: number
-  units?: number,//!ultima mod
-  totalCostService?: number//!ultima mod
+  units?: number,
+  totalCostService?: number
 }
   
+export interface HealthHistory{
+  id?: string,
+  visitDate: string,
+  reason: string,
+  case: string,
+} 

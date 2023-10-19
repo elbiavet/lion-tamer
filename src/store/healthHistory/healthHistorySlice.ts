@@ -3,14 +3,12 @@ import { HealthHistory } from '../../interfaces/appInterfaces';
 
 export interface HealthHistoryState {
     historyList:HealthHistory[],
-    historySearchList:HealthHistory[],
     activeHealthHistory: HealthHistory | null,
     isHealthHistorySaving: boolean,
 }
 
 const initialState: HealthHistoryState = {
     historyList:[],
-    historySearchList:[],
     activeHealthHistory:null,
     isHealthHistorySaving: false,
   }
@@ -21,9 +19,6 @@ export const healthHistorySlice = createSlice({
     reducers: {
         setHealthHistoryList: (state: HealthHistoryState, action: PayloadAction<HealthHistory[]>)  => {
             state.historyList = action.payload;
-        },
-        setHealthHistorySearchList: (state: HealthHistoryState, action: PayloadAction<HealthHistory[]>) => {
-            state.historySearchList = action.payload;
         },
         onSetActiveHealthHistory: (state: HealthHistoryState, action: PayloadAction<HealthHistory | null>) => {
           state.activeHealthHistory = action.payload;
@@ -50,4 +45,4 @@ export const healthHistorySlice = createSlice({
     }
 });
 
-export const { setHealthHistoryList, setHealthHistorySearchList, onSetActiveHealthHistory, onAddNewHealthHistory, setSavingHealthHistory, onUpdateHealthHistory, onDeleteHealthHistory} = healthHistorySlice.actions;
+export const { setHealthHistoryList, onSetActiveHealthHistory, onAddNewHealthHistory, setSavingHealthHistory, onUpdateHealthHistory, onDeleteHealthHistory} = healthHistorySlice.actions;

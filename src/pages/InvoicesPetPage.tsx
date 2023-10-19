@@ -32,7 +32,7 @@ export const InvoicesPetPage = () => {
     }
     
     const initialValuesCashModal = {
-        date:new Date().toLocaleString(),
+        date:new Date().toLocaleDateString(),
         consumedServices: [],
         isPaid: false,
         totalCostInvoice: 0 
@@ -43,6 +43,7 @@ export const InvoicesPetPage = () => {
         startLoadingInvoiceList(activePet.id)
     },[activePet])
     
+    
 
   return (
     <>     
@@ -51,19 +52,14 @@ export const InvoicesPetPage = () => {
             (
                 <div className="card">
                     <div className="card-header d-flex justify-content-between">
-                        <p className="card-title m-2">
-                            <span className="text-primary fw-bold fs-5 me-4">
-                                Facturación
-                            </span>
-                            {activePet?.namePet} 
-                        </p>
+                    <p className="card-title m-2 text-success fw-bold fs-5">Facturación</p>
 
                         <div className="d-flex justify-content-end" >
                             <button 
                                 type="button" 
                                 className="btn btn-success d-flex align-items-baseline" 
                                 data-bs-toggle="modal" 
-                                data-bs-target="#staticBackdrop"
+                                data-bs-target="#staticBackdropInvoice"
                                 onClick={()=> setActiveInvoice(initialValuesCashModal)}
                             >
                                 <span className="d-sm-none d-lg-inline me-1">Cobro</span>
@@ -82,13 +78,13 @@ export const InvoicesPetPage = () => {
                                         className={`list-group-item d-flex justify-content-between ${activeInvoice && activeInvoice.id === invoice.id ? "list-group-item-secondary" : ""}`}
                                         onClick={()=> setActiveInvoice(invoice)}
                                     >
-                                        <div className="d-inline">
-                                            <span className="fw-bold">{invoice.date.slice(0,10)}: 
-                                                <span className="text-success">{invoice.totalCostInvoice}€ </span>
+                                        <div className="d-inline"> {/* //TODO */}
+                                            <span>{invoice.date}: 
+                                                <span className="text-success fw-bold"> {invoice.totalCostInvoice}€ </span>
                                             </span> 
-                                            ({
+                                            ( {
                                             invoice.consumedServices.map(service => (
-                                                <span key={service.code} >
+                                                <span key={service.code} className="me-1">
                                                     {service.service} 
                                                 </span>
                                                 ))
@@ -101,7 +97,7 @@ export const InvoicesPetPage = () => {
                                             className={`btn m-1 ${(activeInvoice && activeInvoice.id === invoice.id) ? "btn-primary" : "btn-outline-secondary" }`}
                                             disabled={!(activeInvoice && activeInvoice.id === invoice.id)}
                                             data-bs-toggle="modal" 
-                                            data-bs-target="#staticBackdrop"
+                                            data-bs-target="#staticBackdropInvoice"
                                             >
                                                 <BsPencil />
                                             </button>

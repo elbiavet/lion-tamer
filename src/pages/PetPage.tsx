@@ -5,6 +5,7 @@ import { Pet } from "../interfaces/appInterfaces";
 import { useOwnerStore } from "../hooks/useOwnerStore";
 import Swal from "sweetalert2";
 import { InvoicesPetPage } from "./InvoicesPetPage";
+import { PetHealthHistory } from "./PetHealthHistory";
 
 
 interface Props{
@@ -58,24 +59,24 @@ export const PetPage = ({ activePet }:Props) => {
                 </div>
                 <div className="card-body">
                     <div className="card-text row">
-                        <div className="col-11 col-sm">
-                            <p className="m-1"><span className="fw-bold">Edad:</span> {activePet?.birthday}</p>
+                        <div className="col-5 col-sm">
+                            <p className="m-1"><span className="fw-bold">Fecha nacimiento:</span> {activePet?.birthday}</p>
+                            <p className="m-1"><span className="fw-bold">Especie:</span> {activePet?.specie}</p>
+                            <p className="m-1" ><span className="fw-bold">Raza:</span> {activePet?.breed}</p>
+                            
+                            <p className="m-1"><span className="fw-bold">Comentarios:</span> {activePet?.commentsPet}</p>
+                        </div>
+                        <div className="col-5 col-sm">
                             <p className="m-1"><span className="fw-bold">Castrado:</span> 
                                 {`${activePet.castrated}` == 'true' ? <> Si</> : <> No</>}
                             </p>
-                            <p className="m-1"><span className="fw-bold">Especie:</span> {activePet?.specie}</p>
-                            <p className="m-1" ><span className="fw-bold">Raza:</span> {activePet?.breed}</p>
                             <p className="m-1"><span className="fw-bold">Capa:</span> {activePet?.coat}</p>
                             <p className="m-1"><span className="fw-bold">Carácter</span> {activePet?.character} </p> 
-                            <p className="m-1"><span className="fw-bold">Comentarios:</span> {activePet?.commentsPet}</p>
                         </div>
-                        <div className="col-11 col-sm">
-                            <p className="m-1"><span className="fw-bold">Historia Clínica:</span> {activePet?.history}</p> 
-                        </div>
-                        
                     </div>
                
                 </div>
+                <PetHealthHistory />
                 <InvoicesPetPage />
             </div>
         )
