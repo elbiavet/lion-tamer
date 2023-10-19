@@ -1,15 +1,17 @@
 import { FaPaw, FaUser, FaCashRegister } from "react-icons/fa6";
 import { IoLogOutOutline } from "react-icons/io5";
 import Logo from "../assets/logo-blue-trans.png"
-import { NavLink, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import { OwnerSearch } from "../pages/OwnerSearch";
 import { useAuthStore } from '../hooks/useAuthStore';
+import { useOwnerStore } from "../hooks/useOwnerStore";
 
 
 
 export const NavBar = () => {
     const navigate = useNavigate();
     const { startLogout } = useAuthStore();
+    const { activeOwner } = useOwnerStore();
 
     const onLogout = () =>{
       startLogout()
@@ -44,21 +46,48 @@ export const NavBar = () => {
     
           <div> 
               <ul className="navbar-nav row d-flex flex-sm-row justify-content-sm-center justify-content-lg-around align-items-center">
+
+                <li className="nav-item col col-lg-3 row">
+                    <div className="d-flex align-items-baseline">
+                      <OwnerSearch />
+                    </div>
+                </li>
                 
-                <li className="nav-item col col-sm-2 col-lg-2">
+                {/* <li className="nav-item col col-sm-2 col-lg-2">
                   <NavLink 
                     className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} 
                     aria-current="page" 
                     to={`/owner`}  
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ficha Propietario"
                   >
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-baseline">
                       <FaUser className="d-lg-none d-xl-inline"/>
                       <p className="d-sm-none d-lg-inline m-0 mx-2 text-secondary">Cliente</p>
                     </div>
                   </NavLink>
-                </li>
+                </li> */}
 
+                <li className="nav-item col col-sm-2 col-lg-2">
+                  <div className="dropdown" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ficha Propietario">
+                      <div className="dropdown-toggle d-flex align-items-baseline fs-4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <FaUser className="d-lg-none d-xl-inline text-primary"/>
+                        <p className="d-sm-none d-lg-inline m-0 mx-2 fw-bold  text-secondary">Cliente</p>
+                      </div>
+                    
+                    <div className="dropdown-menu">
+                      <Link className="dropdown-item" to="/owner">Nuevo</Link>
+                      {activeOwner && (
+                        <Link 
+                          className="dropdown-item" 
+                          to={`/owner/${activeOwner.id}`}
+                        >
+                          Propietario Activo
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </li>
+                
                 <li className="nav-item col col-sm-2 col-lg-2">
                   <NavLink 
                     className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} 
@@ -66,20 +95,14 @@ export const NavBar = () => {
                     to={`/pet`}
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ficha mascota"
                   >
-                    <div className="d-flex align-items-center">
-                      <FaPaw className="d-lg-none d-xl-inline"/>
+                    <div className="d-flex align-items-baseline">
+                      <FaPaw className="d-lg-none d-xl-inline align-self-center"/>
                       <p className="d-sm-none d-lg-inline m-0 mx-2 text-secondary">Mascota</p>
                     </div>
                   </NavLink>
                 </li>
-
-                <li className="nav-item col col-lg-4 row">
-                    <div className="d-flex align-items-baseline">
-                      <OwnerSearch />
-                    </div>
-                </li>
         
-                <li className="nav-item col col-sm-1 d-flex justify-content-sm-center align-items-center">
+                <li className="nav-item col col-sm-2 col-lg-2">
                   <NavLink 
                     className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} 
                     aria-current="page" 
@@ -93,28 +116,26 @@ export const NavBar = () => {
                       
                     </NavLink>
                 </li>
-
-                <li className="nav-item col col-sm-1 p-0 m-sm-1 d-flex justify-content-sm-center align-items-center">
-                  <button className="btn text-danger fs-3"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar sesión">
-                    <div className="d-flex align-items-baseline">
-                      <IoLogOutOutline onClick={onLogout} />
-                        <p className="d-sm-none mx-2">Cerrar sesión</p>
-                    </div>
-                      
-                    
+                <li className="nav-item col col-sm-2 col-lg-2">
+                  <button className="btn text-danger nav-link fw-bold fs-4 link-primary"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar sesión">
+                  <div className="d-flex align-items-baseline">
+                        <IoLogOutOutline 
+                          className="d-lg-none d-xl-inline align-self-center fs-3" 
+                          onClick={onLogout}
+                        />
+                        <p className="d-sm-none d-lg-inline m-0 mx-2 text-danger">Salir</p>
+                      </div>
                   </button>
                 </li>
-                
               </ul>
+
             </div>
-            </div>
-   
+
+          </div>
         </div>
       </div>
 
-          
-        
-        </div>
+      </div>
    </nav> 
   )
 }

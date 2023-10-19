@@ -9,7 +9,6 @@ import { useCheckAuth } from "../hooks/useCheckAuth";
 import { ClientPage } from "../pages/ClientPage";
 import { OwnerResults } from "../pages/OwnerResults";
 import { PetPage } from "../pages/PetPage";
-import { usePetStore } from "../hooks/usePetStore";
 import { CashModal } from "../components/CashModal";
 
 
@@ -18,7 +17,7 @@ import { CashModal } from "../components/CashModal";
 export const Router = () => {
 
   const status = useCheckAuth()
-  const {activePet} = usePetStore();
+
   
   // if(status === 'not-authenticated'){ return (<Login />)}
 
@@ -43,9 +42,8 @@ export const Router = () => {
                 <Route path="owner-results" element={<OwnerResults />} />
                 <Route path="owner" element={< OwnerForm />} /> 
                 <Route path="owner/:id" element={<ClientPage />} />
-                <Route path="pet" element={<PetPage activePet={activePet}/>} />
-                {/* o ${activePet}/cashModal y uso los params */}
-                <Route path="cashModal" element={<CashModal activePet={activePet}/>} /> {/* //!QUITAR? */}
+                <Route path="pet" element={<PetPage />} />
+                <Route path="cashModal" element={<CashModal />} /> {/* //!QUITAR? */}
                 <Route path="cash" element={<CashRegister />} />
                 <Route path="/*" element={<Schedule />} />
               </Routes>

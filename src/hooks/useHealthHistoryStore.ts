@@ -38,7 +38,7 @@ export const useHealthHistoryStore = () => {
             if(!activeOwner || !activePet) throw new Error("No hay usuario o mascota activos")
             
             
-            const docRef = doc(collection(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${activePet.id}/healthHistory/${history.id}`));
+            const docRef = doc(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${activePet.id}/healthHistory/${history.id}`);
 
             await setDoc(docRef, historyToFirestore, {merge:true});
             // console.log('Historial de salud actualizado correctamente', resp);

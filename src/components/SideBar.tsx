@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useOwnerStore } from "../hooks/useOwnerStore";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { FaUserGroup } from "react-icons/fa6";
+import { FaUserGroup, FaPaw, FaUser } from "react-icons/fa6";
 import { onSetActiveOwner } from "../store/owners/ownerSlice";
 import { usePetStore } from "../hooks/usePetStore";
 import { useAuthStore } from "../hooks/useAuthStore";
@@ -20,35 +20,18 @@ export const SideBar = () => {
     }, [uid])
 
   return (
-    <div className="container h-100 border border-2">
-        <p className="mt-3 fw-bold">Últimas fichas añadidas</p>
+    <div className="container vh-100 border border-2">
 
-        <p className="mt-3 text-primary">Dueños <FaUserGroup /></p>
-          <div className="list-group">
-            { ownerList.length > 0 
-              ? (
-                ownerList.slice(-3).map(owner => 
-                  <Link 
-                    key={owner.id}
-                    to={`/owner/${owner.id}`} 
-                    className="list-group-item list-group-item-action" 
-                    onClick={()=> dispatch(onSetActiveOwner(owner))}
-                  >
-                  {owner.ownerFirstName}
-                  </Link>)
-                )
-              : <p>pensando</p>
-          }
-          </div>
-
-
-        <p className="mt-3 text-primary">Propietario Activo</p>
+        <p className="mt-3 text-primary d-flex align-items-center">
+          <FaUser /> 
+          <span className="p-1"> Propietario Activo</span>
+        </p>
         <div className="list-group">
             {activeOwner 
              ?(
               <Link 
                 to={`/owner/${activeOwner.id}`} 
-                className="list-group-item list-group-item-action"
+                className="list-group-item list-group-item-action list-group-item-info"
               >
                 {activeOwner.ownerFirstName}
               </Link>
@@ -59,7 +42,10 @@ export const SideBar = () => {
             }
         </div>
 
-        <p className="mt-3 text-primary">Mascota Activa</p>
+        <p className="mt-3 text-primary d-flex align-items-center">
+          <FaPaw /> 
+          <span className="p-1"> Mascota Activa</span>
+        </p>
         <div className="list-group">
             {
             
@@ -67,7 +53,7 @@ export const SideBar = () => {
               ?( 
                 <Link 
                   to={`/owner/${activeOwner.id}`} 
-                  className="list-group-item list-group-item-action"
+                  className="list-group-item list-group-item-action list-group-item-info"
                 >
                   {activePet.namePet}
                 </Link>
@@ -78,6 +64,30 @@ export const SideBar = () => {
                 
             }
         </div>
+
+        <p className="mt-3 fw-bold">Últimas fichas añadidas</p>
+
+        <p className="mt-3 text-primary d-flex align-items-center">
+          <FaUserGroup /> 
+          <span className="p-1"> Dueños</span>
+        </p>
+        <div className="list-group">
+          { ownerList.length > 0 
+            ? (
+              ownerList.slice(-3).map(owner => 
+                <Link 
+                  key={owner.id}
+                  to={`/owner/${owner.id}`} 
+                  className="list-group-item list-group-item-action list-group-item-secondary" 
+                  onClick={()=> dispatch(onSetActiveOwner(owner))}
+                >
+                {owner.ownerFirstName}
+                </Link>)
+              )
+            : <p>Cargando...</p>
+        }
+        </div>
+
 
     </div>
   )

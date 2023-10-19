@@ -6,14 +6,13 @@ import { useCashRegisterStore } from "../hooks/useCashRegisterStore";
 import { usePetStore } from "../hooks/usePetStore";
 import { useEffect } from 'react';
 import { BsTrash, BsPencil } from "react-icons/bs";
-import { FaSackDollar } from "react-icons/fa6";
 import { CashModal } from "../components/CashModal";
+
 
 export const InvoicesPetPage = () => {
     const { activeOwner } = useOwnerStore();
     const { activePet } = usePetStore();
     const {activeInvoice, totalInvoicesPet, startDeletingInvoice, startLoadingInvoiceList, setActiveInvoice } = useCashRegisterStore();
-
 
     const deleteInvoice = () =>{
         Swal.fire({
@@ -31,16 +30,8 @@ export const InvoicesPetPage = () => {
           })
     }
     
-    const initialValuesCashModal = {
-        date:new Date().toLocaleDateString(),
-        consumedServices: [],
-        isPaid: false,
-        totalCostInvoice: 0 
-    }
-
     useEffect(()=>{
-        if(!activePet || !activePet.id) return
-        startLoadingInvoiceList(activePet.id)
+        activePet && activePet.id && startLoadingInvoiceList(activePet.id)
     },[activePet])
     
     
@@ -55,17 +46,7 @@ export const InvoicesPetPage = () => {
                     <p className="card-title m-2 text-success fw-bold fs-5">Facturación</p>
 
                         <div className="d-flex justify-content-end" >
-                            <button 
-                                type="button" 
-                                className="btn btn-success d-flex align-items-baseline" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#staticBackdropInvoice"
-                                onClick={()=> setActiveInvoice(initialValuesCashModal)}
-                            >
-                                <span className="d-sm-none d-lg-inline me-1">Cobro</span>
-                                <span className="fs-5"><FaSackDollar /></span>
-                            </button>
-                            <CashModal activePet={activePet}/>
+                            <CashModal />
                         </div>
                     </div>
                     <div className="card-body">

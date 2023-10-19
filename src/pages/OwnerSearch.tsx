@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useOwnerStore } from "../hooks/useOwnerStore"
 import * as Yup from 'yup';
-//import { BsSearchHeart } from "react-icons/bs";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 
 
 export const OwnerSearch = () => {
@@ -16,7 +16,6 @@ export const OwnerSearch = () => {
         searchingOwner:''
     },
     onSubmit: (values) => { 
-        //dispatch(startSearchingOwner(values.searchingOwner))
         startSearchingOwner(values.searchingOwner)
         console.log(values.searchingOwner)
         resetForm()
@@ -38,9 +37,9 @@ export const OwnerSearch = () => {
             />
             <button 
                 type="submit"
-                className="btn btn-primary"
-            > Buscar
-                {/* <BsSearchHeart className="me-0 fs-5"/> */}
+                className="btn btn-outline-primary"
+            >
+                <FaMagnifyingGlass className="me-0 fs-5"/>
             </button>
             { !touched.searchingOwner && <span className='form-error m-1'>{errors.searchingOwner}</span>}
         </form>

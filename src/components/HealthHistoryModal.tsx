@@ -4,7 +4,8 @@ import { Pet } from "../interfaces/appInterfaces"
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { useHealthHistoryStore } from "../hooks/useHealthHistoryStore";
-import { FaBookMedical } from "react-icons/fa6";
+import { FaHeartPulse } from "react-icons/fa6";
+import { useEffect } from "react";
 
 interface Props{
     activePet: Pet|null,
@@ -12,7 +13,7 @@ interface Props{
 
 export const HealthHistoryModal = ({ activePet }:Props) => {
 
-    const {startSavingHealthHistory, setActiveHealthHistory } = useHealthHistoryStore();
+    const {startSavingHealthHistory, setActiveHealthHistory, activeHealthHistory } = useHealthHistoryStore();
 
     const initialValues = {
         visitDate: new Date().toLocaleDateString(),
@@ -20,7 +21,7 @@ export const HealthHistoryModal = ({ activePet }:Props) => {
         case: ''
     }
 
-    const { handleSubmit, getFieldProps } = useFormik({
+    const { handleSubmit, getFieldProps, setValues, errors, touched } = useFormik({
         initialValues,
         onSubmit: values => startSavingHealthHistory(values),
         validationSchema: Yup.object({
@@ -28,6 +29,12 @@ export const HealthHistoryModal = ({ activePet }:Props) => {
             case: Yup.string().required('La descripción de la visita es obligatoria')
           }), 
     });
+
+    useEffect(() => {
+        if(activeHealthHistory !== null){
+            setValues(activeHealthHistory)
+        }
+       }, [activeHealthHistory])
 
     return (
         <>
@@ -39,7 +46,7 @@ export const HealthHistoryModal = ({ activePet }:Props) => {
                 onClick={()=> setActiveHealthHistory(initialValues)}
             >
                 <span className="d-sm-none d-lg-inline me-1">Visita</span>
-                <span className="fs-5"><FaBookMedical /></span>
+                <span className="fs-5"><FaHeartPulse /></span>
             </button>
        
             <div className="modal fade" id="staticBackdropHealthHistory" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="staticBackdropHealthHistoryLabel" aria-hidden="true">
@@ -67,6 +74,7 @@ export const HealthHistoryModal = ({ activePet }:Props) => {
                                             type="text" 
                                             className="form-control me-2" 
                                             {...getFieldProps('reason')}/>
+                                        { touched.reason && errors.reason && <span className='form-error m-sm-1'>{errors.reason}</span>}
                                     </div>
                                 </div>
                                 
@@ -75,7 +83,10 @@ export const HealthHistoryModal = ({ activePet }:Props) => {
                                     <textarea 
                                         rows={10} 
                                         className="form-control me-2" 
-                                        {...getFieldProps('case')}/>
+                                        {...getFieldProps('case')}
+                                    />
+                                    { touched.case && errors.case && <span className='form-error m-sm-1'>{errors.case}</span>}
+
                                 </div>
 
                                 <div className="modal-footer">
@@ -90,6 +101,7 @@ export const HealthHistoryModal = ({ activePet }:Props) => {
                                         type="submit" 
                                         className="btn btn-primary" 
                                         data-bs-dismiss="modal" 
+                                        disabled={!!(errors.case || errors.reason)}
                                     >
                                         Aceptar
                                     </button>

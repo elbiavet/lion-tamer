@@ -1,20 +1,15 @@
 
 import { usePetStore } from "../hooks/usePetStore";
 import { useNavigate } from "react-router-dom";
-import { Pet } from "../interfaces/appInterfaces";
 import { useOwnerStore } from "../hooks/useOwnerStore";
 import Swal from "sweetalert2";
 import { InvoicesPetPage } from "./InvoicesPetPage";
 import { PetHealthHistory } from "./PetHealthHistory";
 
 
-interface Props{
-    activePet:Pet|null,
-}
-
-export const PetPage = ({ activePet }:Props) => {
+export const PetPage = () => {
     const { activeOwner } = useOwnerStore();
-    const {startDeletingPet} = usePetStore();
+    const { activePet, startDeletingPet } = usePetStore();
     const navigate = useNavigate();
 
     const deletePetModal = () =>{

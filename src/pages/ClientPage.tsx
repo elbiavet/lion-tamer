@@ -17,14 +17,12 @@ export const ClientPage = () => {
     const navigate = useNavigate();
     
     const handleDeleteOwner = () =>{
-        //dispatch(startDeletingOwner(activeOwner))
         startDeletingOwner()
     }
 
     useEffect(() => {
-        //dispatch(startLoadingPetList(id))
         id && startLoadingPetList(id)
-        dispatch(onSetActivePet(initialValuesPet)) //! esto es lo que hace el resetform de la mascota. cambiar
+        dispatch(onSetActivePet(initialValuesPet)) //TODO: esto es lo que hace el resetform de la mascota. cambiar
     }, [id])
     
 
@@ -101,7 +99,7 @@ export const ClientPage = () => {
                 </div>
         
                 {
-                    activeOwner && activePet && (<PetPage activePet={activePet}/>) 
+                    activeOwner && activePet && (<PetPage />) 
                 } 
         
             </div>

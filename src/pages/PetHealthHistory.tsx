@@ -35,7 +35,9 @@ export const PetHealthHistory = () => {
 
     useEffect(()=>{
         activePet && activePet.id && startLoadingHealthHistory(activePet.id)
-    },[])
+    },[activePet])
+    
+    
 
   return (
     <>     
@@ -75,7 +77,7 @@ export const PetHealthHistory = () => {
                                             className={`btn m-1 ${(activeHealthHistory && activeHealthHistory.id === history.id) ? "btn-primary" : "btn-outline-secondary" }`}
                                             disabled={!(activeHealthHistory && activeHealthHistory.id === history.id)}
                                             data-bs-toggle="modal" 
-                                            data-bs-target="#staticBackdrop"
+                                            data-bs-target="#staticBackdropHealthHistory"
                                             >
                                                 <BsPencil />
                                             </button>

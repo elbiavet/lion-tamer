@@ -55,9 +55,9 @@ export const useCashRegisterStore = () => {
                 })
             }   
         } else {
-            //*Nueva facturación
+            //Nueva facturación
             try {
-                delete invoice.id; //! para cuando viene undefined por los initialValues
+                delete invoice.id; //* para cuando viene el id undefined por los initialValues
                 
                 const newDoc = doc(collection(FirebaseDB, `${uid}/lionTamer/owners/${activeOwner.id}/pets/${activePet.id}/invoices/`));
                 await setDoc(newDoc, invoice);

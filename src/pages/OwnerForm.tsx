@@ -19,7 +19,6 @@ export const OwnerForm = () => {
   const { handleSubmit, setValues , getFieldProps, errors, touched, resetForm } = useFormik({
       initialValues, 
       onSubmit: values => {
-        //dispatch(startSavingOwner(values))
         startSavingOwner(values)
         console.log(values)
       },          
@@ -32,7 +31,6 @@ export const OwnerForm = () => {
   );
 
     const handleDeleteOwner = () =>{
-      //dispatch(startDeletingOwner(activeOwner))
       startDeletingOwner()
       resetForm();
   }
@@ -53,7 +51,7 @@ export const OwnerForm = () => {
   <div>
       {
         activeOwner && (
-          <div className="alert alert-primary d-flex flex-column flex-sm-row justify-content-center align-items-center m-2 m-sm-1 m-lg-0" role="alert">
+          <div className="alert alert-danger d-flex flex-column flex-sm-row justify-content-center align-items-center m-2 m-sm-1 m-lg-0" role="alert">
             <p className="me-sm-4 m-1">Hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
             <button 
               type="button" 
