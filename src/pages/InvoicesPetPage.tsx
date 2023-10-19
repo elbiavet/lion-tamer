@@ -75,7 +75,7 @@ export const InvoicesPetPage = () => {
                                         <span>
                                             <button 
                                             type="button" 
-                                            className={`btn m-1 ${(activeInvoice && activeInvoice.id === invoice.id) ? "btn-primary" : "btn-outline-secondary" }`}
+                                            className={`btn m-1 ${(activeInvoice && activeInvoice.id === invoice.id) ? "btn-custom" : "btn-outline-secondary" }`}
                                             disabled={!(activeInvoice && activeInvoice.id === invoice.id)}
                                             data-bs-toggle="modal" 
                                             data-bs-target="#staticBackdropInvoice"

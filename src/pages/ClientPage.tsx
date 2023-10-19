@@ -46,7 +46,7 @@ export const ClientPage = () => {
                         <div className="m-1">
                             <button 
                                 type="button" 
-                                className="btn btn-outline-primary m-1"
+                                className="btn btn-outline-custom m-1"
                                 onClick={()=> navigate('/owner')}
                                 >
                                     Editar
@@ -73,7 +73,7 @@ export const ClientPage = () => {
                                         activeOwner && petList.map((pet) => 
                                             <button 
                                                 type="button" 
-                                                className="btn btn-primary m-1" 
+                                                className="btn btn-custom m-1" 
                                                 key={pet.id}
                                                 onClick={()=> {
                                                     dispatch(onSetActivePet({...pet}))

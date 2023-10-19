@@ -55,7 +55,7 @@ export const OwnerForm = () => {
             <p className="me-sm-4 m-1">Hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
             <button 
               type="button" 
-              className="btn btn-primary align-self-sm-baseline"
+              className="btn btn-custom align-self-sm-baseline"
               onClick={()=> resetFormValues()}
             >
               Nuevo

@@ -1,0 +1,52 @@
+:root {
+    --color-custom-primary: #46639b;
+    --color-custom-secondary: #8198c7;
+    --color-custom-terciary: #c7d1e6;
+}
+
+/* Clase personalizadas */
+.bg-custom {
+    background-color: var(--color-custom-primary);
+}
+
+.text-custom {
+    color: var(--color-custom-primary);
+}
+
+.link-custom{
+    color: var(--color-custom-primary);
+}
+
+.btn-custom{
+    background-color: var(--color-custom-primary) !important;
+    color: white;
+}
+
+.btn-outline-custom{
+    background-color:white!important;
+    color: var(--color-custom-primary);
+    border: 1px solid var(--color-custom-primary);
+}
+
+.alert-custom{
+    background-color: var(--color-custom-primary);
+    color:white;
+}
+
+.list-group-item-custom{
+    background-color: var(--color-custom-primary);
+    color:white;
+}
+
+.bg-login{
+    background-color: #7f98c5;
+}
+
+.container-login{
+    border: 2px solid var(--color-custom-primary);
+    border-radius: 2%;
+    background-color: white;
+    -webkit-box-shadow: 10px 10px 9px -5px rgba(0,0,0,0.46);
+    -moz-box-shadow: 10px 10px 9px -5px rgba(0,0,0,0.46);
+    box-shadow: 10px 10px 9px -5px rgba(0,0,0,0.46);
+}

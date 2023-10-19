@@ -22,7 +22,7 @@ export const SideBar = () => {
   return (
     <div className="container vh-100 border border-2">
 
-        <p className="mt-3 text-primary d-flex align-items-center">
+        <p className="mt-3 text-custom d-flex align-items-center">
           <FaUser /> 
           <span className="p-1"> Propietario Activo</span>
         </p>
@@ -31,7 +31,7 @@ export const SideBar = () => {
              ?(
               <Link 
                 to={`/owner/${activeOwner.id}`} 
-                className="list-group-item list-group-item-action list-group-item-info"
+                className="list-group-item list-group-item-action list-group-item-custom"
               >
                 {activeOwner.ownerFirstName}
               </Link>
@@ -42,7 +42,7 @@ export const SideBar = () => {
             }
         </div>
 
-        <p className="mt-3 text-primary d-flex align-items-center">
+        <p className="mt-3 text-custom d-flex align-items-center">
           <FaPaw /> 
           <span className="p-1"> Mascota Activa</span>
         </p>
@@ -53,7 +53,7 @@ export const SideBar = () => {
               ?( 
                 <Link 
                   to={`/owner/${activeOwner.id}`} 
-                  className="list-group-item list-group-item-action list-group-item-info"
+                  className="list-group-item list-group-item-action list-group-item-custom"
                 >
                   {activePet.namePet}
                 </Link>
@@ -67,7 +67,7 @@ export const SideBar = () => {
 
         <p className="mt-3 fw-bold">Últimas fichas añadidas</p>
 
-        <p className="mt-3 text-primary d-flex align-items-center">
+        <p className="mt-3 text-custom d-flex align-items-center">
           <FaUserGroup /> 
           <span className="p-1"> Dueños</span>
         </p>

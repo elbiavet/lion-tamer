@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { useSelector } from "react-redux";
 import * as Yup from 'yup';
-import "../styles/Pages.css"
+import "../styles/styles.css"
 import { RootState } from '../store/store';
 import { useAuthStore } from "../hooks/useAuthStore";
 import logo from "../assets/logo-blue-trans.png"
@@ -60,7 +60,7 @@ export const Login = () => {
                                 <div className="form-group m-2">
                                     <button 
                                         type="submit"
-                                        className="btn btn-primary w-100" 
+                                        className="btn btn-custom w-100" 
                                     >Entrar</button>
                                 </div>
                             </Form>

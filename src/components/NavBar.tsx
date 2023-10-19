@@ -20,7 +20,7 @@ export const NavBar = () => {
 
   return (
     
-    <nav className="navbar navbar-expand-sm navbar-light text-primary bg-light border border-2" >
+    <nav className="navbar navbar-expand-sm navbar-light bg-light border border-2" >
       
       <div className="container-fluid m-0 p-0 row d-flex justify-content-center align-items-center">
 
@@ -30,7 +30,7 @@ export const NavBar = () => {
 
         <div className="fs-5 col-2 col-sm-8 col-lg-10"> 
 
-          <button className="btn btn-primary navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+          <button className="btn btn-custom navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
             <span className="navbar-toggler-icon"></span>
           </button>
 
@@ -52,25 +52,11 @@ export const NavBar = () => {
                       <OwnerSearch />
                     </div>
                 </li>
-                
-                {/* <li className="nav-item col col-sm-2 col-lg-2">
-                  <NavLink 
-                    className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} 
-                    aria-current="page" 
-                    to={`/owner`}  
-                    data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ficha Propietario"
-                  >
-                    <div className="d-flex align-items-baseline">
-                      <FaUser className="d-lg-none d-xl-inline"/>
-                      <p className="d-sm-none d-lg-inline m-0 mx-2 text-secondary">Cliente</p>
-                    </div>
-                  </NavLink>
-                </li> */}
 
                 <li className="nav-item col col-sm-2 col-lg-2">
                   <div className="dropdown" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ficha Propietario">
                       <div className="dropdown-toggle d-flex align-items-baseline fs-4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <FaUser className="d-lg-none d-xl-inline text-primary"/>
+                        <FaUser className="d-lg-none d-xl-inline text-custom"/>
                         <p className="d-sm-none d-lg-inline m-0 mx-2 fw-bold  text-secondary">Cliente</p>
                       </div>
                     
@@ -90,7 +76,7 @@ export const NavBar = () => {
                 
                 <li className="nav-item col col-sm-2 col-lg-2">
                   <NavLink 
-                    className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} 
+                    className= {({isActive}) => `nav-link fw-bold fs-4 link-custom ${ isActive ? "active" :"" }`} 
                     aria-current="page" 
                     to={`/pet`}
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ficha mascota"
@@ -104,7 +90,7 @@ export const NavBar = () => {
         
                 <li className="nav-item col col-sm-2 col-lg-2">
                   <NavLink 
-                    className= {({isActive}) => `nav-link fw-bold fs-4 link-primary ${ isActive ? "active" :"" }`} 
+                    className= {({isActive}) => `nav-link fw-bold fs-4 link-custom ${ isActive ? "active" :"" }`} 
                     aria-current="page" 
                     to="/cash"
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cobros"
@@ -117,7 +103,7 @@ export const NavBar = () => {
                     </NavLink>
                 </li>
                 <li className="nav-item col col-sm-2 col-lg-2">
-                  <button className="btn text-danger nav-link fw-bold fs-4 link-primary"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar sesión">
+                  <button className="btn text-danger nav-link fw-bold fs-4 link-custom"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar sesión">
                   <div className="d-flex align-items-baseline">
                         <IoLogOutOutline 
                           className="d-lg-none d-xl-inline align-self-center fs-3" 

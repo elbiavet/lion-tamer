@@ -37,7 +37,7 @@ export const OwnerSearch = () => {
             />
             <button 
                 type="submit"
-                className="btn btn-outline-primary"
+                className="btn btn-outline-custom"
             >
                 <FaMagnifyingGlass className="me-0 fs-5"/>
             </button>

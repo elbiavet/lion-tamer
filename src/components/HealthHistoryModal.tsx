@@ -99,7 +99,7 @@ export const HealthHistoryModal = ({ activePet }:Props) => {
                                     </button>
                                     <button 
                                         type="submit" 
-                                        className="btn btn-primary" 
+                                        className="btn btn-custom" 
                                         data-bs-dismiss="modal" 
                                         disabled={!!(errors.case || errors.reason)}
                                     >

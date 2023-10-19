@@ -19,8 +19,7 @@ export const CalendarModal = () => {
 
     const { activeEvent, startSavingEvent, isEventSaving } = useCalendarStore();
     const { isModalOpen, closeModal, openModal } = useModalStore();
-
-
+    
     const { handleSubmit, values, setValues , getFieldProps, errors, touched, resetForm, handleChange } = useFormik({
       initialValues,
       onSubmit: values => { 
@@ -59,14 +58,13 @@ export const CalendarModal = () => {
         </button>
         <Modal
           isOpen={isModalOpen}
-          /* onAfterOpen={afterOpenModal} */
           onRequestClose={setCloseModal}
           className='calendar-modal'
           overlayClassName='calendar-modal-fondo'
           closeTimeoutMS={200}
         >
           <div className='d-flex justify-content-between'>
-            <p className='fs-4 fw-bold text-primary'>Nueva Cita</p>
+            <p className='fs-4 fw-bold text-custom'>Nueva Cita</p>
             <button className='btn fs-4 rounded-circle' onClick={closeModal}><AiOutlineCloseCircle /></button>
           </div>
           
@@ -131,7 +129,7 @@ export const CalendarModal = () => {
       
           </div>
 
-          <button type='submit' className='btn btn-outline-primary' disabled={ isEventSaving }>Guardar</button>
+          <button type='submit' className='btn btn-outline-custom' disabled={ isEventSaving }>Guardar</button>
 
           </form>
         </Modal>

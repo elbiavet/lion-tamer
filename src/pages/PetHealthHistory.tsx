@@ -46,7 +46,7 @@ export const PetHealthHistory = () => {
          (
             <div className="card">
                     <div className="card-header d-flex justify-content-between">
-                    <p className="card-title m-2 text-primary fw-bold fs-5">Historial de salud</p>
+                    <p className="card-title m-2 text-custom fw-bold fs-5">Historial de salud</p>
 
                         <div className="d-flex justify-content-end" >
                             
@@ -74,7 +74,7 @@ export const PetHealthHistory = () => {
                                         <span>
                                             <button 
                                             type="button" 
-                                            className={`btn m-1 ${(activeHealthHistory && activeHealthHistory.id === history.id) ? "btn-primary" : "btn-outline-secondary" }`}
+                                            className={`btn m-1 ${(activeHealthHistory && activeHealthHistory.id === history.id) ? "btn-custom" : "btn-outline-secondary" }`}
                                             disabled={!(activeHealthHistory && activeHealthHistory.id === history.id)}
                                             data-bs-toggle="modal" 
                                             data-bs-target="#staticBackdropHealthHistory"

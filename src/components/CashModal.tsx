@@ -124,7 +124,7 @@ export const CashModal = () => {
                                             debouncedSubmit();
                                         }}
                                     />
-                                    <button className="btn btn-outline-primary" type="submit">Buscar</button>
+                                    <button className="btn btn-outline-custom" type="submit">Buscar</button>
                                 </div>
                                 
                                 <div className="list-group row">
@@ -152,7 +152,7 @@ export const CashModal = () => {
                             </button>
                             <button 
                                 type="button" 
-                                className="btn btn-primary" 
+                                className="btn btn-custom" 
                                 data-bs-dismiss="modal" 
                                 onClick={()=>addInvoice(tableList)}
                                 disabled={tableList.length <= 0}
