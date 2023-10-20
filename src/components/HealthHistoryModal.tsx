@@ -1,11 +1,9 @@
-
-
-import { Pet } from "../interfaces/appInterfaces"
-import { useFormik } from "formik";
-import * as Yup from 'yup';
-import { useHealthHistoryStore } from "../hooks/useHealthHistoryStore";
-import { FaHeartPulse } from "react-icons/fa6";
 import { useEffect } from "react";
+import { useFormik } from "formik";
+import { useHealthHistoryStore } from "../hooks";
+import * as Yup from 'yup';
+import { Pet } from "../interfaces/appInterfaces"
+import { FaHeartPulse } from "react-icons/fa6";
 
 interface Props{
     activePet: Pet|null,

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { useOwnerStore } from "../hooks/useOwnerStore"
+import { useOwnerStore } from "../hooks"
 import * as Yup from 'yup';
 import { FaMagnifyingGlass } from "react-icons/fa6";
 

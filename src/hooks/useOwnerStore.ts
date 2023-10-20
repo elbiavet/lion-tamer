@@ -2,12 +2,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { FirebaseDB } from "../firebase/firebaseConfig";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { RootState } from "../store/store"
-import { Owner } from "../interfaces/appInterfaces";
 import { onAddNewOwner, onDeleteOwner, onSetActiveOwner, onUpdateOwner, setOwnerList, setOwnerSearchList, setSavingOwner } from "../store/owners/ownerSlice";
-import { getOwnersList } from "../helpers/getOwnersList";
-import { getSearchOwners } from "../helpers/getSearchOwners";
-import Swal from "sweetalert2";
 import { onSetActivePet } from "../store/pet/petSlice";
+import { getOwnersList, getSearchOwners } from "../helpers";
+import Swal from "sweetalert2";
+import { Owner } from "../interfaces/appInterfaces";
 
 
 export const useOwnerStore = () => {

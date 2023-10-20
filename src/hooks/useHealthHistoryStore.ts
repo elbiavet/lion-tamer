@@ -3,10 +3,9 @@ import { RootState } from "../store/store";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/firebaseConfig";
 import Swal from "sweetalert2";
-
 import { onAddNewHealthHistory, onDeleteHealthHistory, onSetActiveHealthHistory, onUpdateHealthHistory, setHealthHistoryList, setSavingHealthHistory } from "../store/healthHistory/healthHistorySlice";
 import { HealthHistory } from "../interfaces/appInterfaces";
-import { getHealthHistoryPet } from "../helpers/getHealthHistoryPet";
+import { getHealthHistoryPet } from "../helpers";
 
 
 export const useHealthHistoryStore = () => {

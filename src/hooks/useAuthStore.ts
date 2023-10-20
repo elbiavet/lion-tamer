@@ -1,8 +1,7 @@
-
-import { checkingCredentials, login, logout } from "../store/auth/authSlice";
-import { logoutFirebase, signInWithEmail } from "../firebase/providers";
 import { useDispatch, useSelector } from "react-redux";
+import { logoutFirebase, signInWithEmail } from "../firebase/providers";
 import { RootState } from "../store/store";
+import { checkingCredentials, login, logout } from "../store/auth/authSlice";
 
 
 export const useAuthStore = () => {

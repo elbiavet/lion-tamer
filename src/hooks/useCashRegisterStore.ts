@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { FirebaseDB } from "../firebase/firebaseConfig";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { RootState } from "../store/store"
-import { Invoice } from "../interfaces/appInterfaces";
-import { onDeleteInvoice, onSetActiveInvoice, setTotalInvoicesPet, onAddNewInvoice, setSavingInvoice, onUpdateInvoice} from "../store/cash/cashRegisterSlice";
 import Swal from "sweetalert2";
+import { onDeleteInvoice, onSetActiveInvoice, setTotalInvoicesPet, onAddNewInvoice, setSavingInvoice, onUpdateInvoice} from "../store/cash/cashRegisterSlice";
 import { getInvoices } from "../helpers/getInvoices";
+import { Invoice } from "../interfaces/appInterfaces";
 
 
 export const useCashRegisterStore = () => {

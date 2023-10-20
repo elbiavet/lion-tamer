@@ -1,12 +1,8 @@
-
 import { Calendar } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { useCalendarStore } from '../hooks/useCalendarStore';
-import { useModalStore } from '../hooks/useModalStore';
-import { getMessages } from '../helpers/getMessages';
-import { CalendarEvent } from '../components/CalendarEvent';
-import { CalendarModal } from '../components/CalendarModal';
-import { localizer } from '../helpers/localizer';
+import { useCalendarStore, useModalStore } from '../hooks';
+import { getMessages, localizer } from '../helpers';
+import { CalendarEvent, CalendarModal } from '../components';
 import { CalendarEventInterface } from '../interfaces/appInterfaces';
 import { FaTrashCan } from "react-icons/fa6";
 

@@ -1,9 +1,8 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
-import { usePetStore } from "../hooks/usePetStore";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useOwnerStore } from "../hooks/useOwnerStore";
+import { usePetStore, useOwnerStore } from "../hooks";
 import { initialValuesPet as initialValues } from "../assets/initialValues";
 
 

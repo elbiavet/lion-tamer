@@ -1,10 +1,8 @@
 import { useEffect } from "react"
 import { useFormik } from "formik"
+import { useCashModal, useCashRegisterStore, usePetStore } from "../hooks"
 import debounce from "debounce"
-import { useCashModal } from "../hooks/useCashModal"
-import { useCashRegisterStore } from "../hooks/useCashRegisterStore"
 import { FaSackDollar } from "react-icons/fa6"
-import { usePetStore } from "../hooks/usePetStore"
 
 
 export const CashModal = () => {

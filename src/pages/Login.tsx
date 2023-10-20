@@ -1,14 +1,14 @@
-import { Formik, Form, Field, ErrorMessage } from "formik"
 import { useSelector } from "react-redux";
-import * as Yup from 'yup';
-import "../styles/styles.css"
+import { Formik, Form, Field, ErrorMessage } from "formik"
 import { RootState } from '../store/store';
 import { useAuthStore } from "../hooks/useAuthStore";
+import * as Yup from 'yup';
+import "../styles/styles.css"
 import logo from "../assets/logo-blue-trans.png"
+
 
 export const Login = () => {
 
-   
     const { errorMessage } = useSelector((state: RootState) => state.auth)
     const { loginWithEmail } = useAuthStore();
 

@@ -1,13 +1,9 @@
-
-import { usePetStore } from "../hooks/usePetStore";
-import { useOwnerStore } from "../hooks/useOwnerStore";
+import { useEffect } from 'react';
+import { useOwnerStore, usePetStore,useHealthHistoryStore } from "../hooks";
 import Swal from "sweetalert2";
-import { HealthHistoryModal } from "../components/HealthHistoryModal";
-
-import { useHealthHistoryStore } from "../hooks/useHealthHistoryStore";
+import { HealthHistoryModal } from "../components";
 import { HealthHistory } from "../interfaces/appInterfaces";
 import { BsPencil, BsTrash } from "react-icons/bs";
-import { useEffect } from 'react';
 
 
 export const PetHealthHistory = () => {

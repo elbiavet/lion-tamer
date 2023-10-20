@@ -1,11 +1,9 @@
+import { Link, NavLink, useNavigate } from "react-router-dom"
+import { useAuthStore, useOwnerStore } from '../hooks';
+import { OwnerSearch } from "../pages";
 import { FaPaw, FaUser, FaCashRegister } from "react-icons/fa6";
 import { IoLogOutOutline } from "react-icons/io5";
 import Logo from "../assets/logo-blue-trans.png"
-import { Link, NavLink, useNavigate } from "react-router-dom"
-import { OwnerSearch } from "../pages/OwnerSearch";
-import { useAuthStore } from '../hooks/useAuthStore';
-import { useOwnerStore } from "../hooks/useOwnerStore";
-
 
 
 export const NavBar = () => {
@@ -61,15 +59,15 @@ export const NavBar = () => {
                       </div>
                     
                     <div className="dropdown-menu">
-                      <Link className="dropdown-item" to="/owner">Nuevo</Link>
                       {activeOwner && (
                         <Link 
-                          className="dropdown-item" 
-                          to={`/owner/${activeOwner.id}`}
+                        className="dropdown-item" 
+                        to={`/owner/${activeOwner.id}`}
                         >
                           Propietario Activo
                         </Link>
                       )}
+                      <Link className="dropdown-item" to="/owner">Nuevo</Link>
                     </div>
                   </div>
                 </li>

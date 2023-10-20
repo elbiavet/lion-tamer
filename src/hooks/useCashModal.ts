@@ -1,8 +1,7 @@
-
+import { useState } from "react"
+import { useCashRegisterStore } from "../hooks"
 import { Invoice, Service } from "../interfaces/appInterfaces"
 import { dataServices } from "../assets/data"
-import { useState } from "react"
-import { useCashRegisterStore } from "../hooks/useCashRegisterStore"
 
 
 export const useCashModal = () => {

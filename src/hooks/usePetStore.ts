@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../store/store";
-import { Pet } from "../interfaces/appInterfaces";
-import { onAddNewPet, onSetActivePet, setSavingPet, onUpdatePet, setPetList, onDeletePet } from "../store/pet/petSlice";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/firebaseConfig";
+import { RootState } from "../store/store";
 import Swal from "sweetalert2";
-import { getPetList } from "../helpers/getPetList";
+import { onAddNewPet, onSetActivePet, setSavingPet, onUpdatePet, setPetList, onDeletePet } from "../store/pet/petSlice";
+import { getPetList } from "../helpers";
+import { Pet } from "../interfaces/appInterfaces";
 
 
 export const usePetStore = () => {

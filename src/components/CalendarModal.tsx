@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import { useFormik } from 'formik';
+import { useCalendarStore, useModalStore } from '../hooks';
+import { dateEnd } from '../helpers/dateEnd';
 import Modal from 'react-modal';
 import * as Yup from 'yup';
-import { dateEnd } from '../helpers/dateEnd';
-import { AiOutlineCloseCircle, AiOutlinePlus } from "react-icons/ai";
-import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/CalendarModal.css'
-import { useCalendarStore } from '../hooks/useCalendarStore';
-import { useModalStore } from '../hooks/useModalStore';
+import 'react-datepicker/dist/react-datepicker.css';
+import { AiOutlineCloseCircle, AiOutlinePlus } from "react-icons/ai";
 import { initialValuesCalendar as initialValues } from '../assets/initialValues';
 
 

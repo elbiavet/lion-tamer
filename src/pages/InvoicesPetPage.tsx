@@ -1,12 +1,10 @@
-
-import { Invoice } from "../interfaces/appInterfaces";
+import { useEffect } from 'react';
 import { useOwnerStore } from "../hooks/useOwnerStore";
 import Swal from "sweetalert2";
-import { useCashRegisterStore } from "../hooks/useCashRegisterStore";
-import { usePetStore } from "../hooks/usePetStore";
-import { useEffect } from 'react';
 import { BsTrash, BsPencil } from "react-icons/bs";
-import { CashModal } from "../components/CashModal";
+import { useCashRegisterStore, usePetStore } from "../hooks";
+import { CashModal } from "../components";
+import { Invoice } from "../interfaces/appInterfaces";
 
 
 export const InvoicesPetPage = () => {

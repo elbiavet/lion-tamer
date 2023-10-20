@@ -9,11 +9,7 @@
     background-color: var(--color-custom-primary);
 }
 
-.text-custom {
-    color: var(--color-custom-primary);
-}
-
-.link-custom{
+.text-custom, .link-custom{
     color: var(--color-custom-primary);
 }
 

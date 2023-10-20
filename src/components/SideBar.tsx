@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
-import { useOwnerStore } from "../hooks/useOwnerStore";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { useOwnerStore, usePetStore, useAuthStore } from "../hooks";
 import { FaUserGroup, FaPaw, FaUser } from "react-icons/fa6";
 import { onSetActiveOwner } from "../store/owners/ownerSlice";
-import { usePetStore } from "../hooks/usePetStore";
-import { useAuthStore } from "../hooks/useAuthStore";
 
 
 export const SideBar = () => {

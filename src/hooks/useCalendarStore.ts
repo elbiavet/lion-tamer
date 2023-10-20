@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
-import { CalendarEventInterface } from '../interfaces/appInterfaces';
-import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent, setEventList, setSaving } from "../store/calendar/calendarSlice";
-import { RootState } from "../store/store";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/firebaseConfig";
+import { RootState } from "../store/store";
 import { getEventsFirebase } from "../helpers/getEventsFirebase";
+import { CalendarEventInterface } from '../interfaces/appInterfaces';
+import { onAddNewEvent, onDeleteEvent, onSetActiveEvent, onUpdateEvent, setEventList, setSaving } from "../store/calendar/calendarSlice";
 
 
 export const useCalendarStore = () => {

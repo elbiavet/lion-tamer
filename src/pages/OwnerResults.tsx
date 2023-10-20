@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom"
-import { useOwnerStore } from "../hooks/useOwnerStore";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom"
+import { useOwnerStore } from "../hooks";
 import { onSetActiveOwner } from "../store/owners/ownerSlice";
 
 

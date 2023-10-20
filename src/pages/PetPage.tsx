@@ -1,7 +1,5 @@
-
-import { usePetStore } from "../hooks/usePetStore";
 import { useNavigate } from "react-router-dom";
-import { useOwnerStore } from "../hooks/useOwnerStore";
+import { useOwnerStore, usePetStore } from "../hooks";
 import Swal from "sweetalert2";
 import { InvoicesPetPage } from "./InvoicesPetPage";
 import { PetHealthHistory } from "./PetHealthHistory";

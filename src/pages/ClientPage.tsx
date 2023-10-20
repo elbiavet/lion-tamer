@@ -1,8 +1,7 @@
-import { useDispatch } from "react-redux";
-import { useOwnerStore } from "../hooks/useOwnerStore"
-import { usePetStore } from "../hooks/usePetStore";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useOwnerStore, usePetStore } from "../hooks"
 import { PetPage } from "./PetPage";
 import { onSetActivePet } from "../store/pet/petSlice";
 import { initialValuesPet } from "../assets/initialValues";
