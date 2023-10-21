@@ -99,23 +99,30 @@ export const PetForm = () => {
             
             <div className="col-sm col-lg form-group m-1">
               <label className="fw-bold">Carácter</label>
-              <input 
-                  type="text"
+              <select 
                   className="form-control"
-                  placeholder="Carácter"
                   {...getFieldProps('character')}
-              />
+              >
+                  <option value="bueno">Bueno</option>
+                  <option value="cariñoso" selected>Cariñoso</option>
+                  <option value="miedoso" selected>Miedoso</option>
+                  <option value="mordedor" selected>Nervioso</option>
+                  <option value="agresivo" selected>Agresivo</option>
+                  <option value="mordedor" selected>Mordedor</option>
+               </select>
             </div>
           </div>
                   
           <div className="row">
             <div className="col-lg form-group m-1">
-              <label className="fw-bold">¿Está castrad@?</label>
-              <select {...getFieldProps('castrated')}>
-                <option value="true">Si</option>
-                <option value="false" selected>No</option>
+              <label className="fw-bold me-2">¿Está castrad@?</label>
+              <select 
+                  className="form-control"
+                  {...getFieldProps('castrated')}
+                >
+                  <option value="true">Si</option>
+                  <option value="false" selected>No</option>
               </select>
-  
             </div>
             <div className="col-lg form-group m-1">
               <label className="fw-bold">Comentarios</label>
@@ -127,15 +134,7 @@ export const PetForm = () => {
               />
             </div>
           </div>
-          <div className="form-group m-1 mb-3">
-            <label className="fw-bold">Historia Clínica</label>
-            <textarea
-                rows={5}
-                className="form-control"
-                placeholder="Historia Clínica"
-                {...getFieldProps('history')}
-            />
-          </div>
+
           <div className="d-flex justify-content-center">
             <button type="submit" className="col-5 col-sm-3 col-lg-1 btn btn-success m-1">
                   Guardar

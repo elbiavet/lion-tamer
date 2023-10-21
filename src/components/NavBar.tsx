@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from "react-router-dom"
-import { useAuthStore, useOwnerStore } from '../hooks';
+import { useAuthStore, useOwnerStore, usePetStore } from '../hooks';
 import { OwnerSearch } from "../pages";
 import { FaPaw, FaUser, FaCashRegister } from "react-icons/fa6";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -10,6 +10,7 @@ export const NavBar = () => {
     const navigate = useNavigate();
     const { startLogout } = useAuthStore();
     const { activeOwner } = useOwnerStore();
+    const { activePet } = usePetStore();
 
     const onLogout = () =>{
       startLogout()
@@ -76,7 +77,7 @@ export const NavBar = () => {
                   <NavLink 
                     className= {({isActive}) => `nav-link fw-bold fs-4 link-custom ${ isActive ? "active" :"" }`} 
                     aria-current="page" 
-                    to={`/pet`}
+                    to={`/pet/${activePet?.id}`}
                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ficha mascota"
                   >
                     <div className="d-flex align-items-baseline">
@@ -101,11 +102,16 @@ export const NavBar = () => {
                     </NavLink>
                 </li>
                 <li className="nav-item col col-sm-2 col-lg-2">
-                  <button className="btn text-danger nav-link fw-bold fs-4 link-custom"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Cerrar sesión">
+                  <button 
+                    className="btn text-danger nav-link fw-bold fs-4 link-custom"  
+                    data-bs-toggle="tooltip" 
+                    data-bs-placement="bottom" 
+                    title="Cerrar sesión"
+                    onClick={onLogout}
+                  >
                   <div className="d-flex align-items-baseline">
                         <IoLogOutOutline 
                           className="d-lg-none d-xl-inline align-self-center fs-3" 
-                          onClick={onLogout}
                         />
                         <p className="d-sm-none d-lg-inline m-0 mx-2 text-danger">Salir</p>
                       </div>

@@ -10,7 +10,7 @@ export const CalendarEvent = ({event}:Props ) => {
     
   return (
     <div className="event">
-        <p><strong>{event.pet}: </strong>{event.title}</p>
+        <p><span className="fw-bold">{event.pet}</span>{event.owner && <span> ({event.owner})</span>} : {event.title}</p>
         <p>{ event.notes }</p>
     </div>
   )

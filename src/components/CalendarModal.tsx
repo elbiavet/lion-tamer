@@ -8,6 +8,7 @@ import '../styles/CalendarModal.css'
 import 'react-datepicker/dist/react-datepicker.css';
 import { AiOutlineCloseCircle, AiOutlinePlus } from "react-icons/ai";
 import { initialValuesCalendar as initialValues } from '../assets/initialValues';
+// import { OwnerSearch } from '../pages';
 
 
 
@@ -69,30 +70,45 @@ export const CalendarModal = () => {
           
           <form onSubmit={ handleSubmit }>
 
-            <div className='form-group mb-2 d-flex flex-column'>
-              <label>Fecha y hora inicio</label>
-              <input 
-                type='datetime-local' 
-                className='form-control m-1' 
-                name='start'
-                value={values.start}
-                onChange={handleChange}
-                />
-                { !touched.start && <span className='form-error m-1'>{JSON.stringify(errors.start)}</span>} 
-            </div>
+            <div className='d-lg-flex justify-content-start'>
+              <div className='form-group mb-2 d-flex flex-column'>
+                <label>Fecha y hora inicio</label>
+                <input 
+                  type='datetime-local' 
+                  className='form-control m-1' 
+                  name='start'
+                  value={values.start}
+                  onChange={handleChange}
+                  />
+                  { !touched.start && <span className='form-error m-1'>{JSON.stringify(errors.start)}</span>} 
+              </div>
 
-            <div className='form-group mb-2 d-flex flex-column'>
-              <label>Fecha y hora fin</label>
-              <input 
-                type='datetime-local' 
-                className='form-control m-1' 
-                name='end'
-                value={values.end}
-                min={values.start} 
-                onChange={handleChange}
-                />
-              { touched.end && <span className='form-error m-1'>{JSON.stringify(errors.end)}</span>} 
-            </div> 
+              <div className='form-group mb-2 d-flex flex-column mx-lg-3'>
+                <label>Fecha y hora fin</label>
+                <input 
+                  type='datetime-local' 
+                  className='form-control m-1' 
+                  name='end'
+                  value={values.end}
+                  min={values.start} 
+                  onChange={handleChange}
+                  />
+                { touched.end && <span className='form-error m-1'>{JSON.stringify(errors.end)}</span>} 
+              </div> 
+
+            </div>
+            
+            {/* //!aqui dueño */}
+            <div className='form-group mb-2'>
+              <label>Nombre dueño</label>
+              <input
+                  type='text'
+                  className='form-control'
+                  placeholder='Nombre dueño'
+                  {...getFieldProps('owner')}
+              />
+              {/* <OwnerSearch /> */}
+            </div>
 
             <div className='form-group mb-2'>
               <label>Nombre mascota</label>

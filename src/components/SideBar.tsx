@@ -50,7 +50,7 @@ export const SideBar = () => {
             activeOwner && activePet?.namePet
               ?( 
                 <Link 
-                  to={`/owner/${activeOwner.id}`} 
+                  to={`/pet/${activePet.id}`} 
                   className="list-group-item list-group-item-action list-group-item-custom"
                 >
                   {activePet.namePet}
@@ -63,7 +63,7 @@ export const SideBar = () => {
             }
         </div>
 
-        <p className="mt-3 fw-bold">Últimas fichas añadidas</p>
+        <p className="mt-3 fw-bold">Últimas fichas</p>
 
         <p className="mt-3 text-custom d-flex align-items-center">
           <FaUserGroup /> 

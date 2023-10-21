@@ -3,8 +3,8 @@ import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../firebase/firebaseConfig";
 import { RootState } from "../store/store";
 import Swal from "sweetalert2";
-import { onAddNewPet, onSetActivePet, setSavingPet, onUpdatePet, setPetList, onDeletePet } from "../store/pet/petSlice";
-import { getPetList } from "../helpers";
+import { onAddNewPet, onSetActivePet, setSavingPet, onUpdatePet, setPetList, onDeletePet, setPetSearchList } from "../store/pet/petSlice";
+import { getPetList, getSearchPet } from "../helpers";
 import { Pet } from "../interfaces/appInterfaces";
 
 
@@ -37,8 +37,9 @@ export const usePetStore = () => {
             console.log('Documento actualizado correctamente', resp);
             
             petToFirestore.id = docRef.id
-            console.log(petToFirestore)
+            
             dispatch(onUpdatePet({...petToFirestore}));
+            dispatch(onSetActivePet({...pet}))
             Swal.fire({
               icon: 'success',
               title: 'Mascota actualizada correctamente',
@@ -93,6 +94,25 @@ export const usePetStore = () => {
     }
   } 
   
+  //buscar mascota por nombre //TODO: no sé si es necesario
+  const startSearchingPet = async( ownerID: string, inputValue: string ) =>{
+    
+    if(!uid) return;
+    try{
+        const resp = await getSearchPet(uid, ownerID, inputValue)
+        if(!resp) return;
+        dispatch(setPetSearchList(resp))
+        
+       
+    } catch(error){
+        Swal.fire({
+            icon: 'error',
+            title: `Error al intentar acceder a la base de datos: ${error}`,
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+}
 
   //borrar mascota
   const startDeletingPet = async() => {
@@ -130,7 +150,8 @@ export const usePetStore = () => {
     setActivePet,
     startSavingPet,
     startLoadingPetList,
-    startDeletingPet
+    startDeletingPet,
+    startSearchingPet
   }
 }
 

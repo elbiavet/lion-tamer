@@ -9,7 +9,7 @@ import { useCheckAuth } from "../hooks/useCheckAuth";
 import { ClientPage } from "../pages/ClientPage";
 import { OwnerResults } from "../pages/OwnerResults";
 import { PetPage } from "../pages/PetPage";
-import { CashModal } from "../components/CashModal";
+import { PetForm } from "../pages";
 
 
 
@@ -42,8 +42,8 @@ export const Router = () => {
                 <Route path="owner-results" element={<OwnerResults />} />
                 <Route path="owner" element={< OwnerForm />} /> 
                 <Route path="owner/:id" element={<ClientPage />} />
-                <Route path="pet" element={<PetPage />} />
-                <Route path="cashModal" element={<CashModal />} /> {/* //!QUITAR? */}
+                <Route path="pet/:id" element={<PetPage />} />
+                <Route path="pet" element={< PetForm />} /> 
                 <Route path="cash" element={<CashRegister />} />
                 <Route path="/*" element={<Schedule />} />
               </Routes>

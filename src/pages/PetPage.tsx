@@ -3,6 +3,8 @@ import { useOwnerStore, usePetStore } from "../hooks";
 import Swal from "sweetalert2";
 import { InvoicesPetPage } from "./InvoicesPetPage";
 import { PetHealthHistory } from "./PetHealthHistory";
+import { getBirthday } from "../helpers";
+import { format } from "date-fns";
 
 
 export const PetPage = () => {
@@ -38,7 +40,7 @@ export const PetPage = () => {
                         <button 
                             type="button" 
                             className="btn btn-outline-custom m-1"
-                            onClick={()=> navigate('/owner')}
+                            onClick={()=> navigate('/pet')}
                         >
                             Editar
                         </button>
@@ -53,7 +55,14 @@ export const PetPage = () => {
                 <div className="card-body">
                     <div className="card-text row">
                         <div className="col-5 col-sm">
-                            <p className="m-1"><span className="fw-bold">Fecha nacimiento:</span> {activePet?.birthday}</p>
+                            <p className="m-1">
+                                <span className="fw-bold me-1">Edad:</span>     
+                                {getBirthday(activePet?.birthday)}
+                                </p>
+                            <p className="m-1">
+                                <span className="fw-bold me-1">Fecha nacimiento:</span> 
+                                {format(new Date(activePet?.birthday), "dd-MM-yyyy")} 
+                            </p>
                             <p className="m-1"><span className="fw-bold">Especie:</span> {activePet?.specie}</p>
                             <p className="m-1" ><span className="fw-bold">Raza:</span> {activePet?.breed}</p>
                             

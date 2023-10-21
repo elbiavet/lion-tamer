@@ -3,6 +3,7 @@
 export interface CalendarEventInterface{
     id?:string,
     pet:string, //! PONER Pet
+    owner?:string,
     start?: string, 
     end?: string, 
     title:string,
