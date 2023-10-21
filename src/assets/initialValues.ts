@@ -16,16 +16,24 @@ export const initialValuesCalendar:CalendarEventInterface={
 /* OWNER */
 
 export const initialValuesOwner:Owner={
-  ownerFirstName:'',
+  ownerFirstName: '',
   ownerLastName:'',
-  tlf: 0,
-  email:'',
   dni:'',
+  address:'',
+  tlf: 0,
+  tlf2: 0,
+  email:'',
+  commentsOwner:'',
 }
 
 export const initialValuesPet:Pet={
-    namePet: '',
-    specie: '',
-    birthday: '',
-    castrated: false,
+  namePet:'',
+  specie:'',
+  breed:'',
+  coat:'',
+  castrated: false,
+  birthday:'', //! antes estaba en Date
+  character:'',
+  commentsPet:[''], 
+    
 }

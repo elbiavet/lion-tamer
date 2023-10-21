@@ -4,12 +4,13 @@ import { OwnerSearch } from "../pages";
 import { FaPaw, FaUser, FaCashRegister } from "react-icons/fa6";
 import { IoLogOutOutline } from "react-icons/io5";
 import Logo from "../assets/logo-blue-trans.png"
+import { initialValuesOwner } from "../assets/initialValues";
 
 
 export const NavBar = () => {
     const navigate = useNavigate();
     const { startLogout } = useAuthStore();
-    const { activeOwner } = useOwnerStore();
+    const { activeOwner, setActiveOwner } = useOwnerStore();
     const { activePet } = usePetStore();
 
     const onLogout = () =>{
@@ -68,7 +69,7 @@ export const NavBar = () => {
                           Propietario Activo
                         </Link>
                       )}
-                      <Link className="dropdown-item" to="/owner">Nuevo</Link>
+                      <Link className="dropdown-item" to="/owner" onClick={()=>setActiveOwner(initialValuesOwner)}>Nuevo</Link>
                     </div>
                   </div>
                 </li>

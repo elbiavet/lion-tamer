@@ -34,10 +34,10 @@ export const useOwnerStore = () => {
                 const docRef = doc(FirebaseDB, `${uid}/lionTamer/owners/${owner.id}`);
                 await setDoc(docRef, ownerToFirestore, {merge:true});
                 
-                
                 ownerToFirestore.id = docRef.id
-                console.log(ownerToFirestore)
+         
                 dispatch(onUpdateOwner({...ownerToFirestore}));
+                dispatch(onSetActiveOwner({...owner}))
                 Swal.fire({
                     icon: 'success',
                     title: 'Propietario actualizado correctamente',
@@ -61,6 +61,7 @@ export const useOwnerStore = () => {
                 dispatch(onAddNewOwner({...owner}))
                 dispatch(onSetActiveOwner({...owner}))
                 dispatch(onSetActivePet(null))
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Propietario guardado correctamente',

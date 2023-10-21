@@ -1,16 +1,15 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useFormik } from "formik"
 import { useOwnerStore } from "../hooks";
 import * as Yup from 'yup';
 import { PetForm } from "./PetForm";
-import { onSetActiveOwner } from "../store/owners/ownerSlice";
 import { initialValuesOwner as initialValues } from "../assets/initialValues";
+import { useNavigate } from "react-router-dom";
 
 export const OwnerForm = () => {
 
-  const { startSavingOwner, activeOwner, startDeletingOwner } = useOwnerStore();
-  const dispatch = useDispatch();
+  const { startSavingOwner, activeOwner, startDeletingOwner, setActiveOwner } = useOwnerStore();
+  const navigate = useNavigate();
 
   // regex para dni español y extranjero
   const regex = /(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]{1}))/
@@ -20,7 +19,7 @@ export const OwnerForm = () => {
       initialValues, 
       onSubmit: values => {
         startSavingOwner(values)
-        console.log(values)
+        if(activeOwner) navigate(`/owner/${activeOwner.id}`)   
       },          
       validationSchema: Yup.object({
         ownerFirstName: Yup.string().required('El nombre es obligatorio'),
@@ -35,11 +34,6 @@ export const OwnerForm = () => {
       resetForm();
   }
 
-  const resetFormValues = ()=>{
-    resetForm()
-    dispatch(onSetActiveOwner(null))
-  }
-
     useEffect(() => {
     if(activeOwner && activeOwner.id){
      setValues({...activeOwner})
@@ -50,19 +44,22 @@ export const OwnerForm = () => {
   return (
   <div>
       {
-        activeOwner && (
+        activeOwner && activeOwner.ownerFirstName.length > 1 && (
           <div className="alert alert-danger d-flex flex-column flex-sm-row justify-content-center align-items-center m-2 m-sm-1 m-lg-0" role="alert">
             <p className="me-sm-4 m-1">Hay un propietario seleccionado actualmente. ¿Quieres crear uno nuevo?</p>
             <button 
               type="button" 
               className="btn btn-custom align-self-sm-baseline"
-              onClick={()=> resetFormValues()}
+              onClick={()=> {
+                resetForm()
+                setActiveOwner(initialValues)
+              }}
             >
               Nuevo
             </button>      
           </div> 
         ) 
-      }
+      }  
     <form onSubmit={ handleSubmit }>
         <div className="container-fluid m-2 m-sm-4">
               <div className="mt-4 mb-4">
@@ -132,7 +129,7 @@ export const OwnerForm = () => {
                   <div className="form-group m-sm-1">
                      <label className="fw-bold">Teléfono de contacto</label>
                     <input 
-                        type="number"
+                        type="tel"
                         className="form-control"
                         placeholder="Teléfono"
                         {...getFieldProps('tlf')}
@@ -143,7 +140,7 @@ export const OwnerForm = () => {
                   <div className="form-group m-sm-1">
                      <label className="fw-bold">Teléfono secundario</label>
                     <input 
-                        type="number"
+                        type="tel"
                         className="form-control"
                         placeholder="Teléfono secundario"
                         {...getFieldProps('tlf2')}

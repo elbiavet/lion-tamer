@@ -20,7 +20,6 @@ export const useAuthStore = () => {
 
 
     const startLogout = async()=>{
-
         await logoutFirebase();
         dispatch(logout('Se ha cerrado la sesión'))
     }

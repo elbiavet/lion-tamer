@@ -25,7 +25,7 @@ export const SideBar = () => {
           <span className="p-1"> Propietario Activo</span>
         </p>
         <div className="list-group">
-            {activeOwner 
+            {activeOwner && activeOwner.ownerFirstName.length > 1 
              ?(
               <Link 
                 to={`/owner/${activeOwner.id}`} 
