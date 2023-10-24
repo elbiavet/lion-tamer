@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { FirebaseDB } from "../firebase/firebaseConfig";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { RootState } from "../store/store"
-import { onAddNewOwner, onDeleteOwner, onSetActiveOwner, onUpdateOwner, setOwnerList, setOwnerSearchList, setSavingOwner } from "../store/owners/ownerSlice";
+import { onAddNewOwner, onDeleteOwner, onSetActiveOwner, onUpdateOwner, addOwnerLastList, setOwnerList, setOwnerSearchList, setSavingOwner, setOwnerLastList } from "../store/owners/ownerSlice";
 import { onSetActivePet } from "../store/pet/petSlice";
 import { getOwnersList, getSearchOwners } from "../helpers";
 import Swal from "sweetalert2";
@@ -12,12 +12,28 @@ import { Owner } from "../interfaces/appInterfaces";
 export const useOwnerStore = () => {
 
     const { uid } = useSelector((state:RootState) => state.auth)
-    const { activeOwner, isOwnerSaving, ownerList, ownerSearchList } = useSelector((state:RootState) => state.owner)
+    const { activeOwner, isOwnerSaving, ownerList, ownerSearchList, ownerLastList } = useSelector((state:RootState) => state.owner)
     const dispatch = useDispatch();
 
     //usuario activo
     const setActiveOwner = (owner:Owner) =>{
         dispatch(onSetActiveOwner(owner))
+    }
+
+    //lista
+    const onSetOwnerLastList = (ownerList: Owner[]) =>{
+        dispatch(setOwnerLastList(ownerList))
+    }
+
+    //crear lista ultimas fichas abiertas 
+    const createOwnersList = (owner:Owner) => {
+        if(ownerLastList.length === 0) {
+            dispatch(addOwnerLastList(owner))
+            } else {
+                const ownerExists = ownerLastList.some(element => element.id === owner.id)
+                if(ownerExists) return;
+                if(!ownerExists) dispatch(addOwnerLastList(owner)) 
+            }
     }
 
     //guardar- actualizar usuario
@@ -78,7 +94,7 @@ export const useOwnerStore = () => {
       };
 
  
-    //cargar lista usuarios
+    // //cargar lista usuarios
     const startLoadingOwnerList = async()=>{
         
         if(!uid) return;
@@ -142,6 +158,9 @@ export const useOwnerStore = () => {
 
     return {
         activeOwner, 
+        createOwnersList, //!NUEVO
+        ownerLastList, //!NUEVO
+        onSetOwnerLastList,//!NUEVO
         isOwnerSaving, 
         ownerList,
         ownerSearchList,

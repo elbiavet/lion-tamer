@@ -17,7 +17,6 @@ export const OwnerSearch = () => {
     },
     onSubmit: (values) => { 
         startSearchingOwner(values.searchingOwner)
-        console.log(values.searchingOwner)
         resetForm()
         navigate('/owner-results')
     },

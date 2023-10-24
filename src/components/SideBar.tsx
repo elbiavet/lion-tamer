@@ -1,21 +1,25 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useOwnerStore, usePetStore, useAuthStore } from "../hooks";
 import { FaUserGroup, FaPaw, FaUser } from "react-icons/fa6";
-import { onSetActiveOwner } from "../store/owners/ownerSlice";
+
 
 
 export const SideBar = () => {
 
-  const { ownerList, activeOwner, startLoadingOwnerList } = useOwnerStore();
+  const { ownerList, activeOwner, setActiveOwner, startLoadingOwnerList, ownerLastList, createOwnersList } = useOwnerStore();
   const { uid } = useAuthStore();
   const { activePet } = usePetStore();
-  const dispatch = useDispatch();
+
 
   useEffect(() => {  
     startLoadingOwnerList()
     }, [uid])
+
+    useEffect(()=>{
+      activeOwner && createOwnersList(activeOwner)
+  },[activeOwner])
+
 
   return (
     <div className="container vh-100 border border-2">
@@ -70,22 +74,34 @@ export const SideBar = () => {
           <span className="p-1"> Dueños</span>
         </p>
         <div className="list-group">
-          { ownerList.length > 0 
-            ? (
-              ownerList.slice(-3).map(owner => 
-                <Link 
-                  key={owner.id}
-                  to={`/owner/${owner.id}`} 
-                  className="list-group-item list-group-item-action list-group-item-secondary" 
-                  onClick={()=> dispatch(onSetActiveOwner(owner))}
-                >
-                {owner.ownerFirstName}
-                </Link>)
-              )
-            : <p>Cargando...</p>
-        }
+          { 
+            ownerLastList.length > 0 
+              ? (
+                ownerLastList.slice(-3).map(owner => 
+                  <Link 
+                    key={owner.id}
+                    to={`/owner/${owner.id}`} 
+                    className="list-group-item list-group-item-action list-group-item-success" 
+                    onClick={()=> setActiveOwner(owner)}
+                  >
+                  {owner.ownerFirstName}
+                  </Link>)
+                )
+              : (
+        
+                ownerList.length > 0 && ownerList.slice(-3).map(owner => 
+                  <Link 
+                    key={owner.id}
+                    to={`/owner/${owner.id}`} 
+                    className="list-group-item list-group-item-action list-group-item-secondary" 
+                    onClick={()=> setActiveOwner(owner)}
+                  >
+                  {owner.ownerFirstName}
+                  </Link>)
+              
+                )
+            }
         </div>
-
 
     </div>
   )

@@ -77,18 +77,27 @@ export const OwnerForm = () => {
                   { touched.ownerFirstName && errors.ownerFirstName && <span className='form-error m-1'>{errors.ownerFirstName}</span>}
                 </div>
 
-                <div className="col-11 col-sm-6 col-lg-5 form-group m-sm-1">
-                  <label className="fw-bold">Apellidos</label>
+                <div className="col-11 col-sm-6 col-lg-3 form-group m-sm-1">
+                  <label className="fw-bold">Primer apellido</label>
                   <input type="text"
                     className="form-control"
-                    placeholder="Apellidos"
+                    placeholder="Primer"
                     {...getFieldProps('ownerLastName')}
                     />
                   { touched.ownerLastName && errors.ownerLastName && <span className='form-error m-sm-1'>{errors.ownerLastName}</span>}
                 </div>
+
+                <div className="col-11 col-sm-6 col-lg-3 form-group m-sm-1">
+                  <label className="fw-bold">Segundo Apellido</label>
+                  <input type="text"
+                    className="form-control"
+                    placeholder="Segundo"
+                    {...getFieldProps('ownerLastName2')}
+                    />
+                </div>
                 
 
-                <div className="col-11 col-sm-5 col-lg-3 form-group m-sm-1">
+                <div className="col-11 col-sm-5 col-lg-2 form-group m-sm-1">
                    <label className="fw-bold">DNI</label>
                   <input 
                       type="text"

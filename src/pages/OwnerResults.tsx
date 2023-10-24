@@ -1,13 +1,9 @@
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom"
 import { useOwnerStore } from "../hooks";
-import { onSetActiveOwner } from "../store/owners/ownerSlice";
-
 
 export const OwnerResults = () => {
 
-    const { ownerSearchList } = useOwnerStore();
-    const dispatch = useDispatch();
+    const { ownerSearchList, setActiveOwner } = useOwnerStore();
     
   return (
     <div className="container-fluid m-3 mt-4">
@@ -28,7 +24,7 @@ export const OwnerResults = () => {
                                     key={owner.id}
                                     to={`/owner/${owner.id}`} 
                                     className="list-group-item list-group-item-action border-primary"
-                                    onClick={()=> dispatch(onSetActiveOwner(owner))}
+                                    onClick={()=> setActiveOwner(owner)}
                                     >
                                     <span>{`${owner.ownerFirstName} ${owner.ownerLastName}`}</span>
                                 </Link>

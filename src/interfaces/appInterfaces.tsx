@@ -14,6 +14,7 @@ export interface Owner{
   id?:string,
   ownerFirstName: string,
   ownerLastName:string,
+  ownerLastName2?:string,
   dni:string,
   address?:string,
   tlf: number,

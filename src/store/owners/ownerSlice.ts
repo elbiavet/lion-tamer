@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Owner } from '../../interfaces/appInterfaces';
 
 export interface OwnersState {
     ownerList:Owner[],
+    ownerLastList:Owner[], //! NUEVO
     ownerSearchList:Owner[],
     activeOwner: Owner | null,
     isOwnerSaving: boolean
@@ -10,6 +11,7 @@ export interface OwnersState {
 
 const initialState: OwnersState = {
     ownerList:[],
+    ownerLastList:[],//! NUEVO
     ownerSearchList:[],
     activeOwner:null,
     isOwnerSaving: false
@@ -19,17 +21,23 @@ export const ownerSlice = createSlice({
     name: 'owner',
     initialState,
     reducers: {
-        setOwnerList: (state: OwnersState, {payload})  => {
-            state.ownerList = payload;
+        setOwnerList: (state: OwnersState, action: PayloadAction<Owner[]>)  => {
+            state.ownerList = action.payload;
+        },
+        setOwnerLastList: (state: OwnersState, action: PayloadAction<Owner[]>)  => {
+            state.ownerLastList = action.payload;
+        },
+        addOwnerLastList: (state: OwnersState, action: PayloadAction<Owner>)  => { //! NUEVO
+            state.ownerLastList.push(action.payload)    
         },
         setOwnerSearchList: (state: OwnersState, {payload})  => {
             state.ownerSearchList = payload;
         },
-        onSetActiveOwner: (state: OwnersState, {payload})  => {
-            state.activeOwner= payload;
+        onSetActiveOwner: (state: OwnersState, action: PayloadAction<Owner>)  => {
+            state.activeOwner= action.payload;
         },
-        onAddNewOwner: (state: OwnersState, {payload})  => {
-            state.ownerList.push(payload);
+        onAddNewOwner: (state: OwnersState, action: PayloadAction<Owner>)  => {
+            state.ownerList.push(action.payload);
             state.activeOwner = null; 
             state.isOwnerSaving= false;
         },
@@ -50,4 +58,4 @@ export const ownerSlice = createSlice({
     }
 });
 
-export const { setOwnerList, setOwnerSearchList, onSetActiveOwner, onAddNewOwner, setSavingOwner, onUpdateOwner, onDeleteOwner} = ownerSlice.actions;
+export const { setOwnerList, setOwnerSearchList, setOwnerLastList, addOwnerLastList, onSetActiveOwner, onAddNewOwner, setSavingOwner, onUpdateOwner, onDeleteOwner} = ownerSlice.actions;

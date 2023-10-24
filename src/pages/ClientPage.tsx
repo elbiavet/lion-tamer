@@ -21,7 +21,6 @@ export const ClientPage = () => {
         setActivePet(initialValuesPet) //TODO: esto es lo que hace el resetform de la mascota. cambiar
     }, [id])
     
-    
 
   return (
     <>
