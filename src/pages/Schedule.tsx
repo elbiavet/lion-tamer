@@ -37,10 +37,9 @@ export const Schedule = () => {
         //* no funcionaba la opción de la documentación: startAccessor= 'start' y la que si funcionaba daba error de TS: endAccessor={(event)=>new Date(event.end)} 
         startAccessor={(event)=> new Date(`${event.start}`)}   
         endAccessor={(event)=>new Date(`${event.end}`)} 
-        style={{ height: 590 }}
+        style={{ height: "90vh" }}
         culture='es'
         messages={ getMessages() }
-        //TODO: style para eventos: eventPropGetter={ eventStyleGetter }  
        components={{
           event: CalendarEvent
         }}

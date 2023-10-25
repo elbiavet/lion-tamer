@@ -103,6 +103,7 @@ export const PetForm = () => {
                   className="form-control"
                   {...getFieldProps('character')}
               >
+                  <option>Selecciona una opción</option>
                   <option value="bueno">Bueno</option>
                   <option value="cariñoso" selected>Cariñoso</option>
                   <option value="miedoso" selected>Miedoso</option>

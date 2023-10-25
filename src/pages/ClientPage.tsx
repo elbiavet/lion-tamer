@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useOwnerStore, usePetStore } from "../hooks"
 import { PetPage } from "./PetPage";
 import { initialValuesPet } from "../assets/initialValues";
+import { BsPencil, BsTrash } from "react-icons/bs";
 
 
 export const ClientPage = () => {
@@ -18,7 +19,7 @@ export const ClientPage = () => {
 
     useEffect(() => {
         id && startLoadingPetList(id)
-        setActivePet(initialValuesPet) //TODO: esto es lo que hace el resetform de la mascota. cambiar
+        setActivePet(initialValuesPet)
     }, [id])
     
 
@@ -26,7 +27,6 @@ export const ClientPage = () => {
     <>
     { activeOwner && activeOwner.ownerFirstName.length > 1 
             ? (
-                <div className="container m-2 m-sm-4">
                 <div className="card">
                     <div className="card-header d-flex justify-content-between">
                         <h5 className="card-title m-2">{activeOwner?.ownerFirstName} {activeOwner?.ownerLastName}</h5>
@@ -35,11 +35,17 @@ export const ClientPage = () => {
                                 type="button" 
                                 className="btn btn-outline-custom m-1"
                                 onClick={()=> navigate('/owner')}
-                                >
-                                    Editar
-                                </button>
-                                <button type="button" className="btn btn-outline-danger m-1" onClick={(handleDeleteOwner)}>
-                                    Eliminar
+                            >
+                                <span className="d-none d-lg-inline me-1">Editar</span>
+                                <span className="d-sm d-lg-none"><BsPencil /></span>
+                            </button>
+                            <button 
+                                type="button" 
+                                className="btn btn-outline-danger m-1" 
+                                onClick={(handleDeleteOwner)}
+                            >
+                                <span className="d-none d-lg-inline me-1">Eliminar</span>
+                                <span className="d-sm d-lg-none"><BsTrash /></span>
                             </button>
                         </div>  
                     </div>
@@ -69,7 +75,7 @@ export const ClientPage = () => {
                                             </button>)
                                     } 
                                 <div className="mt-3 d-flex align-items-center">
-                                    <p className="m-1 fw-bold">¿Otra mascota?</p>
+                                    <p className="m-1 fw-bold">¿Nueva mascota?</p>
                                     <button 
                                     type="button" 
                                     className="btn btn-warning m-1"
@@ -81,7 +87,7 @@ export const ClientPage = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                
                 {
                     activeOwner && activePet && (<PetPage />) 
                 } 

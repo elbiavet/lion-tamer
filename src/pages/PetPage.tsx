@@ -5,6 +5,7 @@ import { InvoicesPetPage } from "./InvoicesPetPage";
 import { PetHealthHistory } from "./PetHealthHistory";
 import { getBirthday } from "../helpers";
 import { format } from "date-fns";
+import { BsPencil, BsTrash } from "react-icons/bs";
 
 
 export const PetPage = () => {
@@ -18,9 +19,27 @@ export const PetPage = () => {
             text: "No podrás revertirlo",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
+            confirmButtonColor: '#46639b',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, eliminar'
+            confirmButtonText: 'Si, dar de baja',
+            cancelButtonText: 'No'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              startDeletingPet()
+            }
+          })
+    }
+
+    const disablePetModal = () =>{
+        Swal.fire({
+            title: '¿Quieres deshabilitar la ficha de esta mascota?',
+            text: "No podrás revertirlo",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '##46639b',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar',
+            cancelButtonText: 'No'
           }).then((result) => {
             if (result.isConfirmed) {
               startDeletingPet()
@@ -42,19 +61,22 @@ export const PetPage = () => {
                             className="btn btn-outline-custom m-1"
                             onClick={()=> navigate('/pet')}
                         >
-                            Editar
+                            <span className="d-none d-lg-inline me-1">Editar</span>
+                            <span className="d-sm d-lg-none"><BsPencil /></span>
                         </button>
                         <button 
                             type="button" 
                             className="btn btn-outline-danger m-1" 
-                            onClick={()=>deletePetModal()}>
-                            Eliminar
+                            onClick={()=>deletePetModal()}
+                        >
+                            <span className="d-none d-lg-inline me-1">Eliminar</span>
+                            <span className="d-sm d-lg-none"><BsTrash /></span>
                         </button>
                     </div>  
                 </div>
                 <div className="card-body">
                     <div className="card-text row">
-                        <div className="col-5 col-sm">
+                        <div className="col col-sm-5">
                             <p className="m-1">
                                 <span className="fw-bold me-1">Edad:</span>     
                                 {getBirthday(activePet?.birthday)}
@@ -68,12 +90,15 @@ export const PetPage = () => {
                             
                             <p className="m-1"><span className="fw-bold">Comentarios:</span> {activePet?.commentsPet}</p>
                         </div>
-                        <div className="col-5 col-sm">
+                        <div className="col col-sm-5">
                             <p className="m-1"><span className="fw-bold">Castrado:</span> 
                                 {`${activePet.castrated}` == 'true' ? <> Si</> : <> No</>}
                             </p>
                             <p className="m-1"><span className="fw-bold">Capa:</span> {activePet?.coat}</p>
-                            <p className="m-1"><span className="fw-bold">Carácter</span> {activePet?.character} </p> 
+                            <p className="m-1"><span className="fw-bold">Carácter:</span> {activePet?.character} </p> 
+                            <p className="fw-bold btn btn-outline-secondary p-1" onClick={()=>disablePetModal()}>
+                               Marcar como fallecido
+                            </p>
                         </div>
                     </div>
                

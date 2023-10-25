@@ -33,8 +33,9 @@ export const Router = () => {
       )
       :(<>
         <NavBar />
-        <div className="row d-flex justify-content-evenly">
-          <div className="col-8 col-sm-9 p-0">
+        <div className="row d-flex justify-content-center">
+          <div className="col-8 col-sm-9 col-lg-10 p-0">
+            <div className="container m-1 m-sm-2 m-lg-3 m-xl-4">
             {
               status === 'authenticated' &&
               <Routes>
@@ -48,6 +49,7 @@ export const Router = () => {
                 <Route path="/*" element={<Schedule />} />
               </Routes>
             }
+            </div>
           </div>
           <div className="col-3 col-sm-2 p-0">
             <SideBar />

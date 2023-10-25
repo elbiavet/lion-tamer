@@ -23,10 +23,10 @@ export const SideBar = () => {
 
   return (
     <div className="container vh-100 border border-2">
-
-        <p className="mt-3 text-custom d-flex align-items-center">
+      <div className="m-3">
+        <p className="text-custom d-flex align-items-center">
           <FaUser /> 
-          <span className="p-1"> Propietario Activo</span>
+          <span className="p-1"> Propietario Actual</span>
         </p>
         <div className="list-group">
             {activeOwner && activeOwner.ownerFirstName.length > 1 
@@ -46,7 +46,7 @@ export const SideBar = () => {
 
         <p className="mt-3 text-custom d-flex align-items-center">
           <FaPaw /> 
-          <span className="p-1"> Mascota Activa</span>
+          <span className="p-1"> Mascota Actual</span>
         </p>
         <div className="list-group">
             {
@@ -81,7 +81,7 @@ export const SideBar = () => {
                   <Link 
                     key={owner.id}
                     to={`/owner/${owner.id}`} 
-                    className="list-group-item list-group-item-action list-group-item-success" 
+                    className="list-group-item list-group-item-action list-group-item-secondary" 
                     onClick={()=> setActiveOwner(owner)}
                   >
                   {owner.ownerFirstName}
@@ -102,7 +102,7 @@ export const SideBar = () => {
                 )
             }
         </div>
-
+      </div>
     </div>
   )
 }
