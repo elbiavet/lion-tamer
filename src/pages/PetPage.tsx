@@ -52,7 +52,7 @@ export const PetPage = () => {
     {
         activeOwner && activePet && activePet.id 
         ? (
-            <div className="card">
+            <div className="card px-1">
                 <div className="card-header d-flex justify-content-between">
                     <p className="card-title m-2"><span className="text-custom fw-bold fs-5 me-4">{activePet?.namePet.toUpperCase()}</span> ({activeOwner.ownerFirstName} {activeOwner.ownerLastName})</p>
                     <div className="m-1">

@@ -22,7 +22,7 @@ export const SideBar = () => {
 
 
   return (
-    <div className="container vh-100 border border-2">
+    <div className="container vh-100 border border-2 p-0">
       <div className="m-3">
         <p className="text-custom d-flex align-items-center">
           <FaUser /> 

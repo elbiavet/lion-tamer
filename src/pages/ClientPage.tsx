@@ -27,7 +27,7 @@ export const ClientPage = () => {
     <>
     { activeOwner && activeOwner.ownerFirstName.length > 1 
             ? (
-                <div className="card">
+                <div className="card px-1">
                     <div className="card-header d-flex justify-content-between">
                         <h5 className="card-title m-2">{activeOwner?.ownerFirstName} {activeOwner?.ownerLastName}</h5>
                         <div className="m-1">

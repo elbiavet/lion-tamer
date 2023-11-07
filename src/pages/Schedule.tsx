@@ -29,7 +29,7 @@ export const Schedule = () => {
   
 
   return (
-    <div>
+    <div className="px-3">
 
       <Calendar
         localizer={localizer}

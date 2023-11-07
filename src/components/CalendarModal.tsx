@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 import * as Yup from 'yup';
 import '../styles/CalendarModal.css'
 import 'react-datepicker/dist/react-datepicker.css';
-import { AiOutlineCloseCircle, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { initialValuesCalendar as initialValues } from '../assets/initialValues';
 // import { OwnerSearch } from '../pages';
 
@@ -54,7 +54,7 @@ export const CalendarModal = () => {
     return (
       <div>
         <button className='btn rounded-circle btn-fab' onClick={setOpenModal} disabled={isEventSaving}>
-          <AiOutlinePlus />
+          +
         </button>
         <Modal
           isOpen={isModalOpen}

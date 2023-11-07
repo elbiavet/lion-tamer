@@ -18,9 +18,7 @@ export const Router = () => {
 
   const status = useCheckAuth()
 
-  
   // if(status === 'not-authenticated'){ return (<Login />)}
-
 
   return(
     <BrowserRouter>
@@ -34,8 +32,8 @@ export const Router = () => {
       :(<>
         <NavBar />
         <div className="row d-flex justify-content-center">
-          <div className="col-8 col-sm-9 col-lg-10 p-0">
-            <div className="container m-1 m-sm-2 m-lg-3 m-xl-4">
+          <div className="col-8 col-sm-9 col-lg-10 pe-0 p-0">
+            <div className="container p-0"> {/*  m-sm-2 m-lg-3 m-xl-4 */}
             {
               status === 'authenticated' &&
               <Routes>
